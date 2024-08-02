@@ -1,0 +1,9 @@
+.details {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 2rem;
+    border: 5px solid #e5e7eb;
+    display: flex;
+    flex-direction: row;
+}
+

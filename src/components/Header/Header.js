@@ -15,15 +15,15 @@ import { Link } from 'react-router-dom';
 
 const pages = [
   { name: "Home", path: "/home" },
-  { name: "TV shows", path: "/anime"},
-  { name: "Movies", path: "/movie"},
-  { name: "Blog", path: "/blog"},
+  { name: "TV shows", path: "/anime" },
+  { name: "Movies", path: "/movie" },
+  { name: "Blog", path: "/blog" },
 ];
 
 const settings = [
-  {name: 'Profile', layout: Link, path: "/profile"}, 
-  {name: 'Account', layout: Link, path: "/account"},
-  {name: 'Logout', layout: null}
+  { name: 'Profile', path: "/profile" },
+  { name: 'Account', path: "/account" },
+  { name: 'Logout' },
 ];
 
 function Header() {
@@ -47,10 +47,14 @@ function Header() {
   };
 
   return (
-    <AppBar position="fixed" sx={{backgroundColor: "#000"}}>
-      <Container maxWidth="xl" >
+    <AppBar position="fixed" sx={{ backgroundColor: "#000" }}>
+      <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography variant="h6" noWrap component={Link} to="/home"
+          <Typography
+            variant="h6"
+            noWrap
+            component={Link}
+            to="/home"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -60,11 +64,11 @@ function Header() {
               color: 'inherit',
               textDecoration: 'none',
             }}
-          >LOGO</Typography>
+          >
+            LOGO
+          </Typography>
 
-          <Box sx={{ flexGrow: 1, 
-            display: { xs: 'flex', md: 'none' },
-            }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="open navigation menu"
@@ -156,9 +160,15 @@ function Header() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting,index) => (
+              {settings.map((setting, index) => (
                 <MenuItem key={index} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting.name}</Typography>
+                  {setting.path ? (
+                    <Link to={setting.path} style={{ textDecoration: 'none', color: 'inherit' }}>
+                      <Typography textAlign="center">{setting.name}</Typography>
+                    </Link>
+                  ) : (
+                    <Typography textAlign="center">{setting.name}</Typography>
+                  )}
                 </MenuItem>
               ))}
             </Menu>

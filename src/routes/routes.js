@@ -15,10 +15,10 @@ import Movie from "../pages/Movie/Movie";
 
 const publicRoutes = [
     { path: "/", component: LandingPage, layout: null },
-    { path: "/home", component: Homepage, layout: SideBar },
+    { path: "/home", component: Homepage},
     { path: "/login", component: Login, layout: null },
     { path: "/payment", component: Payment },
-    { path: "/profile/:userId", component: Profile },
+    { path: "/profile", component: Profile },
     { path: "/watch/:animeId", component: Watch },
     { path: "/genre/:genreId", component: Genre, layout: SideBar },
     { path: "/anime", component: TV},
