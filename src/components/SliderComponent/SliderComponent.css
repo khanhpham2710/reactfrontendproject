@@ -1,0 +1,41 @@
+#slider {
+  width: 100%;
+  height: 90vh;
+  margin-top: 10vh;
+  display: flex;
+  overflow: hidden;
+  flex-wrap: nowrap;
+  position: relative;
+}
+
+#slider:hover .arrow {
+  opacity: 1;
+  transition: opacity 0.5s linear;
+}
+
+.dot {
+  position: absolute;
+  bottom: 1vw;
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.arrow:first-child {
+  left: 1vw;
+}
+
+.arrow:last-child {
+  right: 1vw;
+}

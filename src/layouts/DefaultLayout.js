@@ -1,13 +1,14 @@
 import React from 'react'
 import Header from "../components/Header/Header"
 import Footer from '../components/Footer/Footer'
-import Slider from '../components/Slider/Slider'
+import SliderComponent from "../components/SliderComponent/SliderComponent"
+import { AspectRatio } from '@mui/icons-material'
 
 function DefaultLayout({children}) {
   return (
     <div>
         <Header />
-        <Slider />
+        <SliderComponent />
         {children}
         <Footer />
     </div>
