@@ -4,7 +4,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 const initialState = {
   details: {},
   characters: [],
-  status: 'idle',
+  status_loading: 'idle',
   error: null,
 }
 
@@ -36,25 +36,25 @@ const animeSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchAnimeDetails.pending, (state) => {
-        state.status = 'loading';
+        state.status_loading = 'loading';
       })
       .addCase(fetchAnimeDetails.fulfilled, (state, action) => {
-        state.status = 'succeeded';
+        state.status_loading = 'succeeded';
         state.details = action.payload;
       })
       .addCase(fetchAnimeDetails.rejected, (state, action) => {
-        state.status = 'failed';
+        state.status_loading = 'failed';
         state.error = action.error.message;
       })
       .addCase(fetchAnimeCharacters.pending, (state) => {
-        state.status = 'loading';
+        state.status_loading = 'loading';
       })
       .addCase(fetchAnimeCharacters.fulfilled, (state, action) => {
-        state.status = 'succeeded';
+        state.status_loading = 'succeeded';
         state.characters = action.payload;
       })
       .addCase(fetchAnimeCharacters.rejected, (state, action) => {
-        state.status = 'failed';
+        state.status_loading = 'failed';
         state.error = action.error.message;
       });
   },

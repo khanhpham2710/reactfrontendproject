@@ -5,15 +5,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './global/store';
 import { Provider } from 'react-redux';
-import theme from './theme';
+import { theme } from './theme';
 import { ThemeProvider } from "@mui/material/styles";
+import { CssBaseline } from '@mui/material';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <ThemeProvider theme={theme}>
-        <Provider store={store}>
-            <App />
-        </Provider>
+        <CssBaseline>
+            <Provider store={store}>
+                <App />
+            </Provider>
+        </CssBaseline>
     </ThemeProvider>
 );
 

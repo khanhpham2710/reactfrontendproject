@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Footer from '../../components/Footer/Footer'
+import FAQ from '../../components/FAQ/FAQ'
+import LoginButton from '../../components/LoginButton/LoginButton'
 
 function LandingPage() {
   return (
@@ -14,10 +16,7 @@ function LandingPage() {
           <h1>Unlimited anime movies, shows and more</h1>
           <p>Watch anywhere. Cancel anytime</p>
           <p>Ready to watch? Enter your email to create or restart your membership</p>
-          <form>
-            <input type='email' placeholder='Email address'/>
-            <button type='submit'>Get Started</button>
-          </form>
+          <LoginButton label="Get Started"/>
         </slider>
         </header>
         <section className='tv'>
@@ -32,10 +31,8 @@ function LandingPage() {
         <section className='kid'>
 
         </section>
-        <section id='faq'>
-
-        </section>
-        <Footer />
+        <FAQ id="FAQ"/>
+        <Footer id="footer"/>
     </div>
   )
 }

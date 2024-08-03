@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAiringAnime, fetchUpcomingAnime, fetchPopularAnime } from '../../global/animeListSlice';
 import Loading from '../../components/Loading/Loading';
-import AnimeList from '../../components/AnimeList/AnimeList';
+import AnimeScrollSlider from '../../components/AnimeScrollSlider/AnimeScrollSlider';
 import SideBar from "../../components/SideBar/SideBar"
+
 
 function Homepage() {
   const dispatch = useDispatch();
@@ -28,11 +29,11 @@ function Homepage() {
   }
 
   return (
-    <div>
-      <AnimeList list ={airingAnime} label="Airing Anime"/>
-      <AnimeList list ={popularAnime} label="Popular Anime"/>
-      <AnimeList list ={upcomingAnime} label="Upcoming Anime"/>
+    <div style={{backgroundColor: "#000"}}>
       <SideBar />
+      <AnimeScrollSlider list ={airingAnime} label="Airing"/>
+      <AnimeScrollSlider list ={popularAnime} label="Popular"/>
+      <AnimeScrollSlider list ={upcomingAnime} label="Upcoming"/>
     </div>
   );
 }
