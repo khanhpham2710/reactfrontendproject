@@ -20,6 +20,7 @@ function AnimeCard({ item }) {
       </div>
       <div className="title">
         <p>{item.title}</p>
+        Hello
       </div>
       {open && <AnimeModal handleClose={handleClose} item={item} setOpen={setOpen}/>}
     </div>
