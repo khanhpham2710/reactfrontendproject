@@ -15,7 +15,8 @@ function AnimePage() {
 
 
   const {
-    title, title_english, type, synopsis, trailer,
+    title, 
+    title_english, type, synopsis, trailer,
     source, episodes, duration, aired, status, season,
     images, rank, score, scored_by, popularity,
     rating, studios, producers, genres, demographics
@@ -45,7 +46,7 @@ function AnimePage() {
             <img src={images?.jpg.large_image_url} alt="" />
           </div>
           <div className='anime-details'>
-            <h1>{title}</h1>
+            {/* <h1>{title}</h1> */}
             <p><span>Aired: </span><span>{aired?.string || 'N/A'}</span></p>
             <p><span>Rating: </span><span>{rating || 'N/A'}</span></p>
             <p><span>Rank: </span><span>{rank || 'N/A'}</span></p>

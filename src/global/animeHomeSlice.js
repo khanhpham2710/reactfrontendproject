@@ -3,20 +3,33 @@ import axios from 'axios';
 
 const baseURL = "https://api.jikan.moe/v4";
 
-const categories = ['TopRated', 'Popular', 'Airing', 'Upcoming', 'Favorite'];
+const categories = ['toprated', 'bypopularity', 'airing', 'upcoming', 'favorite'];
 
-const createFetchThunk = (category) => createAsyncThunk(
-    `animeHome/fetch${category}Anime`,
-    async () => {
-        const filter = category.toLowerCase() === 'toprated' ? '' : `?filter=${category.toLowerCase()}&`;
-        const response = await axios.get(`${baseURL}/top/anime${filter}limit=24&sfw=true`);
-        return response.data.data;
-    }
-);
+
+const createFetchThunk = (category) => {
+    return createAsyncThunk(
+        `animeHome/fetch${category}Anime`,
+        async () => {
+            const filter = category === 'toprated' ? '' : `filter=${category}&`;
+            // console.log(filter)
+            console.log(`${baseURL}/top/anime${filter}?limit=24&sfw=true`)
+            const response = await axios.get(`${baseURL}/top/anime?${filter}limit=24&sfw=true`);
+            // console.log(response.data.data)
+            return response.data.data;
+        }
+    );
+};
+
+
+export const fetchTopRatedAnime = createFetchThunk('toprated');
+export const fetchPopularAnime = createFetchThunk('bypopularity');
+export const fetchAiringAnime = createFetchThunk('airing');
+export const fetchUpcomingAnime = createFetchThunk('upcoming');
+export const fetchFavoriteAnime = createFetchThunk('favorite');
 
 const initialState = {
-    topRatedAnime: [],
-    popularAnime: [],
+    topratedAnime: [],
+    bypopularityAnime: [],
     airingAnime: [],
     upcomingAnime: [],
     favoriteAnime: [],
@@ -30,17 +43,18 @@ const animeHomeSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         categories.forEach((category) => {
-            const lowerCategory = category.toLowerCase();
+            const thunk = createFetchThunk(category);
+            
             builder
-                .addCase(createFetchThunk(category).pending, (state) => {
-                    state.loading[lowerCategory] = true;
+                .addCase(thunk.pending, (state) => {
+                    state.loading[category] = true;
                 })
-                .addCase(createFetchThunk(category).fulfilled, (state, action) => {
-                    state[`${lowerCategory}Anime`] = action.payload;
-                    state.loading[lowerCategory] = false;
+                .addCase(thunk.fulfilled, (state, action) => {
+                    state[`${category}Anime`] = action.payload;
+                    state.loading[category] = false;
                 })
-                .addCase(createFetchThunk(category).rejected, (state, action) => {
-                    state.loading[lowerCategory] = false;
+                .addCase(thunk.rejected, (state, action) => {
+                    state.loading[category] = false;
                     state.error = action.error.message || 'An unknown error occurred';
                 });
         });
@@ -48,9 +62,3 @@ const animeHomeSlice = createSlice({
 });
 
 export default animeHomeSlice.reducer;
-
-export const fetchTopRatedAnime = createFetchThunk('TopRated');
-export const fetchPopularAnime = createFetchThunk('Popular');
-export const fetchAiringAnime = createFetchThunk('Airing');
-export const fetchUpcomingAnime = createFetchThunk('Upcoming');
-export const fetchFavoriteAnime = createFetchThunk('Favorite');

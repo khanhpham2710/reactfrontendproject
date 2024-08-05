@@ -17,13 +17,13 @@ import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-
+import { useRef, useEffect } from 'react';
 
 
 const pages = [
   { name: "Home", path: "/home" },
-  { name: "TV shows", path: "/anime" },
-  { name: "Movies", path: "/movie" },
+  { name: "TV shows", path: "/animes/TV" },
+  { name: "Movies", path: "/animes/movie" },
   { name: "Blog", path: "/blog" },
 ];
 
@@ -121,8 +121,29 @@ function SideMenu() {
 
 
 function Header() {
+  
+    const headerRef = useRef();
+  
+    useEffect(() => {
+      const handleScroll = () => {
+        if (window.scrollY > 10) {
+          headerRef.current.style.opacity = 0.7;
+        } else {
+          headerRef.current.style.opacity = 1;
+        }
+      };
+      window.addEventListener('scroll', handleScroll);
+  
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }, []);
+  
+  
   return (
-    <AppBar position="fixed" sx={{ height: "10vh", display: "flex", justifyContent: "center" }}>
+    <AppBar ref={headerRef} position="fixed" sx={{ height: "10vh", display: "flex", justifyContent: "center", transition: "opacity 0.7s" , "&:hover": {
+                  opacity: "1 !important"
+                } }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ mr: 6, display: { xs: 'none', md: 'flex' } }}>
@@ -156,11 +177,11 @@ function Header() {
                 component={Link}
                 to={page.path}
                 sx={{
-                  my: 2, color: 'white', display: 'block', mr: 1, p: "20px 30px",
+                  color: 'white', display: 'block', mr: 1, p: "20px 30px",
                   transition: "color 0.5s ease-in-out, background-color 0.5s ease-in-out",
                   "&:hover": {
                     color: "red",
-                    backgroundColor: "#121212"
+                    backgroundColor: "transparent",
                   }
                 }}>
                 <Typography variant='h6'>
