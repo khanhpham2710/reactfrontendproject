@@ -4,16 +4,21 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
+import CancelPresentationIcon from '@mui/icons-material/CancelPresentation';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
 import assets from '../../assets/assets';
 import User from '../User/User';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+
+
 
 const pages = [
   { name: "Home", path: "/home" },
@@ -22,76 +27,114 @@ const pages = [
   { name: "Blog", path: "/blog" },
 ];
 
+const settings = [
+  { name: 'Profile', path: "/profile" },
+  { name: 'Account', path: "/account" },
+  { name: 'Logout' },
+];
+
+function SideMenu() {
+  const [open, setOpen] = React.useState(false);
+
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
+  };
+
+  const DrawerList = (
+    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', height: "10vh"}}>
+        <IconButton
+          size="large"
+          aria-label="open navigation menu"
+          aria-controls="menu-appbar"
+          aria-haspopup="true"
+          color="inherit"
+          onClick={toggleDrawer(false)}
+          sx={{ textAlign: "right" }}
+        >
+          <CancelPresentationIcon sx={{ fontSize: "40px", transform: "scaleY(1.2)" }} />
+        </IconButton>
+      </Box>
+      <Divider />
+      <List>
+        {pages.map((text, index) => (
+          <ListItem key={index} disablePadding>
+            <ListItemButton
+              key={text.path}
+              component={Link}
+              to={text.path}
+              sx={{
+                color: 'white', display: 'block', mr: 1,
+                transition: "color 0.5s ease-in-out, background-color 0.5s ease-in-out",
+                "&:hover": {
+                  color: "red",
+                  backgroundColor: "#121212"
+                }
+              }}>
+              <ListItemText primary={text.name}/>
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {settings.map((text, index) => (
+          <ListItem key={index} disablePadding>
+            <ListItemButton
+              key={text.path}
+              component={Link}
+              to={text.path}
+              sx={{
+                color: 'white', display: 'block', mr: 1,
+                transition: "color 0.5s ease-in-out, background-color 0.5s ease-in-out",
+                "&:hover": {
+                  color: "red",
+                  backgroundColor: "#121212"
+                }
+              }}>
+              <ListItemText primary={text.name} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+
+  return (
+    <div>
+      <IconButton
+        size="large"
+        aria-label="open navigation menu"
+        aria-controls="menu-appbar"
+        aria-haspopup="true"
+        color="inherit"
+        onClick={toggleDrawer(true)}
+      >
+        <MenuIcon sx={{ fontSize: "40px" }} />
+      </IconButton>
+      <Drawer open={open} onClose={toggleDrawer(false)}>
+        {DrawerList}
+      </Drawer>
+    </div>
+  );
+}
+
 
 function Header() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
   return (
     <AppBar position="fixed" sx={{ height: "10vh", display: "flex", justifyContent: "center" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ mr: 6, display: { xs: 'none', md: 'flex' } }}>
-          <Link to="/home">
-              <img src={assets.logo} style={{ 
-              width: "200px", 
-              height: "auto",
-              transform: "translateX(-20%)" }} alt="Logo" />
-          </Link>
+            <Link to="/home">
+              <img src={assets.logo} style={{
+                width: "150px",
+                height: "auto"
+              }} alt="Logo" />
+            </Link>
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="open navigation menu"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page.path} onClick={handleCloseNavMenu}>
-                  <Link to={page.path} style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <Typography textAlign="center" variant='h6'>{page.name}</Typography>
-                  </Link>
-                </MenuItem>
-              ))}
-            </Menu>
+            <SideMenu />
           </Box>
           <Box
             sx={{
@@ -99,27 +142,36 @@ function Header() {
               flexGrow: 1, ml: 5
             }}
           ><Link to="/home">
-              <img src={assets.logo} style={{ 
-              width: "200px", 
-              height: "auto",
-              transform: "translateX(-20%)" }} alt="Logo" />
-          </Link>
+              <img src={assets.logo} style={{
+                width: "150px",
+                height: "auto",
+                transform: "translateX(-20%)"
+              }} alt="Logo" />
+            </Link>
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page.path}
-                onClick={handleCloseNavMenu}
                 component={Link}
                 to={page.path}
-                sx={{ my: 2, color: 'white', display: 'block', height: "100%" }}
-              ><Typography variant='h6'>
+                sx={{
+                  my: 2, color: 'white', display: 'block', mr: 1, p: "20px 30px",
+                  transition: "color 0.5s ease-in-out, background-color 0.5s ease-in-out",
+                  "&:hover": {
+                    color: "red",
+                    backgroundColor: "#121212"
+                  }
+                }}>
+                <Typography variant='h6'>
                   {page.name}
-              </Typography>
+                </Typography>
               </Button>
             ))}
           </Box>
-          <User />
+          <Box sx={{ flexGrow: 0 }}>
+            { <User />}
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>

@@ -21,12 +21,10 @@ function User() {
     };
 
     return (
-        <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                </IconButton>
-            </Tooltip>
+        <>
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+            </IconButton>
             <Menu
                 sx={{ mt: '45px' }}
                 id="menu-appbar"
@@ -46,13 +44,12 @@ function User() {
                 {settings.map((setting, index) => (
                     <MenuItem key={index} onClick={handleCloseUserMenu}>
                         <Link to={setting.path}>
-                            <Typography textAlign="center" variant="h5" sx={{textDecoration: "none", color: "#fff"}}>{setting.name}</Typography>
+                            <Typography textAlign="center" variant="h5" sx={{ textDecoration: "none", color: "#fff" }}>{setting.name}</Typography>
                         </Link>
                     </MenuItem>
                 ))}
             </Menu>
-        </Box>
-
+        </>
     )
 }
 

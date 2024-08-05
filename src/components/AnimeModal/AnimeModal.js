@@ -1,27 +1,69 @@
-import React from 'react';
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
 import { Box } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import CloseIcon from '@mui/icons-material/Close';
+import { Opacity } from '@mui/icons-material';
 
-function AnimeModal({ handleClose, item, setOpen }) {
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
 
-    console.log(handleClose)
-  return (
-    <Box
-      sx={{
-        width: 700,
-        height: 700,
-        position: 'fixed',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        backgroundColor: 'white',
-        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
-        zIndex: 1000,
-        padding: 2,
-      }}
-    >
-      <button onClick={handleClose} aria-label="Close modal">Close</button>
-    </Box>
-  );
+const CloseButton = styled(Button)({
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    fontSize: "20px",
+    color: "#fff",
+    opacity: 0.7,
+    "&:hover": {
+        opacity: 1,
+        backgroundColor: "transparent"
+    }
+});
+
+export default function AnimeModal(prop) {
+    const { open, handleClose, setOpen, item } = prop
+    const [fullWidth, setFullWidth] = React.useState(true);
+
+    console.log(item)
+
+    return (
+        <Dialog
+            open={open}
+            fullWidth={fullWidth}
+            maxWidth="xl"
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={(e) => {
+                e.stopPropagation();
+                handleClose();
+            }}
+            aria-describedby="alert-dialog-slide-description"
+        >
+            <DialogTitle variant='h4' sx={{textAlign:"center", borderBottom: "2px solid #ccc", fontWeight: 800, letterSpacing: 4}}>{item.title}</DialogTitle>
+            <DialogContent sx={{ display: "flex", mt: 2, gap: 2 }}>
+                <Box>
+                    <img src={item.images.jpg.image_url} alt={item.title} />
+                </Box>
+                <Box>
+                    <DialogContentText id="alert-dialog-slide-description">
+                        {item.synopsis}
+                    </DialogContentText>
+                </Box>
+            </DialogContent>
+            <DialogActions>
+                <CloseButton onClick={(e) => {
+                    e.stopPropagation();
+                    handleClose();
+                }}><CloseIcon/></CloseButton>
+            </DialogActions>
+        </Dialog>
+    );
 }
-
-export default AnimeModal;

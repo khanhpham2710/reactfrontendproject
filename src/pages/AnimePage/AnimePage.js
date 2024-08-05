@@ -22,7 +22,6 @@ function AnimePage() {
   } = details
 
 
-
   useEffect(() => {
     dispatch(fetchAnimeDetails(animeId));
     dispatch(fetchAnimeCharacters(animeId));

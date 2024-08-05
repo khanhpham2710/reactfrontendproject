@@ -8,6 +8,8 @@ import { Provider } from 'react-redux';
 import { theme } from './theme';
 import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from '@mui/material';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

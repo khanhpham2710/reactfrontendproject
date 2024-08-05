@@ -12,7 +12,7 @@ const initialState = {
 export const fetchAnimeDetails = createAsyncThunk(
   'anime/fetchAnimeDetails',
   async (animeId) => {
-    const response = await fetch(`https://api.jikan.moe/v4/anime/${animeId}`);
+    const response = await fetch(`https://api.jikan.moe/v4/anime/${animeId}/full`);
     const data = await response.json();
     return data.data;
   }
