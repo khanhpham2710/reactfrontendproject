@@ -7,14 +7,16 @@ import SideBar from '../../components/SideBar/SideBar';
 
 function Homepage() {
   const dispatch = useDispatch();
-  const { popularAnime, airingAnime, upcomingAnime, topRatedAnime, favoriteAnime, loading, error } = useSelector((state) => state.animeList);
+  const { bypopularityAnime, airingAnime, upcomingAnime, topratedAnime, favoriteAnime, loading, error } = useSelector((state) => state.animeHome);
+
+  // console.log(topratedAnime, bypopularityAnime, airingAnime, upcomingAnime, favoriteAnime)
 
   useEffect(() => {
       dispatch(fetchPopularAnime());
       dispatch(fetchAiringAnime());
-      dispatch(fetchUpcomingAnime());
-      dispatch(fetchTopRatedAnime());
-      dispatch(fetchFavoriteAnime());
+      // dispatch(fetchUpcomingAnime());
+      // dispatch(fetchTopRatedAnime());
+      // dispatch(fetchFavoriteAnime());
   }, []);
 
   const isLoading = loading.popularAnime || loading.airingAnime || loading.upcomingAnime || loading.topRatedAnime || loading.favoriteAnime;
@@ -28,15 +30,15 @@ function Homepage() {
   }
 
   return (
-    <div style={{backgroundColor: "#000"}}>
+    <div style={{backgroundColor: "transparent"}}>
       <SideBar />
       <AnimeScrollSlider list ={airingAnime} label="Airing"/>
-      <AnimeScrollSlider list ={topRatedAnime} label="Top Rated"/>
-      <AnimeScrollSlider list ={popularAnime} label="Most Popular"/>
-      <AnimeScrollSlider list ={favoriteAnime} label="Most Favorite"/>
-      <AnimeScrollSlider list ={upcomingAnime} label="Upcoming"/>
+      {/* <AnimeScrollSlider list ={topratedAnime} label="Top Rated"/> */}
+      <AnimeScrollSlider list ={bypopularityAnime} label="Most Popular"/>
+      {/* <AnimeScrollSlider list ={favoriteAnime} label="Most Favorite"/> */}
+      {/* <AnimeScrollSlider list ={upcomingAnime} label="Upcoming"/> */}
     </div>
-  );
+  )
 }
 
 export default Homepage;

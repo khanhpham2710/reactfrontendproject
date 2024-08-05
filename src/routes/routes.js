@@ -9,9 +9,9 @@ import Watch from "../pages/Watch/Watch";
 import NotFound from "../pages/NotFound/NotFound";
 import LandingPage from "../pages/LandingPage/LandingPage";
 import SearchPage from "../pages/SearchPage/SearchPage";
-import TV from "../pages/TV/TV";
-import Movie from "../pages/Movie/Movie";
 import BookTicket from "../pages/BookTicket/BookTicket";
+import NoSlider from "../layouts/NoSlider";
+import AnimesDisplay from "../pages/AnimesDisplay/AnimesDisplay";
 
 const publicRoutes = [
     { path: "/", component: LandingPage, layout: null },
@@ -19,12 +19,11 @@ const publicRoutes = [
     { path: "/login", component: Login, layout: null },
     { path: "/payment", component: Payment },
     { path: "/profile", component: Profile },
-    { path: "/watch/:animeId", component: Watch, layout: null },
+    { path: "/animes/:param", component: AnimesDisplay, layout: NoSlider },
+    { path: "/watch/:animeId", component: Watch, layout: NoSlider },
     { path: "/genre/:genreId", component: Genre, layout: null },
-    { path: "/anime", component: TV},
-    { path: "/movie", component: Movie},
     { path: "/search/:searchTerm", component: SearchPage},
-    { path: "/anime/:animeId", component: AnimePage, layout: null },
+    { path: "/anime/:animeId", component: AnimePage, layout: NoSlider },
     { path: "/character/:characterId", component: Gallery },
     { path: "/book/:id", component: BookTicket, layout: null },
     { path: "*", component: NotFound },

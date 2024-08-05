@@ -12,7 +12,7 @@ function LandingPage() {
   return (
     <div id="landing_page">
       <Header_LandingPage />
-      <Box maxWidth="xl" sx={{ padding: 6, mt: "10vh"}}>
+      <Box maxWidth="xl" sx={{ padding: 6, m: "10vh auto 0 auto"}}>
         <Typography gutterBottom mb={6} sx={{fontWeight : 900}} variant='h2'>Unlimited anime movies, shows and more</Typography>
         <Typography gutterBottom mb={6} sx={{fontWeight : 400}} variant='h3'>Watch anywhere. Cancel anytime</Typography>
         <Typography gutterBottom mb={6} sx={{fontWeight : 400}} variant='h3'>Ready to watch? Enter your email to create or restart your membership</Typography>

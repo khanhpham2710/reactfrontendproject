@@ -9,6 +9,8 @@ import MyButton from '../MyButton/MyButton';
 function Slider({ movie }) {
     const ref = useRef();
 
+    // console.log(movie)
+
     useEffect(() => {
         if (ref.current) {
             ref.current.style.backgroundImage = `url(${movie.background})`;
