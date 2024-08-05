@@ -17,10 +17,10 @@ function SliderComponent() {
     setCur((prev) => (prev === 0 ? movies.length - 1 : prev - 1));
   };
 
-  useEffect(() => {
-    const timer = setInterval(nextSlide, 5000); 
-    return () => clearInterval(timer); 
-  }, []); 
+  // useEffect(() => {
+  //   const timer = setInterval(nextSlide, 5000); 
+  //   return () => clearInterval(timer); 
+  // }, []); 
 
   return (
     <div id="slider">
@@ -28,8 +28,18 @@ function SliderComponent() {
       <Slider key={movies[cur].id} movie={movies[cur]} />
       <div className='dot'>
       {movies.map((movie,index)=>{
-        return index===cur?<CircleIcon key={index} sx = {{ cursor: "pointer" }}
-         />:<CircleOutlinedIcon key={index} sx = {{ cursor: "pointer" }}
+        return index===cur?<CircleIcon key={index} sx = {{ cursor: "pointer", fontSize: {
+          xs: "16px",
+          sm: "18px",
+          md: "20px",
+      },
+}}
+         />:<CircleOutlinedIcon key={index} sx = {{ cursor: "pointer", fontSize: {
+          xs: "12px",
+          sm: "14px",
+          md: "26px",
+      },
+}}
          onClick={()=>setCur(index)}/> })}
       </div>
         <ArrowForwardIos onClick={nextSlide} className='arrow' sx={{ fontSize: 40 }}/>

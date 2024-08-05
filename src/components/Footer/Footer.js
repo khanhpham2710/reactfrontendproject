@@ -18,20 +18,20 @@ function Footer() {
           <Typography variant="h5" sx={{ fontWeight: 600 }} textAlign="left" ml={4}>Contact us</Typography>
             <List>
               <ListItem>
-                <EmailIcon />
-                <Link href="#">: support@blockbuster.com</Link>
+                <EmailIcon/>
+                <Link href="#">:  support@blockbuster.com</Link>
               </ListItem>
               <ListItem>
                 <PhoneIcon />
-                <Link href="#">: +1 234 569 798</Link>
+                <Link href="#">:  +1 234 569 798</Link>
               </ListItem>
               <ListItem>
                 <PublicIcon />
-                <Link href="#">: www.blockbuster.com</Link>
+                <Link href="#">:  www.blockbuster.com</Link>
               </ListItem>
               <ListItem>
                 <LocationOnIcon />
-                <Link href="#">: 97 Ilchester Road, Muirhead, KY15 2GP</Link>
+                <Link href="#">:  97 Ilchester Road, Muirhead, KY15 2GP</Link>
               </ListItem>
             </List>
           </Grid>
