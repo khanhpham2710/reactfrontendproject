@@ -11,6 +11,8 @@ export const orderby = ["mal_id", "title", "start_date", "end_date", "episodes",
 export const fetchAnimes = createAsyncThunk(
     'top/fetchAnimes',
     async ({ type, filter, page, limit }) => {
+        // console.log(type)
+        // console.log(filter)
         const response = await axios.get(`${baseURL}/top/anime`, {
             params: {
                 type,

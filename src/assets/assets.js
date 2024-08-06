@@ -5,21 +5,17 @@ import logo from "./logo.png";
 import poster_1 from "./poster_1.jpg";
 import poster_2 from "./poster_2.jpg";
 import poster_3 from "./poster_3.jpg";
-
-// const assets = {
-//     slider_1,
-//     slider_2,
-//     slider_3,
-//     logo,
-//     poster_1,
-//     poster_2,
-//     poster_3
-// };
+import age_1 from "./age_1.png"
+import age_2 from "./age_2.png"
+import age_3 from "./age_3.png"
+import age_4 from "./age_4.png"
+import age_5 from "./age_5.png"
 
 const assets = {
     sliders: [slider_1,slider_2,slider_3],
     logo,
-    posters: [poster_1,poster_2,poster_3]
+    posters: [poster_1,poster_2,poster_3],
+    age: [age_1,age_2,age_3,age_4,age_5]
 }
 
 export default assets;

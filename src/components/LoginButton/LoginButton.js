@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import React from 'react';
 import MyButton from "../MyButton/MyButton";
 
-function LoginButton(prop) {
+function LoginButton(props) {
     return (
         <Link to="/login">
-            <MyButton context={prop.label}/>
+            <MyButton context={props.label} />
         </Link>
     );
 }

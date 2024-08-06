@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
+import axios from 'axios';
 
 const initialState = {
   details: {},
@@ -9,21 +9,20 @@ const initialState = {
 }
 
 
+
 export const fetchAnimeDetails = createAsyncThunk(
   'anime/fetchAnimeDetails',
   async (animeId) => {
-    const response = await fetch(`https://api.jikan.moe/v4/anime/${animeId}/full`);
-    const data = await response.json();
-    return data.data;
+    const response = await axios.get(`https://api.jikan.moe/v4/anime/${animeId}/full`);
+    return response.data.data;
   }
 );
 
 export const fetchAnimeCharacters = createAsyncThunk(
   'anime/fetchAnimeCharacters',
   async (animeId) => {
-    const response = await fetch(`https://api.jikan.moe/v4/anime/${animeId}/characters`);
-    const data = await response.json();
-    return data.data;
+    const response = await axios.fetch(`https://api.jikan.moe/v4/anime/${animeId}/characters`);
+    return response.data.data;
   }
 );
 

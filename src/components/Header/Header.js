@@ -18,12 +18,13 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { useRef, useEffect } from 'react';
-
+import SearchBox from '../SearchBox/SearchBox';
+import { Grid } from '@mui/material';
 
 const pages = [
   { name: "Home", path: "/home" },
-  { name: "TV shows", path: "/animes/TV" },
-  { name: "Movies", path: "/animes/movie" },
+  { name: "Top Anime", path: "/top/popular" },
+  { name: "Movies", path: "/animes/movies" },
   { name: "Blog", path: "/blog" },
 ];
 
@@ -191,7 +192,10 @@ function Header() {
             ))}
           </Box>
           <Box sx={{ flexGrow: 0 }}>
-            { <User />}
+            <Grid container columnSpacing={6}>
+              <Grid item><SearchBox /></Grid>
+              <Grid item><User /></Grid>
+            </Grid>
           </Box>
         </Toolbar>
       </Container>
