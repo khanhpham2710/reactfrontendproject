@@ -7,6 +7,7 @@ import Carousel from '../../components/Carousel/Carousel';
 import { Typography, Box } from '@mui/material';
 import assets from '../../assets/assets';
 import Header_LandingPage from '../../components/Header_LandingPage/Header_LandingPage';
+import SearchBox from '../../components/SearchBox/SearchBox';
 
 function LandingPage() {
   return (
@@ -16,7 +17,7 @@ function LandingPage() {
         <Typography gutterBottom mb={6} sx={{fontWeight : 900}} variant='h2'>Unlimited anime movies, shows and more</Typography>
         <Typography gutterBottom mb={6} sx={{fontWeight : 400}} variant='h3'>Watch anywhere. Cancel anytime</Typography>
         <Typography gutterBottom mb={6} sx={{fontWeight : 400}} variant='h3'>Ready to watch? Enter your email to create or restart your membership</Typography>
-        <Link to="/login"><LoginButton label="Get Started" /></Link>
+        <LoginButton label="Get Started" />
       </Box>
       <section className='tv'>
 
