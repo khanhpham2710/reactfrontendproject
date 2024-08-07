@@ -13,6 +13,7 @@ import BookTicket from "../pages/BookTicket/BookTicket";
 import NoSlider from "../layouts/NoSlider";
 import TopAnimesPage from "../pages/TopAnimesPage/TopAnimesPage";
 
+
 const publicRoutes = [
     { path: "/", component: LandingPage, layout: null },
     { path: "/home", component: Homepage},
@@ -23,7 +24,7 @@ const publicRoutes = [
     { path: "/watch/:animeId", component: Watch, layout: NoSlider },
     { path: "/genre/:genreId", component: Genre, layout: null },
     { path: "/search/:searchTerm", component: SearchPage,layout: NoSlider},
-    { path: "/anime/:animeId", component: AnimePage, layout: NoSlider },
+    { path: "/anime/:animeId", component: AnimePage, layout: null },
     { path: "/character/:characterId", component: Gallery },
     { path: "/book/:id", component: BookTicket, layout: null },
     { path: "*", component: NotFound },

@@ -5,6 +5,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import { Box, useTheme } from '@mui/material';
 
+
 function SearchBox() {
   const [search, setSearch] = useState('');
   const navigate = useNavigate();

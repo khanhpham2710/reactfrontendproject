@@ -1,7 +1,6 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { useState } from 'react';
 
 export default function FilterBox(prop) {
   const { list, name, value, setValue } = prop;
@@ -18,6 +17,7 @@ export default function FilterBox(prop) {
       blurOnSelect
       id="combo-box-demo"
       options={list}
+      px = {2}
       sx={{ width: 300 }}
       onChange={handleChange}
       renderInput={(params) => <TextField {...params} label={value || name} />}

@@ -12,7 +12,7 @@ const createFetchThunk = (category) => {
         async () => {
             const filter = category === 'toprated' ? '' : `filter=${category}&`;
             // console.log(filter)
-            console.log(`${baseURL}/top/anime${filter}?limit=24&sfw=true`)
+            // console.log(`${baseURL}/top/anime${filter}?limit=24&sfw=true`)
             const response = await axios.get(`${baseURL}/top/anime?${filter}limit=24&sfw=true`);
             // console.log(response.data.data)
             return response.data.data;

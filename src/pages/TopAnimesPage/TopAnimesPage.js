@@ -70,13 +70,13 @@ function TopAnimesPage() {
             <Container maxWidth="lg">
                 <Box width="100%" my={6}>
                     <Grid container rowSpacing={4}>
-                        <Grid item xs={12} sm={12} md={6} lg={4} display="flex" justifyContent="center">
-                            <FilterBox list={types} name="Type" value={type} setValue={setType} />
-                        </Grid>
-                        <Grid item xs={12} sm={12} md={6} lg={4} display="flex" justifyContent="center">
+                        <Grid item xs={12} sm={12} md={6} lg={5} display="flex" justifyContent="center">
                             <FilterBox list={filters} name="Status" value={filter} setValue={setFilter} />
                         </Grid>
-                        <Grid item xs={12} sm={12} md={12} lg={4} display="flex" justifyContent="center">
+                        <Grid item xs={12} sm={12} md={6} lg={5} display="flex" justifyContent="center">
+                            <FilterBox list={types} name="Type" value={type} setValue={setType} />
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={12} lg={2} display="flex" justifyContent="center">
                             <Button onClick={handleClick}>Filter</Button>
                         </Grid>
                     </Grid>

@@ -43,7 +43,7 @@ function SearchPage(prop) {
   return (
     <div>
       <Typography variant="h1" sx={{
-        fontWeight: 700, textTransform: "uppercase", letterSpacing: "8px", fontSize: {
+        fontWeight: 700, textTransform: "uppercase", letterSpacing: "8px", textAlign: "center",fontSize: {
           xs: "60px",
           sm: "70px",
           md: "80px",

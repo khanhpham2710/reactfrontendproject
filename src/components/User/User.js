@@ -1,56 +1,116 @@
-import React from 'react'
-import { Box, Tooltip, IconButton, Avatar, Menu, Typography, MenuItem } from '@mui/material'
-import { Link } from 'react-router-dom';
-
-const settings = [
-    { name: 'Profile', path: "/profile" },
-    { name: 'Account', path: "/account" },
-    { name: 'Logout' },
-];
-
-function User() {
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-    const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
-    };
+import { Box, Tooltip, IconButton, Avatar, Menu, Typography, MenuItem, Divider } from '@mui/material';
+import * as React from 'react';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import PersonAdd from '@mui/icons-material/PersonAdd';
+import Settings from '@mui/icons-material/Settings';
+import Logout from '@mui/icons-material/Logout';
 
 
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
+export default function User() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
 
-    return (
-        <>
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-            </IconButton>
-            <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-            >
-                {settings.map((setting, index) => (
-                    <MenuItem key={index} onClick={handleCloseUserMenu}>
-                        <Link to={setting.path}>
-                            <Typography textAlign="center" variant="h5" sx={{ textDecoration: "none", color: "#fff" }}>{setting.name}</Typography>
-                        </Link>
-                    </MenuItem>
-                ))}
-            </Menu>
-        </>
-    )
+  const [user,setUser] = React.useState({
+    displayName: "asdasd",
+    email: "",
+    photoURL: ""
+  })
+
+  React.useEffect(() => {
+    const storedUser = localStorage.getItem("googleUser");
+    if (storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser).providerData;
+        setUser(parsedUser);
+      } catch (error) {
+        console.error("Failed to parse user data from localStorage", error);
+      }
+    }
+  }, []);
+
+  
+  React.useEffect(()=>{
+    if(user[0]){
+      console.log(user[0].displayName)
+    }
+  })
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  return (
+    <React.Fragment>
+      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', zIndex: "10" }}>
+          <IconButton
+            onClick={handleClick}
+            size="small"
+            sx={{ ml: 2 }}
+            aria-controls={open ? 'account-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+          >
+            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+          </IconButton>
+      </Box>
+      <Menu
+        anchorEl={anchorEl}
+        id="account-menu"
+        open={open}
+        onClose={handleClose}
+        onClick={handleClose}
+        PaperProps={{
+          elevation: 0,
+          sx: {
+            overflow: 'visible',
+            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+            minWidth: 250,
+            mt: 1.5,
+            '& .MuiAvatar-root': {
+              width: 32,
+              height: 32,
+              ml: -0.5,
+              mr: 1,
+            },
+            '&::before': {
+              content: '""',
+              display: 'block',
+              position: 'absolute',
+              top: 0,
+              right: 14,
+              width: 10,
+              height: 10,
+              bgcolor: 'background.paper',
+              transform: 'translateY(-50%) rotate(45deg)',
+              zIndex: 2,
+            },
+          },
+        }}
+        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+      >
+        <MenuItem onClick={handleClose}>
+          <Avatar /> Profile
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <Avatar /> My account
+        </MenuItem>
+        <Divider />
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <Settings fontSize="small" />
+          </ListItemIcon>
+          Settings
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon>
+          Logout
+        </MenuItem>
+      </Menu>
+    </React.Fragment>
+  );
 }
-
-export default User

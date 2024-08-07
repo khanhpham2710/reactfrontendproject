@@ -24,7 +24,7 @@ function Slider({ movie }) {
                     <Grid item xs={8} md={7} xl={5}>
                         <Box className='slider_details' sx={{
                             p: {
-                                xs: "15px",
+                                xs: "5px 15px",
                                 sm: "10px 15px",
                                 md: "10px 20px",
                                 lg: "20px 35px",
@@ -36,13 +36,12 @@ function Slider({ movie }) {
                                     textAlign: "left",
                                     mb: 2,
                                     fontSize: {
-                                        xs: "20px",
+                                        xs: "17px",
                                         sm: "25px",
                                         md: "30px",
                                         lg: "50px",
                                     }
                                 }}
-                                gutterBottom
                             >
                                 {movie.title}
                             </Typography>
@@ -129,7 +128,7 @@ function Slider({ movie }) {
                             >
                                 {movie.synopsis}
                             </Typography>
-                            <Grid container sx={{ gap: "10px", justifyContent: "flex-end" }} className='slider_buttons' mt={2} pr={1}>
+                            <Grid container sx={{ gap: "10px", justifyContent: "flex-end" }} className='slider_buttons' mt={1} pr={1}>
                                 <Grid item>
                                     <Link to={`/book/${movie.id}`}>
                                         <MyButton context="READ MORE" display={{ xs: "block", sm: "none" }} icon={null} />
@@ -137,7 +136,7 @@ function Slider({ movie }) {
                                 </Grid>
                                 <Grid item>
                                     <Link to={`/book/${movie.id}`}>
-                                        <MyButton context="BOOK TICKET" icon={<SendIcon sx={{fontSize: "18px"}}/>} />
+                                        <MyButton context="BOOK TICKET" icon={<SendIcon sx={{fontSize: "10px"}}/>} />
                                     </Link>
                                 </Grid>
                             </Grid>
