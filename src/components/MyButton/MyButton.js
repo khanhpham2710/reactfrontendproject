@@ -10,13 +10,13 @@ function MyButton(props) {
             sx={{
                 display: display ? display:"inline-block",
                 padding: {
-                    xs: "10px 8px",
+                    xs: "8px 4px",
                     sm: "8px 10px",
                     md: "10px 10px",
                     lg: "15px 20px",
                 },
                 fontSize: {
-                    xs: "12px",
+                    xs: "8px",
                     sm: "14px",
                     md: "20px",
                     lg: "24px",

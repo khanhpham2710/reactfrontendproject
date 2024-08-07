@@ -1,10 +1,9 @@
 import React from 'react'
+import SignInWithGG from '../../components/SignInWithGG/SignInWithGG'
 
 function Login() {
   return (
-    <div>
-      
-    </div>
+    <SignInWithGG />
   )
 }
 

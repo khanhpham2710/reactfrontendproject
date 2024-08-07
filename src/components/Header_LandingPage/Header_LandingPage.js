@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import assets from '../../assets/assets';
 import User from '../User/User';
-import SwitchMode from '../../global/switchMode';
+
 
 
 function Header_LandingPage() {
@@ -20,7 +20,6 @@ function Header_LandingPage() {
             }} alt="Logo" />
           </Box>
           <Box sx={{ flexGrow: 0, display: "flex", gap: "20px" }}>
-            <SwitchMode />
             <User />
           </Box>
         </Toolbar>

@@ -8,20 +8,19 @@ import { Provider } from 'react-redux';
 import { CssBaseline } from '@mui/material';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { ModeContextProvider } from './global/modeContext';
+import { ModeContextProvider } from './global/modeContext/modeContext'
+import { AuthProvider } from './global/authContext/authContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <AuthProvider>
     <ModeContextProvider>
-        <CssBaseline>
-            <Provider store={store}>
-                <App />
-            </Provider>
-        </CssBaseline>
-    </ModeContextProvider>
+    <Provider store={store}>
+      <CssBaseline />
+      <App />
+    </Provider>
+  </ModeContextProvider>
+  </AuthProvider>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

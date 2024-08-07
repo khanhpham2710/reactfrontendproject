@@ -5,13 +5,13 @@ import { Box } from '@mui/material'
 
 function NoSlider({ children }) {
     return (
-        <div>
+        <>
             <Header />
-            <Box sx={{ mt: "14vh"}}>
+            <Box sx={{ mt: "10vh"}}>
                 {children}
             </Box>
             <Footer />
-        </div>
+        </>
     )
 }
 
