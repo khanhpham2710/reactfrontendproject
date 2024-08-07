@@ -7,7 +7,7 @@ import SliderComponent from "../components/SliderComponent/SliderComponent"
 function DefaultLayout({children}) {
   return (
     <div>
-        <Header />
+        <Header/>
         <SliderComponent />
         {children}
         <Footer />

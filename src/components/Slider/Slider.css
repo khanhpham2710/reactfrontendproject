@@ -34,21 +34,19 @@
     font-weight: 800;
 }
 
+.slider_details h6 {
+    color: #fff;
+}
+
 .slider_details p {
     color: #fff;
     text-align: justify;
 }
 
-.slider_button{
-    transition: background-color 0.3s ease-in-out !important;
-    background-color: red !important;
-    color: #fff !important;
-    border-radius: 10px !important;
-    font-weight: 800 !important;
-    border: 2px red solid !important;
+.slider_right .slider_buttons{
+    justify-content: flex-end;
 }
 
-
-.slider_button:hover{
-    background-color: #000 !important
+.slider_left .slider_buttons{
+    justify-content: flex-start;
 }

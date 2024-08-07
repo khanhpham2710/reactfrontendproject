@@ -9,7 +9,6 @@ import FilterBox from "../../components/FilterBox/FilerBox";
 import { Box, Grid } from "@mui/material";
 
 function TopAnimesPage() {
-    const { param } = useParams();
     const dispatch = useDispatch();
     const { animes, loading, error } = useSelector((state) => state.top);
 
@@ -21,13 +20,6 @@ function TopAnimesPage() {
     const [params, setParams] = useState({ type: "", filter: "" });
     const [heading, setHeading] = useState("");
 
-    useEffect(() => {
-        if (types.includes(param.toLowerCase())) {
-            setParams(prev => ({ ...prev, type: param, page: 1 }));
-        } else if (filters.includes(param.toLowerCase())) {
-            setParams(prev => ({ ...prev, filter: param, page: 1 }));
-        }
-    }, [param, types, filters]);
 
     useEffect(() => {
         dispatch(fetchAnimes(params));
@@ -39,10 +31,7 @@ function TopAnimesPage() {
             const filterCapitalized = filter.charAt(0).toUpperCase() + filter.slice(1);
             const typeCapitalized = type.charAt(0).toUpperCase() + type.slice(1);
             newHeading = `${filterCapitalized} ${typeCapitalized}`;
-        } else {
-            const paramCapitalized = param.charAt(0).toUpperCase() + param.slice(1);
-            newHeading = paramCapitalized;
-        }
+        } 
         setHeading(newHeading);
     }, [params]);
 

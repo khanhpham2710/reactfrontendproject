@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button } from '@mui/material'
+import "./MyButton.css"
 
 function MyButton(props) {
     const { context, icon, display} = props
@@ -25,7 +26,7 @@ function MyButton(props) {
             }}
             variant='contained'
             disableElevation
-            className='slider_button'>
+            className='my_button'>
             <div style={{display: "flex", gap: "5px", justifyContent:"center", alignItems: "center"}}>
                 {context}
                 {icon}

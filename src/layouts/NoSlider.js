@@ -7,7 +7,7 @@ function NoSlider({ children }) {
     return (
         <div>
             <Header />
-            <Box sx={{ mt: "10vh"}}>
+            <Box sx={{ mt: "14vh"}}>
                 {children}
             </Box>
             <Footer />
