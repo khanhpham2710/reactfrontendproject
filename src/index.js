@@ -5,21 +5,20 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './global/store';
 import { Provider } from 'react-redux';
-import { theme } from './theme';
-import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from '@mui/material';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { ModeContextProvider } from './global/modeContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <ThemeProvider theme={theme}>
+    <ModeContextProvider>
         <CssBaseline>
             <Provider store={store}>
                 <App />
             </Provider>
         </CssBaseline>
-    </ThemeProvider>
+    </ModeContextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

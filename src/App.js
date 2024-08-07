@@ -1,14 +1,22 @@
-import './App.css';
+import React from 'react';
+import { ThemeProvider as MUIThemeProvider, CssBaseline } from '@mui/material';
+import { darkTheme, lightTheme } from './theme';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import DefaultLayout from './layouts/DefaultLayout';
 import { publicRoutes } from './routes/routes';
-import DefaultLayout from "./layouts/DefaultLayout";
+import { ModeContext } from './global/modeContext';
+import { useContext } from 'react';
 import { Fragment } from 'react';
 
 
 function App() {
+  const { isDarkMode } = useContext(ModeContext)
+
   return (
-    <div className="App">
-      <Router>
+      <MUIThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+      <CssBaseline />
+      <div className="App">
+        <Router>
         <Routes>
           {
             publicRoutes.map((route, index) => {
@@ -35,9 +43,11 @@ function App() {
             })
           }
         </Routes>
-      </Router>
-    </div>
+        </Router>
+      </div>
+    </MUIThemeProvider>
   );
 }
+
 
 export default App;

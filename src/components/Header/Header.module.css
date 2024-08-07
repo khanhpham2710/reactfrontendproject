@@ -1,0 +1,16 @@
+.logo{
+    position: fixed;
+    width: 150px;
+    height: auto;
+    margin: 0 auto;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%,-10%);
+    cursor: pointer;
+}
+
+@media (min-width: 900px) {
+    .logo {
+      display: none;
+    }
+  }

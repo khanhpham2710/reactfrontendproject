@@ -19,7 +19,7 @@ const publicRoutes = [
     { path: "/login", component: Login, layout: null },
     { path: "/payment", component: Payment },
     { path: "/profile", component: Profile },
-    { path: "/top/:param", component: TopAnimesPage, layout: NoSlider},
+    { path: "/top", component: TopAnimesPage, layout: NoSlider},
     { path: "/watch/:animeId", component: Watch, layout: NoSlider },
     { path: "/genre/:genreId", component: Genre, layout: null },
     { path: "/search/:searchTerm", component: SearchPage,layout: NoSlider},

@@ -1,79 +1,47 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { styled, alpha } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  width: '100%',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
-  },
-}));
-
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(1),
-    width: 'auto',
-  },
-}));
+import { Box, useTheme } from '@mui/material';
 
 function SearchBox() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [search, setSearch] = useState('');
   const navigate = useNavigate();
+  const theme = useTheme();
 
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
+  const handleChange = useCallback((event) => {
+    setSearch(event.target.value);
+  }, []);
 
-  const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
-      navigate(`/search/${(searchTerm)}`);
-    }
-  };
+  const handleSubmit = useCallback((event) => {
+    navigate(`/search/${search}`);
+  }, [search, navigate]);
 
   return (
-    <Search>
-      <SearchIconWrapper>
-        <SearchIcon />
-      </SearchIconWrapper>
-      <StyledInputBase
+    <Box component="form" height={70} sx={{ display: 'flex', alignItems: 'center' }} px={2} py={1} onSubmit={handleSubmit}>
+      <InputBase 
+        onChange={handleChange}
         placeholder="Search…"
         inputProps={{ 'aria-label': 'search' }}
-        value={searchTerm}
-        onChange={handleChange}
-        onKeyDown={handleKeyPress}
+        startAdornment={
+          <SearchIcon 
+            sx={{
+              width: 40,
+              height: 40,
+              padding: '8px',
+              borderRadius: '50%',
+              backgroundColor: 'red',
+              mr: 1,
+              "&:hover": {
+                opacity: 0.7
+              }
+            }} 
+          />
+        }
+        sx={{ width: '100%', height: "100%", padding: '0 8px', borderRadius: "50px", border: "3px solid #ccc" }}
       />
-    </Search>
+    </Box>
   );
 }
 

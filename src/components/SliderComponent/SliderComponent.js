@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Slider from '../Slider/Slider';
 import movies from '../../assets/movies';
 import './SliderComponent.css';
@@ -17,32 +17,48 @@ function SliderComponent() {
     setCur((prev) => (prev === 0 ? movies.length - 1 : prev - 1));
   };
 
-  // useEffect(() => {
-  //   const timer = setInterval(nextSlide, 5000); 
-  //   return () => clearInterval(timer); 
-  // }, []); 
-
   return (
     <div id="slider">
-        <ArrowBackIosNew onClick={prevSlide} className='arrow' sx={{ fontSize: 40 }}/>
+      <ArrowBackIosNew
+        onClick={prevSlide}
+        className='arrow'
+        sx={{ 
+          fontSize: 40, 
+          color: '#fff' 
+        }} 
+      />
       <Slider key={movies[cur].id} movie={movies[cur]} />
       <div className='dot'>
-      {movies.map((movie,index)=>{
-        return index===cur?<CircleIcon key={index} sx = {{ cursor: "pointer", fontSize: {
-          xs: "16px",
-          sm: "18px",
-          md: "20px",
-      },
-}}
-         />:<CircleOutlinedIcon key={index} sx = {{ cursor: "pointer", fontSize: {
-          xs: "12px",
-          sm: "14px",
-          md: "26px",
-      },
-}}
-         onClick={()=>setCur(index)}/> })}
+        {movies.map((movie, index) => (
+          index === cur 
+            ? <CircleIcon 
+                key={index} 
+                sx={{ 
+                  cursor: "pointer", 
+                  fontSize: { xs: "12px", sm: "14px", md: "26px" }, 
+                  color: '#fff' 
+                }} 
+              /> 
+            : <CircleOutlinedIcon 
+                key={index} 
+                sx={{ 
+                  cursor: "pointer", 
+                  fontSize: { xs: "8px", sm: "10px", md: "20px" }, 
+                  color: '#fff' 
+                }} 
+                onClick={() => setCur(index)} 
+              />
+        ))}
       </div>
-        <ArrowForwardIos onClick={nextSlide} className='arrow' sx={{ fontSize: 40 }}/>
+
+      <ArrowForwardIos
+        onClick={nextSlide}
+        className='arrow'
+        sx={{ 
+          fontSize: 40, 
+          color: '#fff' 
+        }} 
+      />
     </div>
   );
 }

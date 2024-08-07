@@ -12,9 +12,9 @@ function Homepage() {
   // console.log(topratedAnime, bypopularityAnime, airingAnime, upcomingAnime, favoriteAnime)
 
   useEffect(() => {
-      dispatch(fetchPopularAnime());
+      // dispatch(fetchPopularAnime());
       dispatch(fetchAiringAnime());
-      // dispatch(fetchUpcomingAnime());
+      dispatch(fetchUpcomingAnime());
       // dispatch(fetchTopRatedAnime());
       // dispatch(fetchFavoriteAnime());
   }, []);
@@ -34,9 +34,9 @@ function Homepage() {
       <SideBar />
       <AnimeScrollSlider list ={airingAnime} label="Airing"/>
       {/* <AnimeScrollSlider list ={topratedAnime} label="Top Rated"/> */}
-      <AnimeScrollSlider list ={bypopularityAnime} label="Most Popular"/>
+      {/* <AnimeScrollSlider list ={bypopularityAnime} label="Most Popular"/> */}
       {/* <AnimeScrollSlider list ={favoriteAnime} label="Most Favorite"/> */}
-      {/* <AnimeScrollSlider list ={upcomingAnime} label="Upcoming"/> */}
+      <AnimeScrollSlider list ={upcomingAnime} label="Upcoming"/>
     </div>
   )
 }
