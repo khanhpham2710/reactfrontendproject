@@ -5,6 +5,7 @@ import LoginButton from '../../components/LoginButton/LoginButton';
 import Carousel from '../../components/Carousel/Carousel';
 import { Typography, Box } from '@mui/material';
 import Header_LandingPage from '../../components/Header_LandingPage/Header_LandingPage';
+import Login from '../../components/LogIn/LogIn'
 
 
 function LandingPage() {
@@ -17,6 +18,7 @@ function LandingPage() {
         <Typography textAlign="center" gutterBottom mb={6} sx={{fontWeight : 400}} variant='h3'>Ready to watch? Enter your email to create or restart your membership</Typography>
         <LoginButton label="Get Started" />
       </Box>
+      <Login />
       <section className='tv'>
 
       </section>

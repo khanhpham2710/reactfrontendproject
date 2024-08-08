@@ -4,36 +4,29 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
+import SwitchMode from "../SwitchMode/SwitchMode";
+import { useAuth } from "../../global/authContext/authContext";
 
 
 export default function User() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-
-  const [user,setUser] = React.useState({
-    displayName: "asdasd",
-    email: "",
-    photoURL: ""
-  })
+  const [user,setUser] = React.useState()
+  const { currentUser } = useAuth()
 
   React.useEffect(() => {
     const storedUser = localStorage.getItem("googleUser");
     if (storedUser) {
       try {
         const parsedUser = JSON.parse(storedUser).providerData;
-        setUser(parsedUser);
+        setUser(parsedUser[0]);
       } catch (error) {
         console.error("Failed to parse user data from localStorage", error);
       }
     }
   }, []);
 
-  
-  React.useEffect(()=>{
-    if(user[0]){
-      console.log(user[0].displayName)
-    }
-  })
+
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -52,7 +45,7 @@ export default function User() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            {currentUser?<Avatar src={currentUser.photoURL} sx={{ width: 40, height: 40 }}></Avatar>:<Avatar sx={{ width: 40, height: 40 }}>B</Avatar>}
           </IconButton>
       </Box>
       <Menu
@@ -60,7 +53,6 @@ export default function User() {
         id="account-menu"
         open={open}
         onClose={handleClose}
-        onClick={handleClose}
         PaperProps={{
           elevation: 0,
           sx: {
@@ -96,6 +88,9 @@ export default function User() {
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <Avatar /> My account
+        </MenuItem>
+        <MenuItem>
+          Switch mode <SwitchMode /> 
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>
