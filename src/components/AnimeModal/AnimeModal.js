@@ -44,12 +44,14 @@ export default function AnimeModal(prop) {
             }}
             aria-describedby="alert-dialog-slide-description"
         >
-            <DialogTitle variant='h4' sx={{ textAlign: "center", borderBottom: "2px solid #ccc", fontWeight: 800, letterSpacing: 4, fontSize:{
-                xs: "25px",
-                sm: "30px",
-                md: "40px",
-                lg: "50px",
-            } }}>
+            <DialogTitle variant='h4' sx={{
+                textAlign: "center", borderBottom: "2px solid #ccc", fontWeight: 800, letterSpacing: 4, fontSize: {
+                    xs: "25px",
+                    sm: "30px",
+                    md: "40px",
+                    lg: "50px",
+                }
+            }}>
                 {item.title}
             </DialogTitle>
             <DialogContent sx={{ display: "flex", mt: 2, gap: 2 }}>
@@ -92,3 +94,5 @@ export default function AnimeModal(prop) {
         </Dialog>
     );
 }
+
+

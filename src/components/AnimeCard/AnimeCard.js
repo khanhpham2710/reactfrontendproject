@@ -3,17 +3,16 @@ import { useState } from 'react';
 import AnimeModal from "../AnimeModal/AnimeModal";
 import { Typography, Box } from '@mui/material';
 import { AppBar } from '@mui/material';
-import { styled, useTheme } from '@mui/material/styles'; 
-
+import { styled, useTheme } from '@mui/material/styles';
 
 const TitleBox = styled(Box)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#grey' : theme.palette.primary.main,
-    padding: '8px',
+  backgroundColor: theme.palette.mode === 'dark' ? '#grey' : theme.palette.primary.main,
+  padding: '8px',
 }));
 
 function AnimeCard({ item }) {
   const [open, setOpen] = useState(false);
-  const theme = useTheme(); 
+  const theme = useTheme();
 
   const handleClickOpen = () => {
     setOpen(true);
