@@ -40,9 +40,9 @@ function SignInWithGG() {
         }
     };
 
-    if (userLoggedIn) {
-        return <Navigate to="/home" replace />;
-    }
+    // if (userLoggedIn) {
+    //     return <Navigate to="/home" replace />;
+    // }
 
     return (
         <div>

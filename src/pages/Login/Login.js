@@ -3,6 +3,7 @@ import SignInWithGG from '../../components/SignInWithGG/SignInWithGG'
 
 function Login() {
   return (
+
     <SignInWithGG />
   )
 }
