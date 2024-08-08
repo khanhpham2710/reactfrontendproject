@@ -11,7 +11,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 function Footer() {
   return (
-    <Container maxWidth="xll" sx={{ my: 6 }}>
+    <Container maxWidth="xll" sx={{ my: 6, borderTop: "4px solid #ccc" }}>
       <Grid container rowSpacing={2} columnSpacing={2}>
         <Grid item mt={3} xs={12} sm={12} md={6} lg={3} sx={{ borderRight: { md: "2px solid #ccc" }}}>
           <Typography variant="h5" sx={{ fontWeight: 600 }} textAlign="left" ml={2}>Contact us</Typography>

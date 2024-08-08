@@ -1,14 +1,13 @@
-import { Typography, Grid, Box } from "@mui/material";
+import { Typography, Grid, Box, Container } from "@mui/material";
 import assets from "../../assets/assets";
 import { useState, useEffect, useRef } from "react";
 import "./AnimeInfo.css"
 
 function AnimeInfo({ details }) {
     const {
-        title, title_english, type, synopsis,
-        trailer, source, episodes, duration,
-        aired, status, season, images, rank,
-        score, scored_by, popularity, rating,
+        title, title_english, type, source, 
+        episodes, duration, aired, status, season, 
+        images, rank, score, popularity, rating,
         studios, genres
     } = details;
 
@@ -16,9 +15,8 @@ function AnimeInfo({ details }) {
     const ratingRef = useRef();
 
 
-
-    const [showMore, setShowMore] = useState(false)
-
+    const fontSize ={xs: "14px", sm: "16px", md: "18px", lg: "22px"}
+    const fontSize2 ={xs: "22px", sm: "24px", md: "26px", lg: "30px"}
 
     useEffect(() => {
         if (ratingRef.current && rating) {
@@ -66,7 +64,7 @@ function AnimeInfo({ details }) {
         <Grid container sx={{}}>
             <Grid item xs={12} sm={12} md={4} lg={3} p={4}>
                 <Box width="100%" sx={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                    <img src={images?.jpg.large_image_url} alt={title} style={{ width: '100%', height: 'auto', objectFit: 'cover', maxWidth: "250px", padding: "10px", border: "2px #fff solid", borderRadius: "20px" }} />
+                    <img src={images?.jpg.large_image_url} alt={title} style={{ width: '100%', height: 'auto', objectFit: 'cover', maxWidth: "250px", border: "#ccc 5px solid", borderRadius: "20px" }} />
                 </Box>
             </Grid>
             <Grid item xs={12} sm={12} md={8} lg={9} sx={{ p: { xs: 2, sm: 2, md: 3, lg: 4 } }} textAlign="left">
@@ -75,63 +73,58 @@ function AnimeInfo({ details }) {
                 </Typography>
                 <Grid container columnSpacing={1}>
                     <Grid item xs={12} sm={6} md={5} lg={4}>
-                        <Typography variant='body1' sx={{ fontSize: { xs: "18px", sm: "16px", md: "18px", lg: "22px" } }} fontWeight="700" gutterBottom>
+                        <Typography variant='body1' sx={{ fontSize: fontSize }} fontWeight="700" gutterBottom>
                             Type: {type || 'N/A'}
                         </Typography>
-                        <Typography variant='body1' sx={{ fontSize: { xs: "18px", sm: "16px", md: "18px", lg: "22px" } }} fontWeight="700" gutterBottom>
+                        <Typography variant='body1' sx={{ fontSize: fontSize }} fontWeight="700" gutterBottom>
                             Status: {status || 'N/A'}
                         </Typography>
-                        <Typography variant='body1' sx={{ fontSize: { xs: "18px", sm: "16px", md: "18px", lg: "22px" } }} fontWeight="700" gutterBottom>
+                        <Typography variant='body1' sx={{ fontSize: fontSize }} fontWeight="700" gutterBottom>
                             Source: {source || 'N/A'}
                         </Typography>
-                        <Typography variant='body1' sx={{ fontSize: { xs: "18px", sm: "16px", md: "18px", lg: "22px" } }} fontWeight="700" gutterBottom>
+                        <Typography variant='body1' sx={{ fontSize: fontSize }} fontWeight="700" gutterBottom>
                             Season: {season || 'N/A'}
                         </Typography>
-                        <Typography variant='body1' sx={{ fontSize: { xs: "18px", sm: "16px", md: "18px", lg: "22px" } }} fontWeight="700" gutterBottom>
+                        <Typography variant='body1' sx={{ fontSize: fontSize }} fontWeight="700" gutterBottom>
                             Rating: <img src="" alt="" ref={ratingRef} className="anime_rating"/>
                         </Typography>
                     </Grid>
                     <Grid item xs={12} sm={6} md={7} lg={8}>
-                        <Typography variant='body1' sx={{ fontSize: { xs: "18px", sm: "16px", md: "18px", lg: "22px" } }} fontWeight="700" gutterBottom>
+                        <Typography variant='body1' sx={{ fontSize: fontSize }} fontWeight="700" gutterBottom>
                             Aired: {aired?.string || 'N/A'}
                         </Typography>
-                        <Typography variant='body1' sx={{ fontSize: { xs: "18px", sm: "16px", md: "18px", lg: "22px" } }} fontWeight="700" gutterBottom>
+                        <Typography variant='body1' sx={{ fontSize: fontSize }} fontWeight="700" gutterBottom>
                             Episodes: {episodes || 'N/A'}
                         </Typography>
-                        <Typography variant='body1' sx={{ fontSize: { xs: "18px", sm: "16px", md: "18px", lg: "22px" } }} fontWeight="700" gutterBottom>
+                        <Typography variant='body1' sx={{ fontSize: fontSize }} fontWeight="700" gutterBottom>
                             Duration: {duration || 'N/A'}
                         </Typography>
-                        <Typography variant='body1' sx={{ fontSize: { xs: "18px", sm: "16px", md: "18px", lg: "22px" } }} fontWeight="700" gutterBottom>
+                        <Typography variant='body1' sx={{ fontSize: fontSize }} fontWeight="700" gutterBottom>
                             Studios: {studios?.map(studio => studio.name).join(', ') || 'N/A'}
                         </Typography>
-                        <Typography variant='body1' sx={{ fontSize: { xs: "18px", sm: "16px", md: "18px", lg: "22px" } }} fontWeight="700" gutterBottom>
+                        <Typography variant='body1' sx={{ fontSize: fontSize }} fontWeight="700" gutterBottom>
                             Genres: {genres?.map(genre => genre.name).join(', ') || 'N/A'}
                         </Typography>
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid container width="100%" my={2}>
-                <Grid xs={4} item sx={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "center", gap: "15px" }}>
-                    <Typography variant="h6" fontWeight="800" gutterBottom>Score</Typography>
-                    <div ref={scoreRef} className='rating'>{score || "N/A"}</div>
+            <Grid container width="100%" height="auto" my={2}>
+                <Grid xs={4} item sx={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "center", }}>
+                    <Typography variant="h6" fontWeight="800" fontSize={fontSize2} gutterBottom>Score</Typography>
+                    <Box sx={{height: "100%", display: "flex", alignItems: "center"}}>
+                        <div ref={scoreRef} className='rating' style={{height: "100%"}}>{score || "N/A"}</div>
+                    </Box>
                 </Grid>
                 <Grid xs={4} item sx={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "center", gap: "40px" }}>
-                    <Typography variant="h6" fontWeight="800" gutterBottom>Rank</Typography>
+                    <Typography variant="h6" fontWeight="800" fontSize={fontSize2} gutterBottom>Rank</Typography>
                     <Typography variant="h6" fontWeight="800" fontSize="40px" gutterBottom># {rank || "N/A"}</Typography>
                 </Grid>
                 <Grid xs={4} item sx={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "center", gap: "40px" }}>
-                    <Typography variant="h6" fontWeight="800" gutterBottom>Popularity</Typography>
+                    <Typography variant="h6" fontWeight="800" fontSize={fontSize2} gutterBottom>Popularity</Typography>
                     <Typography variant="h6" fontWeight="800" fontSize="40px" gutterBottom>{popularity || 'N/A'}</Typography>
                 </Grid>
             </Grid>
-            <Grid item xs={12} sm={12} md={8} lg={9} sx={{ p: { xs: 2, sm: 2, md: 3, lg: 4 } }} textAlign="left"></Grid>
         </Grid>
-        <Typography variant='h3' textAlign="center" fontWeight="800" sx={{ p: { xs: 2, sm: 2, md: 3, lg: 4 } }}>Synopsis</Typography>
-        <Typography variant='body1' textAlign="left" fontSize="24px" sx={{ p: { xs: 2, sm: 2, md: 3, lg: 4 } }}>{showMore ? synopsis : synopsis?.substring(0, 450) + '...'}
-            <button onClick={() => {
-                setShowMore(!showMore)
-            }}>{showMore ? 'Show Less' : 'Read More'}</button>
-        </Typography>
     </>
     )
 }

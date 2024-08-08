@@ -1,5 +1,5 @@
 :root {
-    --rating-size: 6rem;
+    --rating-size: 6rem; /* Adjust as needed */
     --bar-size: 0.5rem;
     --background-color: #e7f2fa;
     --rating-color-default: #2980b9;
@@ -9,6 +9,7 @@
     --rating-color-bad: #e74c3c;
 }
 
+
 /* Rating item */
 .rating {
     position: relative;
@@ -17,10 +18,10 @@
     justify-content: center;
     border-radius: 100%;
     overflow: hidden;
-
     background: var(--rating-color-default);
     color: var(--rating-color-default);
     width: var(--rating-size);
+    aspect-ratio: 1;
     height: var(--rating-size);
 
     /* Basic style for the text */
@@ -70,31 +71,4 @@
 .rating.bad {
     background: var(--rating-color-bad);
     color: var(--rating-color-bad);
-}
-
-
-
-
-@media (max-width: 600px) {
-    .rating {
-        height: 60px;
-    }
-}
-
-@media (max-width: 900px) {
-    .rating {
-        height: 120px;
-    }
-}
-
-@media (max-width: 1200px) {
-    .rating {
-        height: 60px;
-    }
-}
-
-@media (max-width: 1536px) {
-    .rating {
-        height: 60px;
-    }
 }

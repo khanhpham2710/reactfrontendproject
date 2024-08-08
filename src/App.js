@@ -11,7 +11,6 @@ import { Fragment } from 'react';
 
 function App() {
   const { darkMode } = useContext(ModeContext)
-  
 
   return (
       <MUIThemeProvider theme={darkMode ? darkTheme : lightTheme}>

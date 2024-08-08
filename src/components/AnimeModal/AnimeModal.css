@@ -1,9 +1,16 @@
+.img_container{
+    background-position: center;
+    background-repeat: no-repeat;
+    /* background-size: cover; */
+}
+
+
 .dialog_synopsis {
     /* background-color: red; */
 }
 
 .dialog_synopsis::-webkit-scrollbar {
-    width: 2vw;
+    width: 1vw;
 }
 
 /* Track */

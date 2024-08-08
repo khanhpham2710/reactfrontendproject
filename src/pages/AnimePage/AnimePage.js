@@ -8,15 +8,18 @@ import AnimeInfo from '../../components/AnimeInfo/AnineInfo';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import SliderComponent from '../../components/SliderComponent/SliderComponent';
+import PlayCircleFilledRoundedIcon from '@mui/icons-material/PlayCircleFilledRounded';
+import AnimeSynopsis from "../../components/AnimeSynopsis/AnimeSynopsis"
+import "./AnimePage.css"
 
 function AnimePage() {
   const { animeId } = useParams();
   const dispatch = useDispatch();
   const { details, status_loading, error } = useSelector((state) => state.anime);
   const trailer = details?.trailer;
-  
+
   const darkMode = localStorage.getItem("darkMode") === "true";
-  
+
   const backGroundRef = useRef(null);
   const boxRef = useRef(null);
 
@@ -51,20 +54,38 @@ function AnimePage() {
   return (
     <Box>
       <Header />
-      {trailer?.images?.maximum_image_url ? (
-        <img
-          ref={backGroundRef}
-          style={{ width: "100vw", aspectRatio: "16 / 9", position: 'fixed', zIndex: "-1" }}
-          alt="Background"
-        />
-      ) : (
-        <SliderComponent />
-      )}
+      <Box style={{ width: "100vw", position: 'fixed', zIndex: "-5" }}>
+        {trailer?.images?.maximum_image_url ? (
+          <>
+            <img
+              ref={backGroundRef}
+              style={{ width: "100vw", aspectRatio: "16 / 9", zIndex: "-6"}}
+              alt="Background"
+            />
+            <PlayCircleFilledRoundedIcon 
+              sx={{ 
+                position: "absolute", 
+                top: "50%", 
+                left: "50%", 
+                transform: "translate(-50%, -50%)", 
+                fontSize: 80, 
+                color: "red",
+                background: "white",
+                borderRadius: "50px"
+              }}
+            />
+            <Box sx={{width: "100vw", height: "100%", background: "green", zIndex: "-2"}} className="anime_page_img"/>
+          </>
+        ) : (
+          <SliderComponent />
+        )}
+      </Box>
       <Box
-        ref={boxRef} px={2} pt={6}
-        style={{ position: "absolute", width: "100%", backgroundColor: darkMode ? "#000" : "#fff" }}
-      >
+        ref={boxRef}
+        backgroundColor={darkMode ? "#000" : "fff"}
+        style={{ position: "absolute", width: "100%"}}>
         <AnimeInfo details={details} />
+        <AnimeSynopsis details={details} />
         <Footer />
       </Box>
     </Box>

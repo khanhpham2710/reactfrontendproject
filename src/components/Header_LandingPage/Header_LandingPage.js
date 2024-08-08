@@ -6,9 +6,9 @@ import Container from '@mui/material/Container';
 import assets from '../../assets/assets';
 import User from '../User/User';
 
-
-
 function Header_LandingPage() {
+
+
   return (
     <AppBar position="fixed" sx={{ height: "10vh", display: "flex", justifyContent: "center" }}>
       <Container maxWidth="xl">
