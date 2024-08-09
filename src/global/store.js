@@ -5,9 +5,8 @@ import searchReducer from './searchSlice';
 import animeHomeSlice from './animeHomeSlice';
 import topSlice from './topSlice';
 import genreSlice from './genreSlice';
-import userSlice from './userSlice';
-import movieBookingSlice from './movieBookingSlice';
-
+import userSlice0 from './userSlice0';
+import movieBookingSlice0 from './movieBookingSlice0';
 
 const store = configureStore({
   reducer: {
@@ -17,8 +16,8 @@ const store = configureStore({
     genre: genreSlice,
     search: searchReducer,
     animeHome: animeHomeSlice,
-    user: userSlice,
-    movieBooking: movieBookingSlice
+    user0: userSlice0,
+    movieBooking0: movieBookingSlice0,
   },
 });
 

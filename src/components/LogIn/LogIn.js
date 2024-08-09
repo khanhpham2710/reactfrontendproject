@@ -13,7 +13,7 @@ const Login = () => {
     };
 
     return (
-        <Box height="100vh" width="100vw" sx={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+        <Box height="100vh" width="100vw" sx={{display: "flex", justifyContent: "center", alignItems: "center"}} className="login_container">
             <div className={`container ${isSignUpActive ? 'active' : ''}`} id="container">
                 <SignInForm />
                 <LoginForm />
@@ -30,7 +30,6 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-
         </Box>
     );
 };

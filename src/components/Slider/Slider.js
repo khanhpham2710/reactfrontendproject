@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import { Button, Typography, Box } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import MyButton from '../MyButton/MyButton';
+import BookTicketButton from '../BookTicketButton/BookTicketButton';
 
 function Slider({ movie }) {
     const ref = useRef();
@@ -130,14 +131,12 @@ function Slider({ movie }) {
                             </Typography>
                             <Grid container sx={{ gap: "10px", justifyContent: "flex-end" }} className='slider_buttons' mt={1} pr={1}>
                                 <Grid item>
-                                    <Link to={`/book/${movie.id}`}>
+                                    <Link to={'/login'}>
                                         <MyButton context="READ MORE" display={{ xs: "block", sm: "none" }} icon={null} />
                                     </Link>
                                 </Grid>
                                 <Grid item>
-                                    <Link to={`/book/${movie.id}`}>
-                                        <MyButton context="BOOK TICKET" icon={<SendIcon sx={{fontSize: "10px"}}/>} />
-                                    </Link>
+                                    <BookTicketButton />
                                 </Grid>
                             </Grid>
                         </Box>

@@ -2,6 +2,7 @@ import React from 'react'
 import Header from "../components/Header/Header"
 import Footer from '../components/Footer/Footer'
 import SliderComponent from "../components/SliderComponent/SliderComponent"
+import ScrollUpButton from '../components/ScrollUpButton/ScrollUpButton'
 
 
 function DefaultLayout({children}) {
@@ -11,6 +12,7 @@ function DefaultLayout({children}) {
         <SliderComponent />
         {children}
         <Footer />
+        <ScrollUpButton />
     </div>
   )
 }

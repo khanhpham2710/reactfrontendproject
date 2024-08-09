@@ -2,6 +2,7 @@ import React from 'react'
 import Header from "../components/Header/Header"
 import Footer from '../components/Footer/Footer'
 import { Box } from '@mui/material'
+import ScrollUpButton from '../components/ScrollUpButton/ScrollUpButton'
 
 function NoSlider({ children }) {
     return (
@@ -11,6 +12,7 @@ function NoSlider({ children }) {
                 {children}
             </Box>
             <Footer />
+            <ScrollUpButton />
         </>
     )
 }

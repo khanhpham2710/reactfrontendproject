@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAnimeDetails, fetchAnimeCharacters } from '../../global/animeSlice';
@@ -11,14 +11,21 @@ import SliderComponent from '../../components/SliderComponent/SliderComponent';
 import PlayCircleFilledRoundedIcon from '@mui/icons-material/PlayCircleFilledRounded';
 import AnimeSynopsis from "../../components/AnimeSynopsis/AnimeSynopsis"
 import "./AnimePage.css"
+import { useTheme } from '@emotion/react';
 
 function AnimePage() {
   const { animeId } = useParams();
   const dispatch = useDispatch();
   const { details, status_loading, error } = useSelector((state) => state.anime);
   const trailer = details?.trailer;
+  const [darkMode, setDarkMode] = useState()
+  const theme = useTheme()
 
-  const darkMode = localStorage.getItem("darkMode") === "true";
+  useEffect(() => {
+    setDarkMode(JSON.parse(localStorage.getItem("darkMode")))
+    // const darkMode = localStorage.getItem("darkMode") === "true";
+  }, [theme])
+
 
   const backGroundRef = useRef(null);
   const boxRef = useRef(null);
@@ -59,22 +66,22 @@ function AnimePage() {
           <>
             <img
               ref={backGroundRef}
-              style={{ width: "100vw", aspectRatio: "16 / 9", zIndex: "-6"}}
+              style={{ width: "100vw", aspectRatio: "16 / 9", zIndex: "-6" }}
               alt="Background"
             />
-            <PlayCircleFilledRoundedIcon 
-              sx={{ 
-                position: "absolute", 
-                top: "50%", 
-                left: "50%", 
-                transform: "translate(-50%, -50%)", 
-                fontSize: 80, 
+            <PlayCircleFilledRoundedIcon
+              sx={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                fontSize: 80,
                 color: "red",
                 background: "white",
                 borderRadius: "50px"
               }}
             />
-            <Box sx={{width: "100vw", height: "100%", background: "green", zIndex: "-2"}} className="anime_page_img"/>
+            <Box sx={{ width: "100vw", height: "100%", background: "green", zIndex: "-2" }} className="anime_page_img" />
           </>
         ) : (
           <SliderComponent />
@@ -83,7 +90,7 @@ function AnimePage() {
       <Box
         ref={boxRef}
         backgroundColor={darkMode ? "#000" : "fff"}
-        style={{ position: "absolute", width: "100%"}}>
+        style={{ position: "absolute", width: "100%" }}>
         <AnimeInfo details={details} />
         <AnimeSynopsis details={details} />
         <Footer />
