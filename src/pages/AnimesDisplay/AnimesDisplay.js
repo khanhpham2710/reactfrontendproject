@@ -9,7 +9,7 @@ function AnimesDisplay(prop) {
     return (<>
         <Grid container spacing={3}>
           {animes.map((anime, index) => (
-            <Grid item key={index} lg={3} md={4} sm={6} xs={6}>
+            <Grid item key={index} lg={3} md={4} sm={4} xs={6}>
               <AnimeCard item={anime} />
             </Grid>
           ))}

@@ -10,8 +10,17 @@ export function useAuth(){
 
 export function AuthProvider({children}){
     const [currentUser, setCurrentUser] = useState(null)
-    const [userLoggedIn, setUserLoggedIn] = useState(false)
+    const [userLoggedInWithGoogle, setUserLoggedInWithGoogle] = useState(false)
     const [loading, setLoading] = useState(true)
+    const [userLogOut,setUserLogOut] = useState(false)
+    const [userInfo, setUserInfo] = useState(false)
+
+    useEffect(() => {
+        const user_info = JSON.parse(localStorage.getItem("user_info"))
+        const logOut = JSON.parse(localStorage.getItem("logOut"))
+        if (user_info) setUserInfo(user_info)
+        if (logOut) setUserLogOut(logOut)
+    }, []);
 
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth,initializeUser);
@@ -21,18 +30,21 @@ export function AuthProvider({children}){
     async function initializeUser(user){
         if (user){
             setCurrentUser({...user});
-            setUserLoggedIn(true)
+            setUserLoggedInWithGoogle(true)
         } else {
             setCurrentUser(null)
-            setUserLoggedIn(false)
+            setUserLoggedInWithGoogle(false)
         }
         setLoading(false)
     }
 
     const value = {
         currentUser,
-        userLoggedIn,
-        loading
+        userLoggedInWithGoogle,
+        loading,
+        userLogOut,
+        userInfo,
+        setUserLogOut
     }
 
     return (

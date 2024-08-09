@@ -14,9 +14,9 @@ function AnimeCard({ item }) {
 
   const fontSize = {
     xs: "10px",
-    sm: "14px",
+    sm: "13px",
     md: "16px",
-    lg: "18px",
+    lg: "16px",
     xl: "19px"
   };
 
@@ -45,9 +45,7 @@ function AnimeCard({ item }) {
           <FavoriteIcon sx={{ fontSize: fontSize }}/>
           {item.favorites}
         </Typography>
-        {item.rank && <Typography variant="body2" component="p" className='rank' sx={{fontSize: fontSize}}>
-          # {item.rank}
-        </Typography>}
+        
         <Box width="100%" sx={{display: "flex", justifyContent: "flex=start", gap:"5px"}} className="genres">
           <Typography variant='body1' element="p" sx={{fontSize: fontSize}}>{item.genres[0].name}</Typography>
           <Typography variant='body1' element="p" sx={{fontSize: fontSize}}>{item.genres[1]?.name}</Typography>

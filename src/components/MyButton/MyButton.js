@@ -12,14 +12,14 @@ function MyButton(props) {
                 padding: {
                     xs: "8px 4px",
                     sm: "8px 10px",
-                    md: "10px 10px",
-                    lg: "15px 20px",
+                    md: "10px",
+                    lg: "10px",
                 },
                 fontSize: {
                     xs: "8px",
                     sm: "14px",
                     md: "20px",
-                    lg: "24px",
+                    lg: "20px",
                 },
                 textTransform: "uppercase",
                 minWidth: "80px"

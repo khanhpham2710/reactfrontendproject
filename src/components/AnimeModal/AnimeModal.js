@@ -34,13 +34,19 @@ export default function AnimeModal(prop) {
     const { open, handleClose, item } = prop;
     const link = "/anime/" + item.mal_id
     const fontSize = {
-        xs: "14px",
+        xs: "13px",
         sm: "16px",
         md: "17px",
         lg: "18px",
         xl: "20px"
     }
 
+    const imgRef = React.useRef()
+    React.useEffect(() => {
+        if (imgRef.current && item) {
+            imgRef.current.style.backgroundImage = `url(${item.images.jpg.image_url})`;
+        }
+    }, [item]);
 
     return (
         <Dialog
@@ -71,41 +77,20 @@ export default function AnimeModal(prop) {
             </DialogTitle>
             <DialogContent sx={{ display: "flex", mt: 2, gap: 2 }}>
                 <Grid container rowSpacing={1} columnSpacing={0.1}>
-                    <Grid item xs={4} sm={4} md={4} lg={3} p={1}>
-                        <Box
-                            className="img_container" sx={{
-                                width: "100%",
-                                p: 1,
-                                border: "2px solid #fff",
-                                borderRadius: "15px",
-                                display: "flex",
-                                justifyContent: "center",
-                                flexDirection: "column",
-                                gap: "10px",
-                                aspectRatio: "9 / 14 "
-                            }}>
-                            <img
-                                src={item.images.jpg.image_url}
-                                alt={item.title}
-                                style={{
-                                    width: "100%",
-                                    height: "auto",
-                                    objectFit: "cover",
-                                }}
-                            />
-                            <Box sx={{display: "flex", justifyContent: "center"}}>
+                    <Grid item xs={5} sm={3.5} md={2.5} lg={2} p={1}>
+                        <Box ref={imgRef}
+                            className="img_container">
                             <Link to={link}>
-                                <MyButton context="Read More" />
+                                <MyButton context="Read More" className="modal_button"/>
                             </Link>
-                            </Box>
                         </Box>
                     </Grid>
-                    <Grid item xs={8} sm={8} md={8} lg={9} p={1}>
+                    <Grid item xs={7} sm={8.5} md={9.5} lg={10} p={1}>
                         <Box sx={{
                             border: "2px solid #fff",
                             borderRadius: "15px",
                             height: "100%",
-                            pt: 2, px: 3
+                            pt: 1, px: 2
                         }}>
                             <Typography variant='body1' sx={{
                                 fontSize: fontSize,
@@ -148,9 +133,9 @@ export default function AnimeModal(prop) {
                         maxHeight:
                         {
                             xs: "300px",
-                            sm: "250px",
-                            md: "200px",
-                            lg: "250px",
+                            sm: "180px",
+                            md: "180px",
+                            lg: "180px",
                             xl: "250px",
                         },
                         overflowY: "auto"

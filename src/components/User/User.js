@@ -6,27 +6,45 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import SwitchMode from "../SwitchMode/SwitchMode";
 import { useAuth } from "../../global/authContext/authContext";
-
+import { auth } from "../../firebase/firebase"
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export default function User() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const [user,setUser] = React.useState()
-  const { currentUser } = useAuth()
+  const [user, setUser] = React.useState()
+  const { currentUser, userLoggedInWithGoogle, userLogOut, userInfo, setUserLogOut } = useAuth()
+  const navigate = useNavigate();
 
   React.useEffect(() => {
-    const storedUser = localStorage.getItem("googleUser");
-    if (storedUser) {
-      try {
-        const parsedUser = JSON.parse(storedUser).providerData;
-        setUser(parsedUser[0]);
-      } catch (error) {
-        console.error("Failed to parse user data from localStorage", error);
+    const googleUser = JSON.parse(localStorage.getItem("googleUser"));
+    const user_info = JSON.parse(localStorage.getItem("user_info"));
+    
+
+    if (!userLogOut) {
+      if (userInfo) {
+        setUser(user_info);
+      } else if (userLoggedInWithGoogle) {
+        setUser(googleUser);
       }
     }
-  }, []);
+  }, [userInfo, currentUser, userLoggedInWithGoogle, userLogOut]);
 
 
+  function handleLogout() {
+    auth.signOut()
+      .then(() => setUserLogOut(true))
+      .then(() => {
+        setUser(null)
+        localStorage.setItem("logOut", JSON.stringify(true))
+        // window.location.reload();
+        navigate('/home');
+      }).catch((error) => {
+        console.error(error);
+      });
+  }
+
+  console.log(user)
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -37,16 +55,16 @@ export default function User() {
   return (
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', zIndex: "10" }}>
-          <IconButton
-            onClick={handleClick}
-            size="small"
-            sx={{ ml: 2 }}
-            aria-controls={open ? 'account-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
-          >
-            {currentUser?<Avatar src={currentUser.photoURL} sx={{ width: 40, height: 40 }}></Avatar>:<Avatar sx={{ width: 40, height: 40 }}>B</Avatar>}
-          </IconButton>
+        <IconButton
+          onClick={handleClick}
+          size="small"
+          sx={{ ml: 2 }}
+          aria-controls={open ? 'account-menu' : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? 'true' : undefined}
+        >
+          {user ? <Avatar src={user.photoURL} sx={{ width: 40, height: 40 }}>{user?.name?.trim()[0]}</Avatar> : <Avatar sx={{ width: 40, height: 40 }}>B</Avatar>}
+        </IconButton>
       </Box>
       <Menu
         anchorEl={anchorEl}
@@ -90,7 +108,7 @@ export default function User() {
           <Avatar /> My account
         </MenuItem>
         <MenuItem>
-          Switch mode <SwitchMode /> 
+          Switch mode <SwitchMode />
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>
@@ -99,7 +117,10 @@ export default function User() {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={() => {
+          handleClose()
+          handleLogout()
+        }}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
