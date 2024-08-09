@@ -3,6 +3,7 @@ import assets from "../../assets/assets";
 import { useState, useEffect, useRef } from "react";
 import "./AnimeInfo.css"
 
+
 function AnimeInfo({ details }) {
     const {
         title, title_english, type, source, 
@@ -10,6 +11,7 @@ function AnimeInfo({ details }) {
         images, rank, score, popularity, rating,
         studios, genres
     } = details;
+
 
     const scoreRef = useRef();
     const ratingRef = useRef();

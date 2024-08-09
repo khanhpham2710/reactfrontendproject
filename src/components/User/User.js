@@ -63,7 +63,7 @@ export default function User() {
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
         >
-          {user ? <Avatar src={user.photoURL} sx={{ width: 40, height: 40 }}>{user?.name?.trim()[0]}</Avatar> : <Avatar sx={{ width: 40, height: 40 }}>B</Avatar>}
+          {user ? <Avatar src={user.photoURL} sx={{ width: 40, height: 40 }}>{user?.name?.trim()[0]}</Avatar> : <Avatar sx={{ width: 40, height: 40 }}></Avatar>}
         </IconButton>
       </Box>
       <Menu

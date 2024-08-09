@@ -61,20 +61,22 @@ const SignUp = () => {
     return (
         <div className="form-container sign-up">
             <form action="">
-                <Typography variant='h3' sx={{ color: "#000", fontWeight: "700", letterSpacing: "1px", fontSize: "30px" }}>
+                <Typography variant='h3' sx={{ color: "#000", fontWeight: "700", letterSpacing: "1px", fontSize: "30px" }} gutterBottom>
                     Create Account
                 </Typography>
                 <TextField
                     fullWidth
                     label="Name"
-                    size="normal"
+                    size="small"
+                    variant="outlined"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
                 <TextField
                     fullWidth
                     label="Email"
-                    size="normal"
+                    size="small"
+                    variant="outlined"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
@@ -83,6 +85,7 @@ const SignUp = () => {
                     <OutlinedInput
                         id="outlined-adornment-password"
                         type={showPassword ? 'text' : 'password'}
+                        size="small"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         endAdornment={

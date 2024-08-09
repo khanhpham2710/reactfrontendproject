@@ -1,13 +1,18 @@
+.login_container{
+    background-color: #ccc;
+}
+
 #container{
-    background-color: #ccc !important;
+    background-color: #fff !important;
     border-radius: 30px;
-    box-shadow: 0 5px 15px rgba(255,255,255,0.35);
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     position: relative;
     overflow: hidden;
     width: 700px;
     max-width: 100%;
     min-height: 400px;
 }
+
 
 #container p{
     font-size: 14px;

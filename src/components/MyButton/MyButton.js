@@ -3,10 +3,10 @@ import { Button } from '@mui/material'
 import "./MyButton.css"
 
 function MyButton(props) {
-    const { context, icon, display} = props
+    const { context, icon, display, onClick} = props
 
     return (
-        <Button
+        <Button onClick={onClick}
             sx={{
                 display: display ? display:"inline-block",
                 padding: {

@@ -1,18 +1,22 @@
 import React from "react";
 import Slider from "react-slick";
 import AnimeCard from "../AnimeCard/AnimeCard";
+import { useContext } from "react";
+import { ModeContext } from "../../global/modeContext/modeContext";
+import "./AnimeMultipleCarousel.css"
 
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
-
+    const { darkMode } = useContext(ModeContext)
 
     return (
         <div
             className={className}
             style={{
                 ...style,
-                display: "block",
-                transform: "scale(2) translate(0%,-60%)",
+                display: "flex",
+                transform: "scale(2) translate(10%,-60%)",
+                zIndex: 2,
             }}
             onClick={onClick}
         />
@@ -26,7 +30,9 @@ function SamplePrevArrow(props) {
             className={className}
             style={{ ...style, 
                 display: "block", 
-                transform: "scale(2) translate(0%,-60%)" }}
+                transform: "scale(2) translate(-10%,-60%)",
+                zIndex: 2,
+            }}
             onClick={onClick}
         />
     );

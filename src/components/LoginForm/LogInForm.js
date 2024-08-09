@@ -45,6 +45,7 @@ const LoginForm = () => {
                 <Typography variant='h3' sx={{color: "#000", fontWeight: "700", letterSpacing: "1px", fontSize: "30px"}}>Login</Typography>
                 <TextField
                     fullWidth
+                    variant="outlined"
                     label="Email"
                     size="normal"
                     margin="dense"
@@ -57,6 +58,7 @@ const LoginForm = () => {
                         id="outlined-adornment-password"
                         type={showPassword ? 'text' : 'password'}
                         value={password}
+                        variant="outlined"
                         onChange={(e) => setPassword(e.target.value)}
                         endAdornment={
                             <InputAdornment position="end">

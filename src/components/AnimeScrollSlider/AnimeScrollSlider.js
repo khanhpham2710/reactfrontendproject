@@ -5,20 +5,20 @@ import { Container, Typography } from "@mui/material";
 import AnimeCard from "../AnimeCard/AnimeCard";
 import AnimeMultipleCarousel from "../AnimeMultipleCarousel/AnimeMultipleCarousel";
 
-function AnimeScrollSlider0(props) {
+function AnimeScrollSlider(props) {
   const { list, label } = props;
   const listRef = useRef();
 
-  const linkPath = label.toLowerCase();
+  const linkPath = "/top/" + label.toLowerCase();
 
   return (
     <Container maxWidth="xl">
       <div className='anime_scroll_slider'>
         <div className="label">
-          <Link to={`/${linkPath}`}> 
-            <Typography variant="h3">{label} Anime</Typography>
+          <Link to={linkPath}> 
+            <Typography variant="h3" className="anime_scroll_label">{label} Anime</Typography>
           </Link>
-          <Link to={`/${linkPath}`}> 
+          <Link to={linkPath}> 
             <Typography variant="body2" component="p">More</Typography>
           </Link>
         </div>
@@ -28,4 +28,4 @@ function AnimeScrollSlider0(props) {
   );
 }
 
-export default AnimeScrollSlider0;
+export default AnimeScrollSlider;
