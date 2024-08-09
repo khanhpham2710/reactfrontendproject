@@ -1,8 +1,21 @@
 .img_container{
     background-position: center;
     background-repeat: no-repeat;
-    /* background-size: cover; */
+    background-size: cover;
+    width: 100%;
+    border: 2px solid #fff;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    aspect-ratio: 9 / 14;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 5%;
 }
+
 
 
 .dialog_synopsis {

@@ -2,7 +2,7 @@ import Gallery from "../pages/Gallery/Gallery";
 import AnimePage from "../pages/AnimePage/AnimePage";
 import Genre from "../pages/Genre/Genre";
 import Homepage from "../pages/Homepage/Homepage";
-import Login from '../pages/Login/Login';
+import LoginPage from '../pages/LoginPage/LoginPage';
 import Payment from "../pages/Payment/Payment";
 import Profile from '../pages/Profile/Profile';
 import Watch from "../pages/Watch/Watch";
@@ -17,7 +17,7 @@ import TopAnimesPage from "../pages/TopAnimesPage/TopAnimesPage";
 const publicRoutes = [
     { path: "/", component: LandingPage, layout: null },
     { path: "/home", component: Homepage},
-    { path: "/login", component: Login, layout: null },
+    { path: "/login", component: LoginPage, layout: null },
     { path: "/payment", component: Payment },
     { path: "/profile", component: Profile },
     { path: "/top", component: TopAnimesPage, layout: NoSlider},
@@ -26,7 +26,7 @@ const publicRoutes = [
     { path: "/search/:searchTerm", component: SearchPage,layout: NoSlider},
     { path: "/anime/:animeId", component: AnimePage, layout: null },
     { path: "/character/:characterId", component: Gallery },
-    { path: "/book/:id", component: BookTicket, layout: null },
+    { path: "/book/:movieId", component: BookTicket, layout: null },
     { path: "*", component: NotFound },
 ];
 
