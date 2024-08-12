@@ -4,6 +4,9 @@ import { fetchAiringAnime, fetchUpcomingAnime, fetchPopularAnime, fetchTopRatedA
 import Loading from '../../components/Loading/Loading';
 import AnimeScrollSlider from '../../components/AnimeScrollSlider/AnimeScrollSlider';
 import SideBar from '../../components/SideBar/SideBar';
+import ErrorPage from '../ErrorPage/ErrorPage';
+import MoviesSection from '../../components/MoviesSection/MoviesSection';
+import videos from '../../assets/videos';
 
 function Homepage() {
   const dispatch = useDispatch();
@@ -26,7 +29,7 @@ function Homepage() {
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <ErrorPage />;
   }
 
   return (

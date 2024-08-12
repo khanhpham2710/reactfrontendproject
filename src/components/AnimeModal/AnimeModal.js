@@ -1,22 +1,20 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
-import { Box, Grid, SvgIcon, Typography } from '@mui/material';
+import { Box, Grid, Typography, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import CloseIcon from '@mui/icons-material/Close';
-import "./AnimeModal.css";
-import MyButton from '../MyButton/MyButton';
 import { Link } from 'react-router-dom';
+import './AnimeModal.css';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const CloseButton = styled(SvgIcon)({
+const CloseButton = styled(CloseIcon)({
     position: 'absolute',
     top: 5,
     right: 5,
@@ -30,23 +28,29 @@ const CloseButton = styled(SvgIcon)({
     }
 });
 
+const ReadMoreButton = styled(Button)(() => ({
+    position: 'absolute',
+    bottom: '2%',
+    left: "50%",
+    transform: "translateX(-50%)",
+    backgroundColor: "red",
+    color: '#fff',
+    border: "red 1px solid",
+    '&:hover': {
+        backgroundColor: "#000",
+    }
+}));
+
 export default function AnimeModal(prop) {
     const { open, handleClose, item } = prop;
-    const link = "/anime/" + item.mal_id
+    const link = `/anime/${item.mal_id}`;
     const fontSize = {
         xs: "13px",
         sm: "16px",
         md: "17px",
         lg: "18px",
         xl: "20px"
-    }
-
-    const imgRef = React.useRef()
-    React.useEffect(() => {
-        if (imgRef.current && item) {
-            imgRef.current.style.backgroundImage = `url(${item.images.jpg.image_url})`;
-        }
-    }, [item]);
+    };
 
     return (
         <Dialog
@@ -77,17 +81,40 @@ export default function AnimeModal(prop) {
             </DialogTitle>
             <DialogContent sx={{ display: "flex", mt: 2, gap: 2 }}>
                 <Grid container rowSpacing={1} columnSpacing={0.1}>
-                    <Grid item xs={5} sm={3.5} md={2.5} lg={2} p={1}>
-                        <Box ref={imgRef}
-                            className="img_container">
-                            <Link to={link}>
-                                <MyButton context="Read More" className="modal_button"/>
-                            </Link>
+                    <Grid item xs={5} sm={4} md={3} lg={2.5} xl={2} p={{
+                        xs: 1,
+                        sm: 1,
+                        md: 2,
+                        lg: 3,
+                        xl: 5
+                    }}>
+                        <Box
+                            className="img_container"
+                            sx={{
+                                border: "5px solid",
+                                borderRadius: "15px",
+                                height: "100%",
+                                overflow: "hidden",
+                                position: "relative",
+                            }}>
+                            <img
+                                src={item.images.jpg.image_url}
+                                alt={item.title}
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "cover",
+                                    borderRadius: "15px",
+                                }}
+                            />
+                            <ReadMoreButton component={Link} to={link}>
+                                Read More
+                            </ReadMoreButton>
                         </Box>
                     </Grid>
-                    <Grid item xs={7} sm={8.5} md={9.5} lg={10} p={1}>
+                    <Grid item xs={7} sm={8} md={9} lg={9.5} xl={10} p={1}>
                         <Box sx={{
-                            border: "2px solid #fff",
+                            border: "2px solid",
                             borderRadius: "15px",
                             height: "100%",
                             pt: 1, px: 2

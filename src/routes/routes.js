@@ -9,11 +9,10 @@ import Watch from "../pages/Watch/Watch";
 import NotFound from "../pages/NotFound/NotFound";
 import LandingPage from "../pages/LandingPage/LandingPage";
 import SearchPage from "../pages/SearchPage/SearchPage";
-import BookTicket from "../pages/BookTicket/BookTicket";
 import NoSlider from "../layouts/NoSlider";
 import TopAnimesPage from "../pages/TopAnimesPage/TopAnimesPage";
-import TopAnimesPageWithParam from "../pages/TopAnimesPageWithParam/TopAnimesPageWithParam";
-import Cart from "../pages/Cart/Cart";
+import CartPage from "../pages/CartPage/CartPage";
+import BookTicket from "../pages/BookTicketV2.js/BookTicket";
 
 
 const publicRoutes = [
@@ -22,16 +21,16 @@ const publicRoutes = [
     { path: "/login", component: LoginPage, layout: null },
     { path: "/payment", component: Payment, layout: NoSlider },
     { path: "/profile", component: Profile, layout: NoSlider },
-    { path: "/cart", component: Cart, layout:NoSlider} ,
+    { path: "/mycart", component: CartPage, layout:NoSlider} ,
     { path: "/top", component: TopAnimesPage, layout: NoSlider},
-    { path: "/top/:filter", component: TopAnimesPageWithParam, layout: NoSlider},
-    { path: "/watch/:animeId", component: Watch, layout: NoSlider },
+    { path: "/top/:filterParam", component: TopAnimesPage, layout: NoSlider},
+    { path: "/watch", component: Watch, layout: null },
     { path: "/genre/:genreId", component: Genre, layout: null },
     { path: "/search/:searchTerm", component: SearchPage,layout: NoSlider},
     { path: "/anime/:animeId", component: AnimePage, layout: null },
-    { path: "/character/:characterId", component: Gallery },
+    { path: "/character/:animeId/:characterId", component: Gallery, layout: NoSlider },
     { path: "/book/:movieId", component: BookTicket, layout: null },
-    { path: "*", component: NotFound },
+    { path: "*", component: NotFound, layout: null },
 ];
 
 const privateRoutes = [

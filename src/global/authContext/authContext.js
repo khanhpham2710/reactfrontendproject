@@ -11,16 +11,8 @@ export function useAuth(){
 export function AuthProvider({children}){
     const [currentUser, setCurrentUser] = useState(null)
     const [userLoggedInWithGoogle, setUserLoggedInWithGoogle] = useState(false)
+    const [userLoggedInWithEmail, setUserLoggedInWithEmail] = useState(false)
     const [loading, setLoading] = useState(true)
-    const [userLogOut,setUserLogOut] = useState(false)
-    const [userInfo, setUserInfo] = useState(false)
-
-    useEffect(() => {
-        const user_info = JSON.parse(localStorage.getItem("user_info"))
-        const logOut = JSON.parse(localStorage.getItem("logOut"))
-        if (user_info) setUserInfo(user_info)
-        if (logOut) setUserLogOut(logOut)
-    }, []);
 
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth,initializeUser);
@@ -38,13 +30,14 @@ export function AuthProvider({children}){
         setLoading(false)
     }
 
+
     const value = {
         currentUser,
         userLoggedInWithGoogle,
+        userLoggedInWithEmail,
+        setUserLoggedInWithGoogle,
+        setUserLoggedInWithEmail,
         loading,
-        userLogOut,
-        userInfo,
-        setUserLogOut
     }
 
     return (

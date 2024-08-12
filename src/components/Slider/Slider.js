@@ -10,7 +10,6 @@ import BookTicketButton from '../BookTicketButton/BookTicketButton';
 function Slider({ movie }) {
     const ref = useRef();
 
-    // console.log(movie)
 
     useEffect(() => {
         if (ref.current) {
@@ -131,12 +130,12 @@ function Slider({ movie }) {
                             </Typography>
                             <Grid container sx={{ gap: "10px", justifyContent: "flex-end" }} className='slider_buttons' mt={1} pr={1}>
                                 <Grid item>
-                                    <Link to={'/login'}>
+                                    <Link>
                                         <MyButton context="READ MORE" display={{ xs: "block", sm: "none" }} icon={null} />
                                     </Link>
                                 </Grid>
                                 <Grid item>
-                                    <BookTicketButton />
+                                    <BookTicketButton movieID={movie.id}/>
                                 </Grid>
                             </Grid>
                         </Box>

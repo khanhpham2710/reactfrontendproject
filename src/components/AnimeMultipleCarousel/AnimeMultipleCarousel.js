@@ -1,13 +1,11 @@
 import React from "react";
 import Slider from "react-slick";
 import AnimeCard from "../AnimeCard/AnimeCard";
-import { useContext } from "react";
-import { ModeContext } from "../../global/modeContext/modeContext";
 import "./AnimeMultipleCarousel.css"
 
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
-    const { darkMode } = useContext(ModeContext)
+
 
     return (
         <div

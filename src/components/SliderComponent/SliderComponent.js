@@ -17,6 +17,12 @@ function SliderComponent() {
     setCur((prev) => (prev === 0 ? movies.length - 1 : prev - 1));
   };
 
+  React.useEffect(() => {
+    const timer = setInterval(nextSlide, 8000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div id="slider">
       <ArrowBackIosNew

@@ -14,7 +14,7 @@ export const fetchAnimePictures = createAsyncThunk
 const characterSlice = createSlice({
     name: 'character',
     initialState: {
-        picture: [],
+        pictures: [],
         loading: false,
         error: null,
     },
@@ -25,7 +25,7 @@ const characterSlice = createSlice({
                 state.loading = true;
             })
             .addCase(fetchAnimePictures.fulfilled, (state, action) => {
-                state.picture = action.payload;
+                state.pictures = action.payload;
                 state.loading = false;
             })
             .addCase(fetchAnimePictures.rejected, (state, action) => {

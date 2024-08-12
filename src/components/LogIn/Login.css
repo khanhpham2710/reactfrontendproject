@@ -8,39 +8,21 @@
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     position: relative;
     overflow: hidden;
-    width: 700px;
+    width: 800px;
     max-width: 100%;
-    min-height: 400px;
+    min-height: 500px;
 }
 
 
-#container p{
-    font-size: 14px;
-    line-height: 20px;
-    letter-spacing: 0.3px;
-    margin: 20px 0;
-}
-
-.css-1k3ibsw-MuiButtonBase-root-MuiIconButton-root,
-.css-p51h6s-MuiInputBase-input-MuiOutlinedInput-input,
-.css-q2lp9a-MuiInputBase-root-MuiOutlinedInput-root{
+#container .css-1k3ibsw-MuiButtonBase-root-MuiIconButton-root,
+#container .css-p51h6s-MuiInputBase-input-MuiOutlinedInput-input,
+#container .css-q2lp9a-MuiInputBase-root-MuiOutlinedInput-root{
     color: #000 !important;
     font-size: 15px !important;
 }
 
 .MuiOutlinedInput-root{
     border-color: 'red',
-}
-
-#container span{
-    font-size: 12px;
-}
-
-#container a{
-    color: #333;
-    font-size: 13px;
-    text-decoration: none;
-    margin: 15px 0 10px;
 }
 
 #container .button{
@@ -53,7 +35,6 @@
     font-weight: 600;
     letter-spacing: 0.5px;
     text-transform: uppercase;
-    margin-top: 10px;
     cursor: pointer;
     width: 100%;
 }
@@ -84,6 +65,7 @@
     flex-direction: column;
     padding: 0 40px;
     height: 100%;
+    gap: 15px;
 }
 
 #container input{
@@ -97,11 +79,6 @@
     outline: none;
 }
 
-input[type=password]::-ms-reveal,
-input[type=password]::-ms-clear
-{
-    display: none;
-}
 
 .form-container{
     position: absolute;
@@ -158,6 +135,10 @@ input[type=password]::-ms-clear
     z-index: 1000;
 }
 
+.toggle-container .toggle h1{
+    margin: 15px 0;
+}
+
 #container.active .toggle-container{
     transform: translateX(-100%);
     border-radius: 20px;
@@ -206,3 +187,35 @@ input[type=password]::-ms-clear
     right: 0;
     transform: translateX(0);
 }
+
+
+
+@media (max-width: 900px) {
+    #container form{
+        padding: 0 40px;
+    }
+
+    #container .button{
+        font-size: 15px;
+        padding: 15px 30px;
+        letter-spacing: 0.5px;
+    }
+}
+
+
+@media (max-width: 600px) {
+    #container form{
+        padding: 0 10px;
+    }
+    
+    #container .button{
+        font-size: 12px;
+        padding: 10px 10px;
+        letter-spacing: 0.5px;
+    }
+
+    #container input{
+        padding: 5px 5px;
+    }
+}
+

@@ -1,48 +1,49 @@
+import React, { useState } from 'react';
 import { Typography, TextField, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
-import React from 'react';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../global/authContext/authContext';
 
-const LoginForm = () => {
-    const [showPassword, setShowPassword] = React.useState(false);
-    const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
+const LoginForm = ({ handleClickSnackbar }) => {
+    const { setUserLoggedInWithEmail } = useAuth()
+
+    const [showPassword, setShowPassword] = useState(false);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate()
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const handleMouseDownPassword = (event) => event.preventDefault();
 
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
-
-    function onLogin(event) {
+    const onLogin = (event) => {
         event.preventDefault();
         const user_info = JSON.parse(localStorage.getItem("user_info"));
-        
+
         if (user_info) {
             if (email === user_info.email && password === user_info.password) {
-                localStorage.setItem("logOut", false);
-                alert("Logged in successfully.");
-                window.location.reload();
+                localStorage.setItem("logInEmail", true);
+                setUserLoggedInWithEmail(true)
+                navigate("/home")
             } else if (email === user_info.email && password !== user_info.password) {
-                alert("Incorrect password");
+                handleClickSnackbar("Incorrect password", "error");
             }
         } else {
-            alert("You have not signed up");
+            handleClickSnackbar("You have not signed up", "error");
         }
-    }
+    };
 
-    function handleForget() {
-        localStorage.removeItem("user_infoy")
+    const handleForget = () => {
+        localStorage.removeItem("user_info");
         setPassword("");
         setEmail("");
-        alert("Please sign up again");
-    }
-
+        handleClickSnackbar("Please sign up again", "info");
+    };
 
     return (
         <div className="form-container sign-in">
             <form onSubmit={onLogin}>
-                <Typography variant='h3' sx={{color: "#000", fontWeight: "700", letterSpacing: "1px", fontSize: "30px"}}>Login</Typography>
+                <Typography variant='h3' sx={{ color: "#000", fontWeight: "700", letterSpacing: "1px", fontSize: "30px" }}>Login</Typography>
                 <TextField
                     fullWidth
                     variant="outlined"
@@ -75,7 +76,10 @@ const LoginForm = () => {
                         label="Password"
                     />
                 </FormControl>
-                <p style={{color: "blue", fontStyle: 'italic', cursor: "pointer"}} onClick={handleForget}>Forget password</p>
+                <Typography variant='body2' sx={{
+                    color: "blue", fontStyle: "italic",
+                    cursor: 'pointer', my: 1, textDecorationLine: "underline"
+                }} onClick={handleForget}>Forget password</Typography>
                 <button type="submit" className='button'>Log In</button>
             </form>
         </div>

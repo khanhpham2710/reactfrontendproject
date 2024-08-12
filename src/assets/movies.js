@@ -11,8 +11,7 @@ const movies = [
         time: "1 hr 50 min",
         date: "April 12,2024",
         type: "right",
-        path: "/new/1",
-        rating: "PG-13"
+        rating: "PG-13 - Teens 13 or older"
     },
     {
         id: 2,
@@ -24,8 +23,7 @@ const movies = [
         genre: "Action",
         date: "August 2,2024",
         type: "right",
-        path: "new/2",
-        rating: "PG-13"
+        rating: "PG-13 - Teens 13 or older"
     },
     {
         id: 3,
@@ -37,8 +35,7 @@ const movies = [
         date: "April 19,2024",
         genre: "Sport",
         type: "left",
-        path: "new/3",
-        rating: "PG-13"
+        rating: "PG-13 - Teens 13 or older"
     }
 ]
 

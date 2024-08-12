@@ -1,40 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Typography, TextField, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { doSignInWithGoogle, doSendEmailVerification, doCreateUserWithEmailAndPassword, doSignInWithEmailAndPassword } from '../../firebase/auth';
+import { doSignInWithGoogle, doSendEmailVerification, doCreateUserWithEmailAndPassword } from '../../firebase/auth';
+import { Link as RouterLink } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../global/authContext/authContext';
 
-const SignUp = () => {
-    const [showPassword, setShowPassword] = React.useState(false);
-    const [name, setName] = React.useState("");
-    const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
-    const [isSigningIn, setIsSigningIn] = React.useState(false);
-    const [errorMessage, setErrorMessage] = React.useState("");
+const SignInForm = ({ handleClickSnackbar }) => {
+    const [showPassword, setShowPassword] = useState(false);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [isSigningIn, setIsSigningIn] = useState(false);
+    const navigate = useNavigate()
+
+    const { setUserLoggedInWithGoogle, setUserLoggedInWithEmail } = useAuth()
+    
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const handleMouseDownPassword = (event) => event.preventDefault();
 
-    const handleMouseDownPassword = (event) => {
+    const onSignUp = async (event) => {
         event.preventDefault();
-    };
-
-    const onSignUp = async () => {
         if (name.trim() && password.trim()) {
-            const user_info = {
-                id: Math.floor(Math.random() * 100) + 1,
-                name: name,
-                email: email,
-                password: password,
-            };
-            localStorage.setItem("user_info", JSON.stringify(user_info));
-            localStorage.setItem("logOut", JSON.stringify(false));
-            setIsSigningIn(true);
+            try {
+                const user_info = {
+                    id: Math.floor(Math.random() * 100) + 1,
+                    displayName: name,
+                    email: email,
+                    password: password,
+                };
+                setUserLoggedInWithEmail(true)
+                localStorage.setItem("user_info", JSON.stringify(user_info));
+                localStorage.setItem("logInEmail", JSON.stringify(true));
+                navigate("/home")
+            } catch (error) {
+                handleClickSnackbar("An error occurred during sign-up.", "error");
+                console.error(error);
+            }
         } else {
-            alert("Please enter both name and password.");
+            handleClickSnackbar("Please enter both name and password.", "error");
         }
     };
-
-    
 
     const onGoogleSignIn = async (e) => {
         e.preventDefault();
@@ -42,16 +50,16 @@ const SignUp = () => {
             setIsSigningIn(true);
             try {
                 const result = await doSignInWithGoogle();
-                const storeUser = {...result.user,id:Math.floor(Math.random() * 100) + 1}
+                const storeUser = { ...result.user, id: Math.floor(Math.random() * 100) + 1 };
+                setUserLoggedInWithGoogle(true)
                 localStorage.setItem("googleUser", JSON.stringify(storeUser));
-                localStorage.setItem("logOut", JSON.stringify(false));
+                localStorage.setItem("logInGoogle", JSON.stringify(true));
 
-                // Send email verification after Google sign-in if necessary
                 await doSendEmailVerification();
-                alert("Verification email sent. Please check your inbox.");
+                handleClickSnackbar("Verification email sent. Please check your inbox.", "info");
             } catch (error) {
-                alert("An error occurred during Google sign-in.");
-                console.log(error);
+                handleClickSnackbar("An error occurred during Google sign-in.", "error");
+                console.error(error);
             } finally {
                 setIsSigningIn(false);
             }
@@ -60,8 +68,8 @@ const SignUp = () => {
 
     return (
         <div className="form-container sign-up">
-            <form action="">
-                <Typography variant='h3' sx={{ color: "#000", fontWeight: "700", letterSpacing: "1px", fontSize: "30px" }} gutterBottom>
+            <form onSubmit={onSignUp}>
+                <Typography variant='h3' sx={{ color: "#000", fontWeight: "700", letterSpacing: "1px", textAlign: "center", fontSize: { xs: "25px", md: "30px" } }} gutterBottom>
                     Create Account
                 </Typography>
                 <TextField
@@ -103,19 +111,15 @@ const SignUp = () => {
                         label="Password"
                     />
                 </FormControl>
-                <button onClick={onSignUp} className='button'>
-                    Sign Up
-                </button>
-                {/* <button onClick={onSignIn} className='button'>
-                    Sign In
-                </button> */}
-                <button onClick={onGoogleSignIn} className='button'>
-                    Sign Up With Google
-                </button>
-                {errorMessage && <Typography color="error">{errorMessage}</Typography>}
+                <Typography variant='body2' component={RouterLink} to="/home" sx={{
+                    color: "blue !important", fontStyle: "italic !important",
+                    cursor: 'pointer', my: 1, textDecorationLine: "underline !important"
+                }} >Continue as guest</Typography>
+                <button type="submit" className='button'>Sign Up</button>
+                <button onClick={onGoogleSignIn} className='button'>Sign Up With Google</button>
             </form>
         </div>
     );
 };
 
-export default SignUp;
+export default SignInForm;

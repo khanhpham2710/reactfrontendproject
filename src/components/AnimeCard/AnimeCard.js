@@ -2,20 +2,20 @@ import './AnimeCard.css';
 import { useEffect, useRef, useState } from 'react';
 import AnimeModal from "../AnimeModal/AnimeModal";
 import { Typography, Box } from '@mui/material';
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
 
-function AnimeCard({ item }) {
+function AnimeCard({ item, font }) {
   const [open, setOpen] = useState(false);
   const theme = useTheme();
   const imgRef = useRef();
 
-  const fontSize = {
-    xs: "10px",
-    sm: "13px",
-    md: "16px",
+  const fontSize = font || {
+    xs: "9px",
+    sm: "10px",
+    md: "12px",
     lg: "16px",
     xl: "19px"
   };

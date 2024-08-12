@@ -3,19 +3,19 @@ import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
-import { Box, useTheme } from '@mui/material';
+import { Box } from '@mui/material';
 
 
 function SearchBox() {
   const [search, setSearch] = useState('');
   const navigate = useNavigate();
-  const theme = useTheme();
 
   const handleChange = useCallback((event) => {
     setSearch(event.target.value);
   }, []);
 
   const handleSubmit = useCallback((event) => {
+    event.preventDefault();
     navigate(`/search/${search}`);
   }, [search, navigate]);
 
@@ -40,7 +40,13 @@ function SearchBox() {
             }} 
           />
         }
-        sx={{ width: '100%', height: "100%", padding: '0 8px', borderRadius: "50px", border: "3px solid #ccc" }}
+        sx={{ 
+          width: '100%', 
+          height: "100%", 
+          padding: '0 8px', 
+          borderRadius: "50px", 
+          border: "3px solid #ccc",
+        }}
       />
     </Box>
   );
