@@ -5,7 +5,10 @@ import LoginButton from '../../components/LoginButton/LoginButton';
 import Carousel from '../../components/Carousel/Carousel';
 import { Typography, Box } from '@mui/material';
 import Header_LandingPage from '../../components/Header_LandingPage/Header_LandingPage';
-
+import ScrollUpButton from '../../components/ScrollUpButton/ScrollUpButton'
+import media from "../../assets/media"
+import Media from '../../components/Media/Media';
+import Packages from "../../components/Packages/Packages"
 
 
 function LandingPage() {
@@ -18,20 +21,13 @@ function LandingPage() {
         <Typography textAlign="center" gutterBottom mb={6} sx={{fontWeight : 400}} variant='h3'>Ready to watch? Enter your email to create or restart your membership</Typography>
         <LoginButton label="Get Started" />
       </Box>
-      <section className='tv'>
-
-      </section>
-      <section className='mobile'>
-
-      </section>
-      <section className='both'>
-
-      </section>
-      <section className='kid'>
-
-      </section>
+      {media.map((item,index)=>
+        <Media key={index} heading={item.heading} content={item.content} right={item.right} image={item.image} youtubeId={item?.youtubeId} />
+      )}
+      <Packages />
       <FAQ id="FAQ" />
       <Footer id="footer" />
+      <ScrollUpButton />
     </div>
   );
 }

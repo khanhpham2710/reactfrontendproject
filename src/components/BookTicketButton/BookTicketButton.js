@@ -8,6 +8,7 @@ import SendIcon from '@mui/icons-material/Send';
 import MyButton from "../MyButton/MyButton";
 import { Link } from "react-router-dom";
 import { useAuth } from '../../global/authContext/authContext';
+import LoginButton from '../LoginButton/LoginButton';
 
 
 const style = {
@@ -20,6 +21,11 @@ const style = {
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  gap: 5
 };
 
 function TransitionsModal() {
@@ -47,11 +53,9 @@ function TransitionsModal() {
         <Fade in={open}>
           <Box sx={style}>
             <Typography id="transition-modal-title" variant="h6" component="h2">
-              Text in a modal
+              You need to log in to book ticket
             </Typography>
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography>
+            <LoginButton label="Login"/>
           </Box>
         </Fade>
       </Modal>
@@ -59,17 +63,29 @@ function TransitionsModal() {
   );
 }
 
-// export default TransitionsModal;
 
 
 
+function BookTicketButton({movieID}) {
+  const [user,setUser] = React.useState()
 
-function BookTicketButton() {
-  const { userLoggedInWithGoogle, userLogOut, userInfo } = useAuth();
+  React.useEffect(() => {
+    const googleUser = JSON.parse(localStorage.getItem("googleUser"));
+    const user_info = JSON.parse(localStorage.getItem("user_info"));
+    const logInEmail = JSON.parse(localStorage.getItem("logInEmail"));
+    const logInGoogle = JSON.parse(localStorage.getItem("logInGoogle"));
 
-  if ((userInfo || userLoggedInWithGoogle) && !userLogOut) {
+    if (logInEmail && user_info) setUser(user_info)
+    else if (logInGoogle && googleUser) setUser(googleUser);
+
+  }, []);
+
+
+  const link = "/book/" + movieID
+
+  if (user) {
     return (
-      <Link to="/book/1">
+      <Link to={link}>
         <MyButton context="BOOK TICKET" icon={<SendIcon sx={{ fontSize: "10px" }} />} />
       </Link>
     );

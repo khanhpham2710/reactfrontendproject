@@ -1,0 +1,16 @@
+#cart_button, #list_button{
+    z-index : 30;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: aura 0.5s infinite alternate, fade 0.5s infinite alternate
+}
+
+#cart_button .num , #list_button .number{
+    position: absolute;
+    top: 25%;
+    right: 10%;
+    transform: translate(50%,-50%);
+    font-weight: 800;
+}
+

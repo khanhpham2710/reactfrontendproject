@@ -1,0 +1,27 @@
+.slick-slide {
+    padding: 10px;
+}
+
+.gallery-big-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.gallery-big-image img {
+    width: 100%;
+    height: auto;
+    max-width: 250px;
+}
+
+.gallery-slide-item img {
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.gallery-slide-item.selected img {
+    transform: scale(1.1);
+    border: 2px solid #EB5757;
+}

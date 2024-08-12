@@ -41,10 +41,11 @@ export const darkTheme = createTheme({
 
 export const lightTheme = createTheme({
   palette: {
-    mode: 'light',
-    text: {
-      primary: '#000',
-      secondary: '#333',
+    primary: {
+      main: '#29b6f6',
+    },
+    secondary: {
+      main: '#f06292',
     },
   },
   breakpoints: {

@@ -1,50 +1,48 @@
 import { Box, Tooltip, IconButton, Avatar, Menu, Typography, MenuItem, Divider } from '@mui/material';
 import * as React from 'react';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import SwitchMode from "../SwitchMode/SwitchMode";
-import { useAuth } from "../../global/authContext/authContext";
 import { auth } from "../../firebase/firebase"
-import { Navigate, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
+import LoginIcon from '@mui/icons-material/Login';
+import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
+
 
 export default function User() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const [user, setUser] = React.useState()
-  const { currentUser, userLoggedInWithGoogle, userLogOut, userInfo, setUserLogOut } = useAuth()
+
   const navigate = useNavigate();
+
+  const [user, setUser] = React.useState()
 
   React.useEffect(() => {
     const googleUser = JSON.parse(localStorage.getItem("googleUser"));
     const user_info = JSON.parse(localStorage.getItem("user_info"));
-    
+    const logInEmail = JSON.parse(localStorage.getItem("logInEmail"));
+    const logInGoogle = JSON.parse(localStorage.getItem("logInGoogle"));
 
-    if (!userLogOut) {
-      if (userInfo) {
-        setUser(user_info);
-      } else if (userLoggedInWithGoogle) {
-        setUser(googleUser);
-      }
-    }
-  }, [userInfo, currentUser, userLoggedInWithGoogle, userLogOut]);
+    if (logInEmail && user_info) setUser(user_info)
+    else if (logInGoogle && googleUser) setUser(googleUser);
+
+  }, []);
+
 
 
   function handleLogout() {
     auth.signOut()
-      .then(() => setUserLogOut(true))
       .then(() => {
         setUser(null)
-        localStorage.setItem("logOut", JSON.stringify(true))
-        // window.location.reload();
-        navigate('/home');
+        localStorage.setItem("logInEmail", JSON.stringify(false))
+        localStorage.setItem("logInGoogle", JSON.stringify(false))
+        window.location.reload();
       }).catch((error) => {
         console.error(error);
       });
   }
 
-  console.log(user)
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -63,7 +61,7 @@ export default function User() {
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
         >
-          {user ? <Avatar src={user.photoURL} sx={{ width: 40, height: 40 }}>{user?.name?.trim()[0]}</Avatar> : <Avatar sx={{ width: 40, height: 40 }}></Avatar>}
+          {user ? <Avatar src={user.photoURL} sx={{ width: 40, height: 40 }}>{user?.displayName?.trim()[0]}</Avatar> : <Avatar sx={{ width: 40, height: 40 }}></Avatar>}
         </IconButton>
       </Box>
       <Menu
@@ -76,7 +74,7 @@ export default function User() {
           sx: {
             overflow: 'visible',
             filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-            minWidth: 250,
+            minWidth: 200,
             mt: 1.5,
             '& .MuiAvatar-root': {
               width: 32,
@@ -101,23 +99,33 @@ export default function User() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={()=>{
+          handleClose()
+          navigate("/profile")
+          }}>
           <Avatar /> Profile
         </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Avatar /> My account
+        <MenuItem onClick={()=>{
+          handleClose()
+          navigate("/mycart")
+        }}>
+          <ListItemIcon>
+            <ShoppingCartCheckoutIcon fontSize="small" />
+          </ListItemIcon>
+          My cart
         </MenuItem>
         <MenuItem>
           Switch mode <SwitchMode />
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>
+        {!user ? (<MenuItem onClick={() => {
+          navigate("/login")
+        }}>
           <ListItemIcon>
-            <Settings fontSize="small" />
+            <LoginIcon fontSize="small" />
           </ListItemIcon>
-          Settings
-        </MenuItem>
-        <MenuItem onClick={() => {
+          Login
+        </MenuItem>) : (<MenuItem onClick={() => {
           handleClose()
           handleLogout()
         }}>
@@ -125,7 +133,7 @@ export default function User() {
             <Logout fontSize="small" />
           </ListItemIcon>
           Logout
-        </MenuItem>
+        </MenuItem>)}
       </Menu>
     </React.Fragment>
   );

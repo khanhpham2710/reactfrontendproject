@@ -1,10 +1,11 @@
 .my_button{
-    transition: background-color 0.3s ease-in-out !important;
+    transition: background-color 0.5s ease-in-out !important;
     background-color: red !important;
     color: #fff !important;
     border-radius: 10px !important;
     font-weight: 800 !important;
     border: 2px red solid !important;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset !important
 }
 
 

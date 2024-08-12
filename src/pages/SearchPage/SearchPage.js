@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchAnime } from '../../global/searchSlice';
-import Loading from '../../components/Loading/Loading';
+import LoadingAnimesDisplay from '../LoadingAnimesDisplay/LoadingAnimesDisplay';
 import AnimesDisplay from '../AnimesDisplay/AnimesDisplay';
 import { Typography, Container,Grid } from '@mui/material';
-import MyPagination from '../../components/MyPagination/MyPagination';
-import AnimeCard from '../../components/AnimeCard/AnimeCard';
+
 
 function SearchPage(prop) {
   const { searchTerm } = useParams();
@@ -30,9 +29,6 @@ function SearchPage(prop) {
     dispatch(searchAnime(params));
   }, [params, dispatch]);
 
-  if (loading) {
-    return <Loading />;
-  }
 
   if (error) {
     return <div>Error: {error}</div>;
@@ -50,8 +46,9 @@ function SearchPage(prop) {
           lg: "80px",
         }
       }} gutterBottom>{heading}</Typography>
-      <Container>
-        <AnimesDisplay animes={searchResults} lastPage={lastPage} page={page} handleChange={handleChange}/>
+      <Container maxWidth="lg">
+        {loading ? <LoadingAnimesDisplay />: 
+        <AnimesDisplay animes={searchResults} lastPage={lastPage} page={page} handleChange={handleChange}/>}
       </Container>
     </div>
   );

@@ -6,6 +6,7 @@ import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import { Container } from '@mui/material';
+import Aos from 'aos';
 
 
 const Accordion = styled((props) => (
@@ -86,6 +87,12 @@ const AccordionList = [
 ]
 
 export default function FAQ() {
+    React.useEffect(() => {
+        Aos.init({
+            duration: 1000,
+        });
+    }, []);
+
     const [expanded, setExpanded] = React.useState('panel1');
 
     const handleChange = (panel) => (event, newExpanded) => {
@@ -93,7 +100,7 @@ export default function FAQ() {
     };
 
     return (
-        <Container maxWidth="xl" sx={{ my: 6 }}>
+        <Container maxWidth="xl" sx={{ my: 6 }} data-aos="flip-up">
             {AccordionList.map((item, index) => {
                 const panel = `panel${index+1}`
                 return (<Accordion key={index} expanded={expanded === panel} onChange={handleChange(panel)}>

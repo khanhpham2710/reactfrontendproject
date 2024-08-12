@@ -1,12 +1,13 @@
 import { Typography, Grid, Box, Container } from "@mui/material";
 import assets from "../../assets/assets";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import "./AnimeInfo.css"
+import AddToFavorite from "../AddToFavorite/AddToFavorite"
 
 
 function AnimeInfo({ details }) {
     const {
-        title, title_english, type, source, 
+        mal_id, title, title_english, type, source, 
         episodes, duration, aired, status, season, 
         images, rank, score, popularity, rating,
         studios, genres
@@ -107,6 +108,7 @@ function AnimeInfo({ details }) {
                         <Typography variant='body1' sx={{ fontSize: fontSize }} fontWeight="700" gutterBottom>
                             Genres: {genres?.map(genre => genre.name).join(', ') || 'N/A'}
                         </Typography>
+                        <AddToFavorite title={title_english || title} id={mal_id} image={images?.jpg.large_image_url} />
                     </Grid>
                 </Grid>
             </Grid>
@@ -123,7 +125,7 @@ function AnimeInfo({ details }) {
                 </Grid>
                 <Grid xs={4} item sx={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "center", gap: "40px" }}>
                     <Typography variant="h6" fontWeight="800" fontSize={fontSize2} gutterBottom>Popularity</Typography>
-                    <Typography variant="h6" fontWeight="800" fontSize="40px" gutterBottom>{popularity || 'N/A'}</Typography>
+                    <Typography variant="h6" fontWeight="800" fontSize="40px" gutterBottom># {popularity || 'N/A'}</Typography>
                 </Grid>
             </Grid>
         </Grid>

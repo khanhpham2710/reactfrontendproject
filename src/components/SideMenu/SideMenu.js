@@ -12,29 +12,25 @@ import CancelPresentationIcon from '@mui/icons-material/CancelPresentation';
 import { pages, settings } from "../Header/Header";
 import SearchBox from "../SearchBox/SearchBox";
 import SwitchMode from "../SwitchMode/SwitchMode";
-import { Tooltip, Avatar, Menu, Typography, MenuItem } from '@mui/material';
 import { auth } from "../../firebase/firebase";
-import { useAuth } from "../../global/authContext/authContext";
-
+import { useNavigate } from "react-router-dom";
 
 
 
 function SideMenu({ toggleTheme }) {
     const [open, setOpen] = React.useState(false);
+    const navigate = useNavigate()
 
     const toggleDrawer = (newOpen) => () => {
         setOpen(newOpen);
     };
 
-    const theme = useTheme()
-
-    const { setUserLogOut } = useAuth()
 
     function handleLogout() {
         auth.signOut()
-            .then(() => setUserLogOut(true))
             .then(() => {
-                localStorage.setItem("logOut", JSON.stringify(true));
+                localStorage.setItem("logInEmail", JSON.stringify(false));
+                localStorage.setItem("logInGoogle", JSON.stringify(false));
             }).catch((error) => {
                 console.error(error);
             });
@@ -82,22 +78,59 @@ function SideMenu({ toggleTheme }) {
             </List>
             <Divider />
             <List>
-                    <ListItem  disablePadding>
-                        <ListItemButton
-                            onClick={handleLogout}
-                            sx={{
-                                color: 'white', display: 'block', mr: 1,
-                                transition: "color 0.5s ease-in-out, background-color 0.5s ease-in-out",
-                            }}>
-                            <ListItemText primary="Log Out" primaryTypographyProps={{
-                                style: {
-                                    fontWeight: "800",
-                                    textTransform: "uppercase",
-                                    letterSpacing: "1px"
-                                }
-                            }} />
-                        </ListItemButton>
-                    </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton
+                        onClick={()=>{
+                            navigate("/profile")
+                        }}
+                        sx={{
+                            color: 'white', display: 'block', mr: 1,
+                            transition: "color 0.5s ease-in-out, background-color 0.5s ease-in-out",
+                        }}>
+                        <ListItemText primary="My Profile" primaryTypographyProps={{
+                            style: {
+                                fontWeight: "800",
+                                textTransform: "uppercase",
+                                letterSpacing: "1px"
+                            }
+                        }} />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton
+                        onClick={()=>{
+                            navigate("/mycart")
+                        }}
+                        sx={{
+                            color: 'white', display: 'block', mr: 1,
+                            transition: "color 0.5s ease-in-out, background-color 0.5s ease-in-out",
+                        }}>
+                        <ListItemText primary="My Cart" primaryTypographyProps={{
+                            style: {
+                                fontWeight: "800",
+                                textTransform: "uppercase",
+                                letterSpacing: "1px"
+                            }
+                        }} />
+                    </ListItemButton>
+                </ListItem>
+
+                <ListItem disablePadding>
+                    <ListItemButton
+                        onClick={handleLogout}
+                        sx={{
+                            color: 'white', display: 'block', mr: 1,
+                            transition: "color 0.5s ease-in-out, background-color 0.5s ease-in-out",
+                        }}>
+                        <ListItemText primary="Log Out" primaryTypographyProps={{
+                            style: {
+                                fontWeight: "800",
+                                textTransform: "uppercase",
+                                letterSpacing: "1px"
+                            }
+                        }} />
+                    </ListItemButton>
+                </ListItem>
             </List>
         </Box >
     );
