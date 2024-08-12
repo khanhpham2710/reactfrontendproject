@@ -31,7 +31,7 @@ function AnimePage() {
   const style = {
     position: 'absolute',
     bgcolor: 'background.paper',
-    width: "100%",
+    width: "100vw",
     zIndex: play ? -100000 : 0,
   };
 
@@ -64,7 +64,7 @@ function AnimePage() {
 
   return (
     <Box>
-      <Header play={play} /> {/* Pass play state here */}
+      <Header play={play} /> 
       <Box sx={{ width: "100vw", position: 'fixed', zIndex: -5, mt:"10vh" }}>
         <img
           ref={backGroundRef}
@@ -73,7 +73,7 @@ function AnimePage() {
         />
         {trailer?.images?.maximum_image_url && <PlayButton id={trailer.youtube_id} setPlay={setPlay}/>}
       </Box>
-      <Container maxWidth="xl" ref={boxRef} sx={style}>
+      <Box ref={boxRef} sx={style}>
         <AnimeInfo details={details} />
         <Divider />
         <Typography variant='h4' className={styles.heading} mt={4} textAlign="center" fontWeight="800">Synopsis</Typography>
@@ -91,7 +91,7 @@ function AnimePage() {
         <Divider />
         <Typography variant='h4' className={styles.heading} mt={4} textAlign="center" fontWeight="800">Recommendations</Typography>
         <Footer />
-      </Container>
+      </Box>
     </Box>
   );
 }

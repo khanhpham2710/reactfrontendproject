@@ -2,6 +2,7 @@
   "name": "reactfrontendproject",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://khanhpham2710.github.io/reactfrontendproject/",
   "dependencies": {
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
@@ -23,6 +24,7 @@
     "axios": "^1.7.2",
     "dayjs": "^1.11.12",
     "firebase": "^10.12.5",
+    "gh-pages": "^6.1.1",
     "react": "^18.3.1",
     "react-carousel-mui": "^1.0.0",
     "react-dom": "^18.3.1",
@@ -39,7 +41,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build"
   },
   "eslintConfig": {
     "extends": [

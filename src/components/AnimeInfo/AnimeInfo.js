@@ -64,7 +64,7 @@ function AnimeInfo({ details }) {
 
 
     return (<>
-        <Grid container sx={{}}>
+        <Grid container sx={{width: "100vw"}}>
             <Grid item xs={12} sm={12} md={4} lg={3} p={4}>
                 <Box width="100%" sx={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
                     <img src={images?.jpg.large_image_url} alt={title} style={{ width: '100%', height: 'auto', objectFit: 'cover', maxWidth: "250px", border: "#ccc 5px solid", borderRadius: "20px" }} />
