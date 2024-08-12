@@ -16,7 +16,7 @@ import BookTicket from "../pages/BookTicketV2.js/BookTicket";
 
 
 const publicRoutes = [
-    { path: "/", component: LandingPage, layout: null },
+    { path: "/reactfrontendproject", component: LandingPage, layout: null },
     { path: "/home", component: Homepage},
     { path: "/login", component: LoginPage, layout: null },
     { path: "/payment", component: Payment, layout: NoSlider },

@@ -41,6 +41,7 @@ const ReadMoreButton = styled(Button)(() => ({
     }
 }));
 
+
 export default function AnimeModal(prop) {
     const { open, handleClose, item } = prop;
     const link = `/anime/${item.mal_id}`;
@@ -81,7 +82,7 @@ export default function AnimeModal(prop) {
             </DialogTitle>
             <DialogContent sx={{ display: "flex", mt: 2, gap: 2 }}>
                 <Grid container rowSpacing={1} columnSpacing={0.1}>
-                    <Grid item xs={5} sm={4} md={3} lg={2.5} xl={2} p={{
+                    <Grid item xs={12} sm={4.8} md={4} lg={2.5} xl={3} p={{
                         xs: 1,
                         sm: 1,
                         md: 2,
@@ -93,6 +94,7 @@ export default function AnimeModal(prop) {
                             sx={{
                                 border: "5px solid",
                                 borderRadius: "15px",
+                                width: "100%",
                                 height: "100%",
                                 overflow: "hidden",
                                 position: "relative",
@@ -102,6 +104,7 @@ export default function AnimeModal(prop) {
                                 alt={item.title}
                                 style={{
                                     width: "100%",
+                                    minWidth: "250px",
                                     height: "100%",
                                     objectFit: "cover",
                                     borderRadius: "15px",
@@ -112,7 +115,7 @@ export default function AnimeModal(prop) {
                             </ReadMoreButton>
                         </Box>
                     </Grid>
-                    <Grid item xs={7} sm={8} md={9} lg={9.5} xl={10} p={1}>
+                    <Grid item xs={12} sm={7.2} md={8} lg={9.5} xl={9} p={1}>
                         <Box sx={{
                             border: "2px solid",
                             borderRadius: "15px",
