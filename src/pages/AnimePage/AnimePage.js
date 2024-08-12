@@ -65,7 +65,7 @@ function AnimePage() {
   return (
     <Box>
       <Header play={play} /> 
-      <Box sx={{ width: "100vw", position: 'fixed', zIndex: -5, mt:"10vh" }}>
+      <Box sx={{ width: "100vw", position: 'fixed', zIndex: -5, mt:{ xs: "10vh", md: "0" }}}>
         <img
           ref={backGroundRef}
           style={{ width: "100vw", aspectRatio: "16 / 9", zIndex: -6, position: "relative" }}

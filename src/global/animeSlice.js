@@ -5,7 +5,7 @@ const baseURL = 'https://api.jikan.moe/v4/anime';
 
 const endpoints = ['recommendations', 'reviews', 'relations', 'themes'];
 
-// Create fetch thunk for each endpoint
+
 const createFetchThunk = (endpoint) => {
   return createAsyncThunk(
     `anime/fetch${endpoint.charAt(0).toUpperCase() + endpoint.slice(1)}`,
@@ -16,7 +16,7 @@ const createFetchThunk = (endpoint) => {
   );
 };
 
-// Thunk for fetching anime details
+
 export const fetchAnimeDetails = createAsyncThunk(
   'anime/fetchDetails',
   async (animeId) => {
@@ -26,7 +26,7 @@ export const fetchAnimeDetails = createAsyncThunk(
   }
 );
 
-// Thunk for fetching characters
+
 export const fetchAnimeCharacters = createAsyncThunk(
   'anime/fetchCharacters',
   async (animeId) => {

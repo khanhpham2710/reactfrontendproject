@@ -37,6 +37,7 @@ function CartPage() {
     return (
         <Container maxWidth="lg">
             <Typography variant="h3" textAlign="center" mt="14vh" mb={4} fontWeight="800" letterSpacing={1}>Your Tickets</Typography>
+            {tickets && <Typography variant='h3' mb={4}>Total price: ${tickets?.length * 4.99}</Typography>}
             {tickets.length > 0 ? (
                 <Box width="100%" sx={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gridGap: "2rem", my: 2 }}>
                     {tickets

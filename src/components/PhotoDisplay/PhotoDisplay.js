@@ -43,9 +43,8 @@ export default function PhotoDisplay({ user, handleClickSnackbar, logInEmail }) 
 
     return (
         <Box
-            width="100%"
             sx={{
-                width: "100%",
+                width: "90%",
                 height: "auto",
                 display: "flex",
                 justifyContent: "center",

@@ -28,13 +28,15 @@ function SideMenu({ toggleTheme }) {
 
     function handleLogout() {
         auth.signOut()
-            .then(() => {
-                localStorage.setItem("logInEmail", JSON.stringify(false));
-                localStorage.setItem("logInGoogle", JSON.stringify(false));
-            }).catch((error) => {
-                console.error(error);
-            });
-    }
+          .then(() => {
+            localStorage.setItem("logInEmail", JSON.stringify(false))
+            localStorage.setItem("logInGoogle", JSON.stringify(false))
+            window.location.reload();
+            // navigate("/home")
+          }).catch((error) => {
+            console.error(error);
+          });
+      }
 
     const DrawerList = (
         <Box sx={{ width: 250 }} role="presentation">

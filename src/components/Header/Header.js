@@ -17,7 +17,7 @@ import SearchBoxOpen from '../SearchBoxOpen/SearchBoxOpen'
 export const pages = [
   { name: "Home", path: "/home" },
   { name: "Top Anime", path: "/top" },
-  { name: "Genres", path: "/genres" },
+  { name: "Watch", path: "/watch" },
 ];
 
 export const settings = [

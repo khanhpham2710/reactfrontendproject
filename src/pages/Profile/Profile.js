@@ -54,27 +54,29 @@ function Profile() {
 
 
   return (
-    <Grid container mt="12vh">
-      <Grid item xs={12} sm={12} md={4} lg={3} p={4}>
-        <PhotoDisplay user={{ user }} handleClickSnackbar={handleClickSnackbar} logInEmail={logInEmail}/>
+    <Container maxWidth="xl">
+      <Grid container mt="12vh">
+        <Grid item xs={12} sm={12} md={4} lg={3} p={4}>
+          <PhotoDisplay user={{ user }} handleClickSnackbar={handleClickSnackbar} logInEmail={logInEmail} />
+        </Grid>
+        <Divider orientation="vertical" flexItem />
+        <Grid item xs={12} sm={12} md={8} lg={8.5} sx={{ p: { xs: 2, sm: 2, md: 3, lg: 4 } }} textAlign="left">
+          <Typography variant='h4' fontWeight="800" gutterBottom>User Info</Typography>
+          <Typography variant='body1' gutterBottom>Name: {user?.displayName}</Typography>
+          <Typography variant='body1' gutterBottom>Email: {user?.email} </Typography>
+          {logInEmail && <ChangePassword handleClickSnackbar={handleClickSnackbar} />}
+        </Grid>
+        <MySnackbars
+          open={snackbarOpen}
+          handleClose={handleCloseSnackbar}
+          message={snackbarMessage}
+          severity={snackbarSeverity}
+        />
+        <Box width="100%">
+          {user && <FavoriteAnimes list={favorite} />}
+        </Box>
       </Grid>
-      <Divider orientation="vertical" flexItem />
-      <Grid item xs={12} sm={12} md={8} lg={8.5} sx={{ p: { xs: 2, sm: 2, md: 3, lg: 4 } }} textAlign="left">
-        <Typography variant='h4' fontWeight="800" gutterBottom>User Info</Typography>
-        <Typography variant='body1' gutterBottom>Name: {user?.displayName}</Typography>
-        <Typography variant='body1' gutterBottom>Email: {user?.email} </Typography>
-        {logInEmail && <ChangePassword handleClickSnackbar={handleClickSnackbar} />}
-      </Grid>
-      <MySnackbars
-        open={snackbarOpen}
-        handleClose={handleCloseSnackbar}
-        message={snackbarMessage}
-        severity={snackbarSeverity}
-      />
-      <Box width="100%">
-        {user && <FavoriteAnimes list={favorite} />}
-      </Box>
-    </Grid>
+    </Container>
   )
 }
 

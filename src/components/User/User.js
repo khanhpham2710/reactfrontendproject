@@ -38,6 +38,7 @@ export default function User() {
         localStorage.setItem("logInEmail", JSON.stringify(false))
         localStorage.setItem("logInGoogle", JSON.stringify(false))
         window.location.reload();
+        // navigate("/home")
       }).catch((error) => {
         console.error(error);
       });

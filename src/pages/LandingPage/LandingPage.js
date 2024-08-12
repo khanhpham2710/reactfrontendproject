@@ -15,10 +15,16 @@ function LandingPage() {
   return (
     <div id="landing_page">
       <Header_LandingPage />
-      <Box maxWidth="xl" sx={{ padding: 6, m: "10vh auto 0 auto", display: "flex", flexDirection: "column", alignItems: "center"}}>
-        <Typography textAlign="center" gutterBottom mb={6} sx={{fontWeight : 900}} variant='h2'>Unlimited anime movies, shows and more</Typography>
-        <Typography textAlign="center" gutterBottom mb={6} sx={{fontWeight : 400}} variant='h3'>Watch anywhere. Cancel anytime</Typography>
-        <Typography textAlign="center" gutterBottom mb={6} sx={{fontWeight : 400}} variant='h3'>Ready to watch? Enter your email to create or restart your membership</Typography>
+      <Box maxWidth="xl" sx={{ padding: 6, m: "10vh auto 0 auto", display: "flex", flexDirection: "column", alignItems: "center", height: "90vh", justifyContent: "center"}}>
+        <Typography textAlign="center" gutterBottom mb={6} sx={{fontWeight : 900, fontSize: {
+          xs: "30px", sm:"45px", md: "50px", lg: "70px"
+        }}} variant='h1'>Unlimited anime movies, shows and more</Typography>
+        <Typography textAlign="center" gutterBottom mb={6} sx={{fontWeight : 400, fontSize: {
+          xs: "20px", sm:"35px", md: "40px", lg: "50px"
+        }}} variant='h2'>Watch anywhere. Cancel anytime</Typography>
+        <Typography textAlign="center" gutterBottom mb={6} sx={{fontWeight : 400, fontSize: {
+          xs: "20px", sm:"35px", md: "40px", lg: "50px"
+        }}} variant='h2'>Ready to watch? Enter your email to create or restart your membership</Typography>
         <LoginButton label="Get Started" />
       </Box>
       {media.map((item,index)=>

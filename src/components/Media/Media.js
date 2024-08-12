@@ -37,9 +37,9 @@ function Media({ heading, content, right, image, youtubeId }) {
     }, [imgDimensions]);
 
     return (
-        <Container maxWidth="lg">
-            <Grid container columnSpacing={2}>
-                <Grid item xs={12} md={7}
+        <Container maxWidth="xl">
+            <Grid container columnSpacing={2} rowSpacing={2}>
+                <Grid item xs={12} md={7} my={2}
                     data-aos="fade-right"
                     sx={{
                         display: {
@@ -72,7 +72,7 @@ function Media({ heading, content, right, image, youtubeId }) {
                         />
                     </Box>
                 </Grid>
-                <Grid item xs={12} md={5} 
+                <Grid item xs={12} md={5} my={2}
                 data-aos={right?"fade-right":"fade-left"}
                 sx={{
                     display: "flex",
@@ -83,7 +83,7 @@ function Media({ heading, content, right, image, youtubeId }) {
                     <Typography variant='h3' textAlign="center" mb={6}>{heading}</Typography>
                     <Typography variant='h5' textAlign="center">{content}</Typography>
                 </Grid>
-                <Grid item xs={12} md={7} 
+                <Grid item xs={12} md={7} my={2}
                 data-aos="fade-left"
                 sx={{
                     display: {
