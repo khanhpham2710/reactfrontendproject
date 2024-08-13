@@ -67,23 +67,11 @@ function TransitionsModal() {
 
 
 function BookTicketButton({movieID}) {
-  const [user,setUser] = React.useState()
-
-  React.useEffect(() => {
-    const googleUser = JSON.parse(localStorage.getItem("googleUser"));
-    const user_info = JSON.parse(localStorage.getItem("user_info"));
-    const logInEmail = JSON.parse(localStorage.getItem("logInEmail"));
-    const logInGoogle = JSON.parse(localStorage.getItem("logInGoogle"));
-
-    if (logInEmail && user_info) setUser(user_info)
-    else if (logInGoogle && googleUser) setUser(googleUser);
-
-  }, []);
-
+  const { userLoggedIn } = useAuth()
 
   const link = "/book/" + movieID
 
-  if (user) {
+  if (userLoggedIn) {
     return (
       <Link to={link}>
         <MyButton context="BOOK TICKET" icon={<SendIcon sx={{ fontSize: "10px" }} />} />

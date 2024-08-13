@@ -17,7 +17,7 @@ export const doSignInWithGoogle = async (data) =>{
     return result
 }
 
-export const doSginOut = () => {
+export const doSignOut = () => {
     return auth.signOut()
 }
 

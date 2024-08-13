@@ -10,27 +10,14 @@ import FavoriteAnimes from '../../components/FavoriteAnimes/FavoriteAnimes';
 import PhotoDisplay from '../../components/PhotoDisplay/PhotoDisplay';
 
 function Profile() {
-  const [user, setUser] = React.useState()
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+  const { currentUser, userLoggedIn } = useAuth()
+
 
   const { favorite } = useSelector(state => state.user0)
   const dispatch = useDispatch()
-
-  const logInEmail = JSON.parse(localStorage.getItem("logInEmail"));
-
-  React.useEffect(() => {
-    const googleUser = JSON.parse(localStorage.getItem("googleUser"));
-    const user_info = JSON.parse(localStorage.getItem("user_info"));
-
-    const logInGoogle = JSON.parse(localStorage.getItem("logInGoogle"));
-
-    if (logInEmail && user_info) setUser(user_info)
-    else if (logInGoogle && googleUser) setUser(googleUser);
-
-  }, []);
-
 
   React.useEffect(() => {
     dispatch(loadFavorite)
@@ -56,14 +43,14 @@ function Profile() {
   return (
     <Grid container mt="12vh">
       <Grid item xs={12} sm={12} md={4} lg={3} p={4}>
-        <PhotoDisplay user={{ user }} handleClickSnackbar={handleClickSnackbar} logInEmail={logInEmail}/>
+        <PhotoDisplay user={ currentUser } handleClickSnackbar={handleClickSnackbar}/>
       </Grid>
       <Divider orientation="vertical" flexItem />
       <Grid item xs={12} sm={12} md={8} lg={8.5} sx={{ p: { xs: 2, sm: 2, md: 3, lg: 4 } }} textAlign="left">
         <Typography variant='h4' fontWeight="800" gutterBottom>User Info</Typography>
-        <Typography variant='body1' gutterBottom>Name: {user?.displayName}</Typography>
-        <Typography variant='body1' gutterBottom>Email: {user?.email} </Typography>
-        {logInEmail && <ChangePassword handleClickSnackbar={handleClickSnackbar} />}
+        <Typography variant='body1' gutterBottom>Name: {currentUser?.displayName}</Typography>
+        <Typography variant='body1' gutterBottom>Email: {currentUser?.email} </Typography>
+        <ChangePassword handleClickSnackbar={handleClickSnackbar} />
       </Grid>
       <MySnackbars
         open={snackbarOpen}
@@ -72,7 +59,7 @@ function Profile() {
         severity={snackbarSeverity}
       />
       <Box width="100%">
-        {user && <FavoriteAnimes list={favorite} />}
+        {userLoggedIn && <FavoriteAnimes list={favorite} />}
       </Box>
     </Grid>
   )

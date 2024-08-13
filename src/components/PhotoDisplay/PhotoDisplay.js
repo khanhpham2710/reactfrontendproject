@@ -1,45 +1,58 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Avatar, Button, Dialog, DialogTitle, List, ListItem, ListItemAvatar, ListItemButton, ListItemText, Typography, DialogContent } from '@mui/material';
+import { Box, Avatar, Button, Dialog, DialogTitle, DialogContent } from '@mui/material';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import PersonIcon from '@mui/icons-material/Person';
-import AddIcon from '@mui/icons-material/Add';
-import { blue } from '@mui/material/colors';
+import { useAuth } from '../../global/authContext/authContext';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
-
-export default function PhotoDisplay({ user, handleClickSnackbar, logInEmail }) {
+export default function PhotoDisplay({ handleClickSnackbar }) {
+    const { currentUser, setCurrentUser, userLoggedIn } = useAuth();
     const [openDialog, setOpenDialog] = useState(false);
-    const [avatar, setAvatar] = useState()
+    const [avatar, setAvatar] = useState(null);
+    const storage = getStorage(); 
 
     const handleAddPhoto = () => {
         setOpenDialog(true);
     };
 
-    const handleCloseDialog = (value) => {
+    const handleCloseDialog = () => {
         setOpenDialog(false);
-        setAvatar()
+        setAvatar(null);
     };
 
     useEffect(() => {
         return () => {
-            avatar && URL.revokeObjectURL(avatar.preview)
-        }
-    }, [avatar])
+            if (avatar && avatar.preview) {
+                URL.revokeObjectURL(avatar.preview);
+            }
+        };
+    }, [avatar]);
 
     const handlePreviewAvatar = (e) => {
-        const file = e.target.files[0]
+        const file = e.target.files[0];
+        if (file) {
+            file.preview = URL.createObjectURL(file);
+            setAvatar(file);
+        }
+    };
 
-        file.preview = URL.createObjectURL(file)
+    const handleConfirmChange = async () => {
+        if (avatar) {
+            try {
+                const storageRef = ref(storage, `profile_pictures/${currentUser.uid}`);
+                await uploadBytes(storageRef, avatar);
+                const downloadURL = await getDownloadURL(storageRef);
 
-        setAvatar(file)
-    }
-
-    const handleConfirmChange = () => {
-        let user_info = JSON.parse(localStorage.getItem("user_info"));
-        user_info.photoURL = avatar.preview
-        localStorage.setItem("user_info",JSON.stringify(user_info))
-        handleClickSnackbar("Sorry this function have not been finished","success")
-        handleCloseDialog()
-    }
+                await currentUser.updateProfile({ photoURL: downloadURL });
+                setCurrentUser({ ...currentUser, photoURL: downloadURL });
+                handleClickSnackbar("Photo updated successfully", "success");
+            } catch (error) {
+                handleClickSnackbar("An error occurred while updating photo.", "error");
+                console.error(error);
+            }
+            handleClickSnackbar("Sorry this function is still being developed", "success");
+            handleCloseDialog();
+        }
+    };
 
     return (
         <Box
@@ -53,9 +66,9 @@ export default function PhotoDisplay({ user, handleClickSnackbar, logInEmail }) 
                 position: "relative"
             }}
         >
-            {user ? (
+            {userLoggedIn ? (
                 <Avatar
-                    src={user?.user?.photoURL}
+                    src={currentUser?.photoURL}
                     sx={{
                         width: "20vw",
                         height: "20vw",
@@ -69,7 +82,7 @@ export default function PhotoDisplay({ user, handleClickSnackbar, logInEmail }) 
                         }
                     }}
                 >
-                    {user?.user?.displayName?.trim()[0]}
+                    {currentUser?.displayName?.trim()[0]}
                 </Avatar>
             ) : (
                 <Avatar sx={{
@@ -85,7 +98,7 @@ export default function PhotoDisplay({ user, handleClickSnackbar, logInEmail }) 
                     }
                 }} />
             )}
-            {logInEmail && <AddAPhotoIcon
+            <AddAPhotoIcon
                 onClick={handleAddPhoto}
                 sx={{
                     position: "absolute",
@@ -101,24 +114,25 @@ export default function PhotoDisplay({ user, handleClickSnackbar, logInEmail }) 
                         opacity: "1 !important"
                     }
                 }}
-            />}
+            />
 
             <Dialog onClose={() => setOpenDialog(false)} open={openDialog}>
                 <DialogTitle>Add photo</DialogTitle>
-                <DialogContent sx={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
-                    <input style ={{marginBottom: "20px"}}
+                <DialogContent sx={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>
+                    <input style={{ marginBottom: "20px" }}
                         type="file"
                         onChange={handlePreviewAvatar}
                     />
                     {avatar && (
                         <>
                             <Avatar src={avatar.preview} sx={{
-                            width: "20vw",
-                            height: "20vw",
-                            mb: 5,
-                            position: "relative",
-                            minWidth: "200px",
-                            minHeight: "200px"}} />
+                                width: "20vw",
+                                height: "20vw",
+                                mb: 5,
+                                position: "relative",
+                                minWidth: "200px",
+                                minHeight: "200px"
+                            }} />
                             <Button variant="contained" onClick={handleConfirmChange}>Confirm change</Button>
                         </>
                     )}
@@ -127,4 +141,3 @@ export default function PhotoDisplay({ user, handleClickSnackbar, logInEmail }) 
         </Box>
     );
 }
-
