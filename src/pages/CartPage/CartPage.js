@@ -6,12 +6,15 @@ import Ticket from '../../components/Ticket/Ticket';
 import { Box, Container, Typography, Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import RestoreIcon from '@mui/icons-material/Restore';
-import MyButton from '../../components/MyButton/MyButton';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../global/authContext/authContext';
 
 function CartPage() {
     const dispatch = useDispatch();
     const tickets = useSelector(state => state.user0.tickets);
     const [removedList, setRemovedList] = useState([]);
+    const { userLoggedIn } = useAuth()
+    const navigate = useNavigate()
 
     useEffect(() => {
         dispatch(loadTicketsFromStorage());
@@ -33,6 +36,10 @@ function CartPage() {
         });
         setRemovedList([]);
     };
+
+    if (!userLoggedIn){
+        navigate("/login")
+    }
 
     return (
         <Container maxWidth="lg">

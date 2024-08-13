@@ -4,16 +4,18 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import FormHelperText from '@mui/material/FormHelperText';
-
+import { doPasswordChange } from "../../firebase/auth"
+import { useAuth } from '../../global/authContext/authContext';
 
 export default function ChangePassword({ handleClickSnackbar }) {
     const [open, setOpen] = React.useState(false);
     const [password, setPassword] = React.useState('');
     const [confirmPassword, setConfirmPassword] = React.useState('');
     const [errorMessage, setErrorMessage] = React.useState('');
+
+    const { userLoggedIn } =useAuth()
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -26,32 +28,32 @@ export default function ChangePassword({ handleClickSnackbar }) {
         setConfirmPassword('');
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-    
+
         if (!password.trim() || !confirmPassword.trim()) {
             setErrorMessage("Please don't leave password fields blank");
             return;
         } else if (password !== confirmPassword) {
             setErrorMessage('Passwords do not match');
             return;
+        } else {
+            try {
+                await doPasswordChange(password);
+                handleClickSnackbar("Change password successful", "success");
+                handleClose();
+            } catch (error) {
+                handleClickSnackbar("An error occurred while changing the password", "error");
+                console.error(error);
+            }
         }
-        
-        
-        let userInfo = JSON.parse(localStorage.getItem("user_info"));
-        userInfo = { ...userInfo, password: password };
-        localStorage.setItem("user_info", JSON.stringify(userInfo));
-        
-        
-        handleClickSnackbar("Change password successful", "success");
-        handleClose();
     };
 
     return (
         <React.Fragment>
-            <Button variant="contained" onClick={handleClickOpen}>
+            {userLoggedIn && <Button variant="contained" onClick={handleClickOpen}>
                 Change Password
-            </Button>
+            </Button>}
             <Dialog
                 open={open}
                 onClose={handleClose}

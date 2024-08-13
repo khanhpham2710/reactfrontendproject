@@ -4,6 +4,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../global/authContext/authContext';
+import { doSignInWithEmailAndPassword, doPasswordReset } from '../../firebase/auth';
 
 const LoginForm = ({ handleClickSnackbar }) => {
     const { setUserLoggedInWithEmail } = useAuth()
@@ -16,28 +17,35 @@ const LoginForm = ({ handleClickSnackbar }) => {
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (event) => event.preventDefault();
 
-    const onLogin = (event) => {
+    const onLogin = async (event) => {
         event.preventDefault();
-        const user_info = JSON.parse(localStorage.getItem("user_info"));
 
-        if (user_info) {
-            if (email === user_info.email && password === user_info.password) {
-                localStorage.setItem("logInEmail", true);
-                setUserLoggedInWithEmail(true)
-                navigate("/home")
-            } else if (email === user_info.email && password !== user_info.password) {
+        try {
+            await doSignInWithEmailAndPassword(email, password);
+            setUserLoggedInWithEmail(true);
+            navigate("/home");
+        } catch (error) {
+            if (error.code === 'auth/wrong-password') {
                 handleClickSnackbar("Incorrect password", "error");
+            } else if (error.code === 'auth/user-not-found') {
+                handleClickSnackbar("No account found with this email", "error");
+            } else {
+                handleClickSnackbar(error.message, "error");
             }
-        } else {
-            handleClickSnackbar("You have not signed up", "error");
         }
     };
 
-    const handleForget = () => {
-        localStorage.removeItem("user_info");
-        setPassword("");
-        setEmail("");
-        handleClickSnackbar("Please sign up again", "info");
+    const handleForget = async () => {
+        try {
+            await doPasswordReset(email);
+            handleClickSnackbar("Password reset email sent", "info");
+        } catch (error) {
+            if (error.code === 'auth/user-not-found') {
+                handleClickSnackbar("No account found with this email", "error");
+            } else {
+                handleClickSnackbar(error.message, "error");
+            }
+        }
     };
 
     return (

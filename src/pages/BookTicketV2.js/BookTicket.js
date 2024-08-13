@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createSeats, bookSeats, loadMovieState } from '../../global/movieBookingSlice';
 import { addTickets } from '../../global/userSlice0';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Box, Container, Typography, Grid, Autocomplete, TextField, Button } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -13,7 +13,7 @@ import SelectedList from '../../components/SelectedList/SelectedList';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import Seat from '../../components/Seat/Seat';
-import InventoryIcon from '@mui/icons-material/Inventory';
+import { useAuth } from '../../global/authContext/authContext';
 
 const timeOptions = [
     { label: '8-10' },
@@ -27,7 +27,8 @@ const timeOptions = [
 
 const BookTicket = () => {
     const { movieId } = useParams();
-    const [userId, setUserId] = useState(null);
+    const { currentUser, userLoggedIn } = useAuth()
+    const navigate = useNavigate()
 
     const dispatch = useDispatch();
     const { schedule } = useSelector(state => state.movieBooking);
@@ -38,19 +39,11 @@ const BookTicket = () => {
     const [seats, setSeats] = useState([])
     const [selectedList, setSelectedList] = useState([]);
 
-    useEffect(() => {
-        dispatch(loadMovieState());
-        const logOut = JSON.parse(localStorage.getItem("logOut"));
-        const googleUser = JSON.parse(localStorage.getItem("googleUser"));
-        const user_info = JSON.parse(localStorage.getItem("user_info"));
-
-        if (!logOut) {
-            if (user_info) setUserId(user_info.id);
-            else if (googleUser) setUserId(googleUser.id);
-        } else {
-            alert("You need to log in to book tickets");
+    useEffect(()=>{
+        if (!userLoggedIn){
+            navigate("/login")
         }
-    }, []);
+    },[])
 
     const handleStart = () => {
         dispatch(createSeats({ movieId: movieId, date: date, time: time }));
@@ -74,7 +67,7 @@ const BookTicket = () => {
                 row: row,
                 num: num,
                 seatNo: row + num,
-                userId: userId
+                userId: currentUser.uid
             };
             const check = selectedList.findIndex(item =>
                 item.row === row && 
@@ -95,7 +88,7 @@ const BookTicket = () => {
 
     const handleBookTickets = () => {
         try {
-            dispatch(bookSeats({ seats: selectedList, userId: userId, movieId: movieId }));
+            dispatch(bookSeats({ seats: selectedList, userId: currentUser.uid, movieId: movieId }));
             dispatch(addTickets(selectedList));
             alert('Tickets booked successfully!');
             dispatch(loadMovieState());

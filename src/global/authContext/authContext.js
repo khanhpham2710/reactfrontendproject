@@ -10,8 +10,7 @@ export function useAuth(){
 
 export function AuthProvider({children}){
     const [currentUser, setCurrentUser] = useState(null)
-    const [userLoggedInWithGoogle, setUserLoggedInWithGoogle] = useState(false)
-    const [userLoggedInWithEmail, setUserLoggedInWithEmail] = useState(false)
+    const [userLoggedIn,setUserLoggedIn] = useState(null)
     const [loading, setLoading] = useState(true)
 
     useEffect(()=>{
@@ -21,11 +20,12 @@ export function AuthProvider({children}){
 
     async function initializeUser(user){
         if (user){
-            setCurrentUser({...user});
-            setUserLoggedInWithGoogle(true)
+            const randomId = Math.floor(Math.random() * 100) + 1;
+            setCurrentUser({...user, id: randomId});
+            setUserLoggedIn(true)
         } else {
             setCurrentUser(null)
-            setUserLoggedInWithGoogle(false)
+            setUserLoggedIn(false)
         }
         setLoading(false)
     }
@@ -33,10 +33,9 @@ export function AuthProvider({children}){
 
     const value = {
         currentUser,
-        userLoggedInWithGoogle,
-        userLoggedInWithEmail,
-        setUserLoggedInWithGoogle,
-        setUserLoggedInWithEmail,
+        setUserLoggedIn,
+        setCurrentUser,
+        userLoggedIn,
         loading,
     }
 

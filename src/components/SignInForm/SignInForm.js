@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Typography, TextField, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { doSignInWithGoogle, doSendEmailVerification, doCreateUserWithEmailAndPassword } from '../../firebase/auth';
+import { doSignInWithGoogle, doCreateUserWithEmailAndPassword, doSendEmailVerification } from '../../firebase/auth';
 import { Link as RouterLink } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../global/authContext/authContext';
+import { updateProfile } from 'firebase/auth'; // Import this
 
 const SignInForm = ({ handleClickSnackbar }) => {
     const [showPassword, setShowPassword] = useState(false);
@@ -13,10 +14,9 @@ const SignInForm = ({ handleClickSnackbar }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isSigningIn, setIsSigningIn] = useState(false);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
-    const { setUserLoggedInWithGoogle, setUserLoggedInWithEmail } = useAuth()
-    
+    const { setCurrentUser } = useAuth()
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (event) => event.preventDefault();
@@ -25,16 +25,13 @@ const SignInForm = ({ handleClickSnackbar }) => {
         event.preventDefault();
         if (name.trim() && password.trim()) {
             try {
-                const user_info = {
-                    id: Math.floor(Math.random() * 100) + 1,
-                    displayName: name,
-                    email: email,
-                    password: password,
-                };
-                setUserLoggedInWithEmail(true)
-                localStorage.setItem("user_info", JSON.stringify(user_info));
-                localStorage.setItem("logInEmail", JSON.stringify(true));
-                navigate("/home")
+                const userCredential = await doCreateUserWithEmailAndPassword(email, password);
+                const user = userCredential.user;
+
+                await updateProfile(user, { displayName: name });
+                setCurrentUser((prev) => ({ ...prev, displayName: name }));
+
+                navigate("/home");
             } catch (error) {
                 handleClickSnackbar("An error occurred during sign-up.", "error");
                 console.error(error);
@@ -50,10 +47,6 @@ const SignInForm = ({ handleClickSnackbar }) => {
             setIsSigningIn(true);
             try {
                 const result = await doSignInWithGoogle();
-                const storeUser = { ...result.user, id: Math.floor(Math.random() * 100) + 1 };
-                setUserLoggedInWithGoogle(true)
-                localStorage.setItem("googleUser", JSON.stringify(storeUser));
-                localStorage.setItem("logInGoogle", JSON.stringify(true));
 
                 await doSendEmailVerification();
                 handleClickSnackbar("Verification email sent. Please check your inbox.", "info");

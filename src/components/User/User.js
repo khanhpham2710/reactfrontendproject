@@ -1,13 +1,14 @@
 import { Box, Tooltip, IconButton, Avatar, Menu, Typography, MenuItem, Divider } from '@mui/material';
 import * as React from 'react';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import SwitchMode from "../SwitchMode/SwitchMode";
-import { auth } from "../../firebase/firebase"
+import { doSignOut } from '../../firebase/auth';
 import {  useNavigate } from 'react-router-dom';
 import LoginIcon from '@mui/icons-material/Login';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
+import { useAuth } from '../../global/authContext/authContext';
+import { useMonthCalendarDefaultizedProps } from '@mui/x-date-pickers/MonthCalendar/MonthCalendar';
 
 
 export default function User() {
@@ -16,33 +17,18 @@ export default function User() {
 
   const navigate = useNavigate();
 
-  const [user, setUser] = React.useState()
+  const { currentUser, userLoggedIn } = useAuth()
 
-  React.useEffect(() => {
-    const googleUser = JSON.parse(localStorage.getItem("googleUser"));
-    const user_info = JSON.parse(localStorage.getItem("user_info"));
-    const logInEmail = JSON.parse(localStorage.getItem("logInEmail"));
-    const logInGoogle = JSON.parse(localStorage.getItem("logInGoogle"));
-
-    if (logInEmail && user_info) setUser(user_info)
-    else if (logInGoogle && googleUser) setUser(googleUser);
-
-  }, []);
-
-
+  console.log(currentUser)
 
   function handleLogout() {
-    auth.signOut()
+    doSignOut()
       .then(() => {
-        setUser(null)
-        localStorage.setItem("logInEmail", JSON.stringify(false))
-        localStorage.setItem("logInGoogle", JSON.stringify(false))
         window.location.reload();
       }).catch((error) => {
         console.error(error);
       });
   }
-
 
 
   const handleClick = (event) => {
@@ -62,7 +48,7 @@ export default function User() {
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
         >
-          {user ? <Avatar src={user.photoURL} sx={{ width: 40, height: 40 }}>{user?.displayName?.trim()[0]}</Avatar> : <Avatar sx={{ width: 40, height: 40 }}></Avatar>}
+          {userLoggedIn ? <Avatar src={currentUser?.photoURL} sx={{ width: 40, height: 40 }}>{currentUser?.displayName?.trim()[0]}</Avatar> : <Avatar sx={{ width: 40, height: 40 }}></Avatar>}
         </IconButton>
       </Box>
       <Menu
@@ -119,7 +105,7 @@ export default function User() {
           Switch mode <SwitchMode />
         </MenuItem>
         <Divider />
-        {!user ? (<MenuItem onClick={() => {
+        {!userLoggedIn ? (<MenuItem onClick={() => {
           navigate("/login")
         }}>
           <ListItemIcon>
