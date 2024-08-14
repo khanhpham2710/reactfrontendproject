@@ -100,7 +100,7 @@ export default function FAQ() {
     };
 
     return (
-        <Container maxWidth="xl" sx={{ my: 6 }} data-aos="flip-up">
+        <Container maxWidth="xl" sx={{ my: 6 }} data-aos="flip-up ">
             {AccordionList.map((item, index) => {
                 const panel = `panel${index+1}`
                 return (<Accordion key={index} expanded={expanded === panel} onChange={handleChange(panel)}>
