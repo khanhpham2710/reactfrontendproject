@@ -26,6 +26,9 @@ const SignInForm = ({ handleClickSnackbar }) => {
         if (name.trim() && password.trim()) {
             try {
                 const userCredential = await doCreateUserWithEmailAndPassword(email, password);
+                await doSendEmailVerification();
+                handleClickSnackbar("Verification email sent. Please check your inbox.", "info");
+
                 const user = userCredential.user;
 
                 await updateProfile(user, { displayName: name });

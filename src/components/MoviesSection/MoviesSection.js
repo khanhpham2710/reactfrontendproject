@@ -11,9 +11,8 @@ function SampleNextArrow(props) {
       style={{
         ...style,
         display: "flex",
-        height: "100%",
         alignItems: "center",
-        transform: "scale(3) translate(-50%,-15%)",
+        transform: "scale(2) translate(-50%,-15%)",
         zIndex: 2,
       }}
       onClick={onClick}
@@ -29,9 +28,8 @@ function SamplePrevArrow(props) {
       style={{
         ...style,
         display: "flex",
-        height: "100%",
         alignItems: "center",
-        transform: "scale(3) translate(50%,-15%)",
+        transform: "scale(2) translate(50%,-15%)",
         zIndex: 2,
       }}
       onClick={onClick}
