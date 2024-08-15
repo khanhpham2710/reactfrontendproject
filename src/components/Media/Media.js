@@ -35,7 +35,7 @@ function Media({ heading, content, right, image, youtubeId }) {
     }, [imgDimensions]);
 
     return (
-        <Container maxWidth="md" sx={{ overflow: 'hidden' }}>
+        <Container maxWidth="lg" sx={{ overflow: 'hidden' }}>
             <Grid container columnSpacing={2} rowSpacing={4}>
                 <Grid item xs={12} md={7}
                     data-aos="fade-right"
