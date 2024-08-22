@@ -4,14 +4,14 @@ import { InputBase, Box, MenuItem, Typography, Paper, MenuList } from '@mui/mate
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { searchAnime } from '../../global/searchSlice';
+import { searchAnime, letterSearchAnime } from '../../global/searchSlice';
 
 function SearchBoxOpen({ setShowSearch }) {
     const [search, setSearch] = useState('');
     const [fullWidth, setFullWidth] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { searchResults } = useSelector(state => state.search);
+    const { letterSearchResults } = useSelector(state => state.search);
     const [filterList, setFilterList] = useState([]);
 
     const handleChange = useCallback((event) => {
@@ -21,7 +21,7 @@ function SearchBoxOpen({ setShowSearch }) {
     const handleSubmit = useCallback((event) => {
         event.preventDefault();
         if (search.trim()) {
-            dispatch(searchAnime({ query: search }));
+            dispatch(({ query: search }));
             navigate(`/search/${search}`);
         }
     }, [search, dispatch, navigate]);
@@ -33,21 +33,23 @@ function SearchBoxOpen({ setShowSearch }) {
 
     const firstLetter = useMemo(() => search.charAt(0), [search]);
 
-    const isLetter = (char) => /^[a-zA-Z]$/.test(char);
+    function isLetter(char){
+        return /^[a-zA-Z]$/.test(char);
+    }
 
     useEffect(() => {
         if (firstLetter && isLetter(firstLetter)) {
-            dispatch(searchAnime({ letter: firstLetter }));
+            dispatch(letterSearchAnime({ letter: firstLetter }));
         }
     }, [firstLetter, dispatch]);
 
     useEffect(() => {
         if (search) {
-            setFilterList(searchResults?.filter((item) => {
+            setFilterList(letterSearchResults?.filter((item) => {
                 return item.title.substring(0, search.length).toLowerCase() === search.toLowerCase();
             }));
         }
-    }, [searchResults, search]);
+    }, [letterSearchResults, search]);
 
 
     return (
@@ -95,7 +97,7 @@ function SearchBoxOpen({ setShowSearch }) {
                     }}
                 />
             </form>
-            {firstLetter && typeof firstLetter === "string" && searchResults.length > 0 && (
+            {firstLetter && letterSearchResults.length > 0 && (
                 <Paper
                     sx={{
                         position: 'absolute',
