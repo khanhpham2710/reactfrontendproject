@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { searchAnime } from '../../global/searchSlice';
 import LoadingAnimesDisplay from '../LoadingAnimesDisplay/LoadingAnimesDisplay';
 import AnimesDisplay from '../AnimesDisplay/AnimesDisplay';
-import { Typography, Container,Grid } from '@mui/material';
+import { Typography, Container } from '@mui/material';
 
 
 function SearchPage(prop) {
   const { searchTerm } = useParams();
 
   const dispatch = useDispatch();
-  const { searchResults, isSearch, loading, error, total, lastPage } = useSelector((state) => state.search);
+  const { searchResults, loading, error, lastPage } = useSelector((state) => state.search);
 
   const [page, setPage] = useState(1);
   const [params, setParams] = useState({ query: searchTerm, page });

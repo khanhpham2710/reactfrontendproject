@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from "../../global/authContext/authContext";
-import { Container, Grid, Box, Typography, Avatar, Divider, Button } from '@mui/material';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import { Grid, Box, Typography, Divider } from '@mui/material';
 import ChangePassword from '../../components/ChangePassword/ChangePassword';
 import MySnackbars from '../../components/MySnackbars/MySnackbars'
 import { useSelector, useDispatch } from 'react-redux';

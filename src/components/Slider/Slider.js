@@ -2,8 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import "./Slider.css";
 import { Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
-import { Button, Typography, Box } from '@mui/material';
-import SendIcon from '@mui/icons-material/Send';
+import { Typography, Box } from '@mui/material';
 import MyButton from '../MyButton/MyButton';
 import BookTicketButton from '../BookTicketButton/BookTicketButton';
 
