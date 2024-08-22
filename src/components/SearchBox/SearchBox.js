@@ -9,7 +9,7 @@ import { Box } from '@mui/material';
 function SearchBox() {
   const [search, setSearch] = useState('');
   const navigate = useNavigate();
-
+  
   const handleChange = useCallback((event) => {
     setSearch(event.target.value);
   }, []);

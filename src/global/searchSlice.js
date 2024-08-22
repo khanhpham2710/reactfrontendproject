@@ -5,17 +5,23 @@ const baseURL = "https://api.jikan.moe/v4";
 
 export const searchAnime = createAsyncThunk(
     'search/searchAnime',
-    async ({ query, page }) => {
-        const response = await axios.get(`${baseURL}/anime?q=${query}&order_by=popularity&sort=asc&sfw=true&page=${page}&limit=16`);
-        return response.data;
+    async ({ query, page, letter }) => {
+        if (query){
+            const response = await axios.get(`${baseURL}/anime?q=${query}&letter=${letter}&order_by=popularity&sort=asc&sfw=true&page=${page}&limit=16`);
+            return response.data;
+        } else if (letter){
+            const response = await axios.get(`${baseURL}/anime?letter=${letter}&order_by=popularity&sort=asc&sfw=true`);
+            return response.data;
+        }
     }
 );
+
+
 
 const searchSlice = createSlice({
     name: 'search',
     initialState: {
         searchResults: [],
-        isSearch: false,
         loading: false,
         error: null,
         total: 0,
@@ -32,12 +38,11 @@ const searchSlice = createSlice({
                 state.total = action.payload.pagination.items.total;
                 state.lastPage = action.payload.pagination.last_visible_page;
                 state.loading = false;
-                state.isSearch = true;
             })
             .addCase(searchAnime.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
-            });
+            })
     }
 });
 
