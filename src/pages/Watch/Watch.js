@@ -3,7 +3,7 @@ import MoviesSection from '../../components/MoviesSection/MoviesSection';
 import videos from '../../assets/videos';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-import { Button, Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 
 function Watch() {
   const [selectedId, setSelectedId] = useState(videos[0].id);

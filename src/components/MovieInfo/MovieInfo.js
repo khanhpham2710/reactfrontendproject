@@ -1,5 +1,5 @@
 import { Typography, Grid, Box, Container } from "@mui/material";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import "./AnimeInfo.css"
 import assets from "../../assets/assets";
 import movies from "../../assets/movies"

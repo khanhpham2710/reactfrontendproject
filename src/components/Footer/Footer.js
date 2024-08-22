@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Grid, Typography, List, ListItem, Divider, Link, Box } from '@mui/material';
-import { HeartBroken, Instagram, X } from '@mui/icons-material';
+import { HeartBroken } from '@mui/icons-material';
 import LoginButton from '../LoginButton/LoginButton';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';

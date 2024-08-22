@@ -9,7 +9,7 @@ import FilterBox from "../../components/FilterBox/FilerBox";
 import { Box, Grid } from "@mui/material";
 import MyBreadCrumbs from "../../components/MyBreadCrumb/MyBreadCrumb";
 import ErrorPage from "../ErrorPage/ErrorPage";
-import LoadingAnimesDisplay from "../LoadingAnimesDisplay/LoadingAnimesDisplay";
+
 
 function TopAnimesPage() {
     const { filterParam } = useParams();
