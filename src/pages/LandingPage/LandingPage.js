@@ -8,6 +8,7 @@ import Header_LandingPage from '../../components/Header_LandingPage/Header_Landi
 import ScrollUpButton from '../../components/ScrollUpButton/ScrollUpButton'
 import media from "../../assets/media"
 import Media from '../../components/Media/Media';
+import MyButton from '../../components/MyButton/MyButton';
 
 
 function LandingPage() {
