@@ -42,14 +42,12 @@ export default function PhotoDisplay({ handleClickSnackbar }) {
                 await uploadBytes(storageRef, avatar);
                 const downloadURL = await getDownloadURL(storageRef);
 
-                await currentUser.updateProfile({ photoURL: downloadURL });
                 setCurrentUser({ ...currentUser, photoURL: downloadURL });
                 handleClickSnackbar("Photo updated successfully", "success");
             } catch (error) {
                 handleClickSnackbar("An error occurred while updating photo.", "error");
                 console.error(error);
             }
-            handleClickSnackbar("Sorry this function is still being developed", "success");
             handleCloseDialog();
         }
     };

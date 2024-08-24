@@ -6,7 +6,7 @@ import { doSignInWithGoogle, doCreateUserWithEmailAndPassword, doSendEmailVerifi
 import { Link as RouterLink } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../global/authContext/authContext';
-import { updateProfile } from 'firebase/auth'; // Import this
+import { updateProfile } from 'firebase/auth'; 
 
 const SignInForm = ({ handleClickSnackbar }) => {
     const [showPassword, setShowPassword] = useState(false);

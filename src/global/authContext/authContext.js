@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "../../firebase/firebase";
+import { auth, database } from "../../firebase/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
 const AuthContext = createContext()
@@ -20,8 +20,7 @@ export function AuthProvider({children}){
 
     async function initializeUser(user){
         if (user){
-            const randomId = Math.floor(Math.random() * 100) + 1;
-            setCurrentUser({...user, id: randomId});
+            setCurrentUser({...user});
             setUserLoggedIn(true)
         } else {
             setCurrentUser(null)

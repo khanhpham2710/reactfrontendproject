@@ -13,11 +13,11 @@ function AnimeCard({ item, font }) {
   const imgRef = useRef();
 
   const fontSize = font || {
-    xs: "9px",
-    sm: "10px",
-    md: "12px",
-    lg: "16px",
-    xl: "19px"
+    xs: "11px",
+    sm: "12px",
+    md: "13px",
+    lg: "15px",
+    xl: "18px"
   };
 
 

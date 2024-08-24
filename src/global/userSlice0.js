@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     tickets: [],
-    favorite: []
+    favorite: [],
+    userReviews: []
 };
 
 
@@ -66,9 +67,25 @@ const userSlice0 = createSlice({
             if (storedFavorite) {
                 state.favorite = storedFavorite;
             }
+        },
+        addReviews: (state,action) =>{
+            const index = state.userReviews.findIndex(item => item.id === action.payload.id)
+            if (index !== -1) state.userReviews[index] = action.payload
+            else state.userReviews.push(action.payload)
+            localStorage.setItem("userReviews", JSON.stringify(state.userReviews))
+        },
+        removeReviews: (state,action) =>{
+            state.userReviews = state.userReviews.filter(item => item.id !== action.payload)
+            localStorage.setItem("userReviews", JSON.stringify(state.userReviews))
+        },
+        loadReviews: (state) => {
+            const storedReviews = JSON.parse(localStorage.getItem('userReviews'));
+            if (storedReviews) {
+                state.userReviews = storedReviews;
+            }
         }
     },
 });
 
-export const { addTickets, removeTickets, loadTicketsFromStorage, addFavorite, removeFavorite,loadFavorite } = userSlice0.actions;
+export const { addTickets, removeTickets, loadTicketsFromStorage, addFavorite, removeFavorite,loadFavorite, addReviews, loadReviews, removeReviews } = userSlice0.actions;
 export default userSlice0.reducer;

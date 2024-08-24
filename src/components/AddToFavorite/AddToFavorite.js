@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { addFavorite, loadFavorite } from "../../global/userSlice0";
+import { addFavorite, loadFavorite, removeFavorite } from "../../global/userSlice0";
 import { Stack } from '@mui/material';
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
+import PlaylistRemoveIcon from '@mui/icons-material/PlaylistRemove';
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import StarIcon from '@mui/icons-material/Star';
@@ -83,7 +84,7 @@ function AddToFavorite({ title, id, image }) {
         }
     }, [favorite, id]);
 
-    function handleClick() {
+    function handleAdd() {
         dispatch(addFavorite({
             id,
             title,
@@ -92,12 +93,22 @@ function AddToFavorite({ title, id, image }) {
         }));
     }
 
+    function handleRemove() {
+        dispatch(removeFavorite(id));
+        
+    }
+
     return (
         <Stack spacing={2} sx={{ width: "100%" }} mt={2}>
             <HoverRating setRating={setRating} rating={rating} />
-            <Button variant="contained" endIcon={<PlaylistAddIcon />} sx={{ maxWidth: "200px" }} onClick={handleClick}>
+            <Stack direction="row" spacing={2}>
+            <Button variant="contained" endIcon={<PlaylistAddIcon />} sx={{ maxWidth: "200px" }} onClick={handleAdd}>
                 Add to favorite
             </Button>
+            <Button variant="contained" endIcon={<PlaylistRemoveIcon />} sx={{ maxWidth: "200px" }} onClick={handleRemove}>
+                Remove from favorite
+            </Button>
+            </Stack>
         </Stack>
     );
 }
