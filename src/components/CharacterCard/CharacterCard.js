@@ -44,12 +44,12 @@ function CharacterCard({ character, role, animeId }) {
             ...style,
             color: "#fff",
             fontSize: {
-              xs: "9px",
+              xs: "12px",
               sm: "14px",
-              md: "18px",
-              lg: "20px",
+              md: "15px",
+              lg: "18px",
             },
-            height: "60%"
+            height: "70%"
           }}>
           {name}
         </Typography>
@@ -59,9 +59,9 @@ function CharacterCard({ character, role, animeId }) {
             ...style,
             color: "#ccc",
             fontSize: {
-              md: "13px",
-              lg: "18px",
-              height: "40%"
+              md: "12px",
+              lg: "16px",
+              height: "30%"
             },
             display: {
               xs: "none",

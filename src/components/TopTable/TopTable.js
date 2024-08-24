@@ -56,16 +56,16 @@ export default function TopTable(props) {
                     <TableHead>
                         <TableRow>
                             <TableCell align="center" sx={{ width: '10%' }}>
-                                <Typography variant="h5" fontWeight="800">Rank</Typography>
+                                <Typography variant="h6" fontWeight="800">Rank</Typography>
                             </TableCell>
-                            <TableCell align="center" sx={{ width: '20%' }}>
-                                <Typography variant="h5" fontWeight="800">Poster</Typography>
+                            <TableCell align="center" sx={{ width: '30%' }}>
+                                <Typography variant="h6" fontWeight="800">Poster</Typography>
                             </TableCell>
-                            <TableCell align="left" sx={{ width: '50%' }}>
-                                <Typography variant="h5" fontWeight="800">Title</Typography>
+                            <TableCell align="left" sx={{ width: '40%' }}>
+                                <Typography variant="h6" fontWeight="800">Title</Typography>
                             </TableCell>
                             <TableCell align="right" sx={{ width: '20%' }}>
-                                <Typography variant="h5" fontWeight="800">Score</Typography>
+                                <Typography variant="h6" fontWeight="800">Score</Typography>
                             </TableCell>
                         </TableRow>
                     </TableHead>
@@ -73,7 +73,7 @@ export default function TopTable(props) {
                         {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
                             <TableRow key={row.rank}>
                                 <TableCell component="th" scope="row" align="center">
-                                    <Typography variant="h5" fontWeight="800">{row.rank}</Typography>
+                                    <Typography variant="h6" fontWeight="800">{row.rank}</Typography>
                                 </TableCell>
                                 <TableCell align="center">
                                     <Box
@@ -93,7 +93,7 @@ export default function TopTable(props) {
                                 </TableCell>
                                 <TableCell align="left">
                                     <Typography 
-                                        variant="h5" fontWeight="800" 
+                                        variant="h6" fontWeight="800" 
                                         sx={{ cursor: 'pointer' }} 
                                         onClick={() => handleClickOpen(animes[index])}
                                     >
@@ -101,7 +101,7 @@ export default function TopTable(props) {
                                     </Typography>
                                 </TableCell>
                                 <TableCell align="right">
-                                    <Typography variant="h5" fontWeight="800" color="gold">{row.score}</Typography>
+                                    <Typography variant="h6" fontWeight="800" color="gold">{row.score}</Typography>
                                 </TableCell>
                             </TableRow>
                         ))}

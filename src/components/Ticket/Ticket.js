@@ -12,14 +12,14 @@ import ShareIcon from '@mui/icons-material/Share';
 
 
 function Ticket({ ticket, onClick, button_name, button_icon }) {
-    const { movieId, date, time, row, num, seatNo } = ticket;
+    const { movieId, date, time, row, num, seatNo, userId } = ticket;
     const movie = movies[movieId - 1];
 
-    const generateId = useCallback((movieId, date, time, row, num) => {
+    const generateId = useCallback((movieId, date, time, row, num, userId) => {
         const [day, month, year] = date.split('/');
 
         const formattedDate = `${day}${month}${year.slice(-2)}`;
-        const id = `${movieId}${formattedDate}${time.replace('-', '')}${row}${num}`;
+        const id = `${movieId}${formattedDate}${time.replace('-', '')}${row}${num}${userId}`;
 
         return btoa(id);
     }, []);

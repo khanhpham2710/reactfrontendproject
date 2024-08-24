@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAnimeDetails, fetchAnimeCharacters, fetchAnimeTheme, fetchAnimeReviews, fetchAnimeRecommendation, fetchAnimeRelations } from '../../global/animeSlice';
+import { fetchAnimeDetails, fetchAnimeCharacters, fetchAnimeReviews, fetchAnimeRecommendation, fetchAnimeRelations } from '../../global/animeSlice';
 import Loading from '../../components/Loading/Loading';
 import { Box, Typography, Divider, Container } from '@mui/material';
 import AnimeInfo from '../../components/AnimeInfo/AnimeInfo';
@@ -11,15 +11,16 @@ import AnimeSynopsis from "../../components/AnimeSynopsis/AnimeSynopsis";
 import assets from '../../assets/assets';
 import CharacterSection from '../CharactersSection/CharacterSection';
 import styles from "./AnimePage.module.css"
-import OpeningEndingSection from '../../components/OpeningEndingSection/OpeningEndingSection';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import PlayButton from '../../components/PlayButton/PlayButton';
+import ReviewSection from "../../components/ReviewSection/ReviewSection"
+import ReviewBox from "../../components/ReviewBox/ReviewBox"
 
 
 function AnimePage() {
   const { animeId } = useParams();
   const dispatch = useDispatch();
-  const { details, status_loading, error, characters, themes } = useSelector((state) => state.anime);
+  const { details, status_loading, error, characters, reviews } = useSelector((state) => state.anime);
 
   const [play, setPlay] = useState(false);
 
@@ -38,7 +39,7 @@ function AnimePage() {
   useEffect(() => {
     dispatch(fetchAnimeDetails(animeId));
     dispatch(fetchAnimeCharacters(animeId));
-    dispatch(fetchAnimeTheme(animeId));
+    dispatch(fetchAnimeReviews(animeId));
   }, [animeId, dispatch]);
 
   useEffect(() => {
@@ -59,19 +60,18 @@ function AnimePage() {
   }
 
   if (status_loading === 'failed') {
-    return <ErrorPage error={error}/>;
+    return <ErrorPage error={error} />;
   }
 
   return (
     <Box>
-      <Header play={play} /> 
-      <Box sx={{ width: "100vw", position: 'fixed', zIndex: -5, mt:"10vh" }}>
+      <Header play={play} />
+      <Box sx={{ width: "100vw", position: 'fixed', zIndex: -5 }}>
         <img
           ref={backGroundRef}
           style={{ width: "100vw", aspectRatio: "16 / 9", zIndex: -6, position: "relative" }}
-          alt="Background"
         />
-        {trailer?.images?.maximum_image_url && <PlayButton id={trailer.youtube_id} setPlay={setPlay}/>}
+        {trailer?.images?.maximum_image_url && <PlayButton id={trailer.youtube_id} setPlay={setPlay} />}
       </Box>
       <Box ref={boxRef} sx={style}>
         <AnimeInfo details={details} />
@@ -79,15 +79,16 @@ function AnimePage() {
         <Typography variant='h4' className={styles.heading} mt={4} textAlign="center" fontWeight="800">Synopsis</Typography>
         <AnimeSynopsis details={details} />
         <Divider />
-        <Typography variant='h4' className={styles.heading} mt={4} textAlign="center" fontWeight="800">Opening & Ending</Typography>
-        <OpeningEndingSection themes={themes} />
-        <Divider />
         <Typography variant='h4' className={styles.heading} mt={4} textAlign="center" fontWeight="800">Characters</Typography>
         <Container maxWidth="lg">
           <CharacterSection characters={characters} animeId={animeId} />
         </Container>
         <Divider />
-        <Typography variant='h4' className={styles.heading} mt={4} textAlign="center" fontWeight="800">Anime Relations</Typography>
+        <Typography variant='h4' className={styles.heading} mt={4} textAlign="center" fontWeight="800">Reviews</Typography>
+        <Container maxWidth="lg">
+          <ReviewBox id={animeId}/>
+          <ReviewSection reviews={reviews} id={animeId}/>
+        </Container>
         <Divider />
         <Typography variant='h4' className={styles.heading} mt={4} textAlign="center" fontWeight="800">Recommendations</Typography>
         <Footer />

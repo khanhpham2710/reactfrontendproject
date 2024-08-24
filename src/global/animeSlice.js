@@ -11,6 +11,7 @@ const createFetchThunk = (endpoint) => {
     `anime/fetch${endpoint.charAt(0).toUpperCase() + endpoint.slice(1)}`,
     async (animeId) => {
       const response = await axios.get(`${baseURL}/${animeId}/${endpoint}`);
+      console.log(`${baseURL}/${animeId}/${endpoint}`)
       return response.data.data;
     }
   );
@@ -38,7 +39,7 @@ export const fetchAnimeCharacters = createAsyncThunk(
 export const fetchAnimeRecommendation = createFetchThunk('recommendations');
 export const fetchAnimeReviews = createFetchThunk('reviews');
 export const fetchAnimeRelations = createFetchThunk('relations');
-export const fetchAnimeTheme = createFetchThunk('themes');
+
 
 const initialState = {
   details: {},

@@ -28,13 +28,26 @@ const CloseButton = styled(CloseIcon)({
     }
 });
 
-const ReadMoreButton = styled(Button)(() => ({
+const ReadMoreButton = styled(Button)(({ theme }) => ({
     position: 'absolute',
     bottom: '2%',
     left: "50%",
     transform: "translateX(-50%)",
     backgroundColor: "red",
     color: '#fff',
+    fontSize: theme.typography.pxToRem(12), 
+    [theme.breakpoints.up('xs')]: {
+        fontSize: theme.typography.pxToRem(12),
+    },
+    [theme.breakpoints.up('sm')]: {
+        fontSize: theme.typography.pxToRem(12),
+    },
+    [theme.breakpoints.up('md')]: {
+        fontSize: theme.typography.pxToRem(14),
+    },
+    [theme.breakpoints.up('lg')]: {
+        fontSize: theme.typography.pxToRem(14),
+    },
     border: "red 1px solid",
     '&:hover': {
         backgroundColor: "#000",
@@ -98,6 +111,9 @@ export default function AnimeModal(prop) {
                                 height: "100%",
                                 overflow: "hidden",
                                 position: "relative",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center"
                             }}>
                             <img
                                 src={item.images.jpg.image_url}
