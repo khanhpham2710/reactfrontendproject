@@ -1,8 +1,9 @@
 import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchGenres } from "../../global/topSlice";
+import { fetchGenres } from "../../global/genreSlice";
 import { memo, useEffect, useRef } from "react";
-import { fetchGenres } from "../../global/topSlice";
+import { Typography } from "@mui/material";
+import { Link, useNavigate } from 'react-router-dom';
 
 function GenresButton() {
     const dispatch = useDispatch()
@@ -14,11 +15,12 @@ function GenresButton() {
             dispatch(fetchGenres())
         }
     },[])
-
-    const ref = useRef()
+    
 
     return(
         <Button
+            component={Link}
+            to={"/genres"}
             sx={{
                 color: 'white',
                 display: 'block',
@@ -28,8 +30,7 @@ function GenresButton() {
                     color: "red",
                     backgroundColor: "transparent",
                 }
-            }}
-            ref = {ref}
+            }}            
         >
             <Typography variant='h6' fontSize="18px" fontWeight="700" lineHeight="30px">
                 Genres

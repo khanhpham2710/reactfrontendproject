@@ -27,8 +27,9 @@ export const fetchAnimes = createAsyncThunk(
 
 export const fetchGenres = createAsyncThunk(
     'top/fetchGenres',
-    async () => {
-        const response = await axios.get(`${baseURL}/genres/anime`);
+    async ({genresList}) => {
+        console.log(genresList)
+        const response = await axios.get(`${baseURL}/anime?genres=${genresList}`);
         return response.data;
     }
 )
@@ -37,7 +38,7 @@ const topSlice = createSlice({
     name: 'top',
     initialState: {
         animes: [],
-        genres: [],
+        genresAnimes: [],
         total: 0,
         lastPage: 0,
         loading: false,
@@ -63,7 +64,7 @@ const topSlice = createSlice({
                 state.loading = true;
             })
             .addCase(fetchGenres.fulfilled, (state, action) => {
-                state.genres = action.payload.data;
+                state.genresAnimes = action.payload.data;
                 state.loading = false;
             })
             .addCase(fetchGenres.rejected, (state, action) => {
