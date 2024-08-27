@@ -2,31 +2,31 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 
-export const fetchSearch = createAsyncThunk(
-    'genre/fetchSearch',
+export const fetchGenres = createAsyncThunk(
+    'genre/fetchGenres',
     async () => {
-        const response = await axios.get(`https://api.jikan.moe/v4/genres/anime`);
+        const response = await axios.get(`https://api.jikan.moe/v4/genres/anime?filter=genres`);
         return response.data.data;
     });
 
 const genreSlice = createSlice({
     name: 'genre',
     initialState: {
-        genre: [],
+        genres: [],
         loading: false,
         error: null,
     },
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchSearch.pending, (state) => {
+            .addCase(fetchGenres.pending, (state) => {
                 state.loading = true;
             })
-            .addCase(fetchSearch.fulfilled, (state, action) => {
-                state.genre = action.payload;
+            .addCase(fetchGenres.fulfilled, (state, action) => {
+                state.genres = action.payload;
                 state.loading = false;
             })
-            .addCase(fetchSearch.rejected, (state, action) => {
+            .addCase(fetchGenres.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
             });

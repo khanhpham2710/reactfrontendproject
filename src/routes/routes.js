@@ -25,7 +25,7 @@ const publicRoutes = [
     { path: "/top", component: TopAnimesPage, layout: NoSlider},
     { path: "/top/:filterParam", component: TopAnimesPage, layout: NoSlider},
     { path: "/watch", component: Watch, layout: null },
-    { path: "/genre/:genreId", component: Genre, layout: null },
+    { path: "/genres", component: Genre, layout: NoSlider },
     { path: "/search/:searchTerm", component: SearchPage,layout: NoSlider},
     { path: "/anime/:animeId", component: AnimePage, layout: null },
     { path: "/character/:animeId/:characterId", component: Gallery, layout: NoSlider },
