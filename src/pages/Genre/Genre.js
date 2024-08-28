@@ -1,65 +1,68 @@
 import { Typography, Container } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import { styled } from '@mui/material/styles';
-import Chip from '@mui/material/Chip';
-import Paper from '@mui/material/Paper';
-import TagFacesIcon from '@mui/icons-material/TagFaces';
-import TopTable from '../../components/TopTable/TopTable';
+import React, { useEffect, useMemo, useState } from 'react';
+import AnimesDisplay from '../AnimesDisplay/AnimesDisplay';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGenres } from '../../global/topSlice';
+import LoadingAnimesDisplay from '../LoadingAnimesDisplay/LoadingAnimesDisplay';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import { useParams } from 'react-router-dom';
 
-const ListItem = styled('li')(({ theme }) => ({
-  margin: theme.spacing(0.5),
-}));
+
+function ComboBox({genres, setGenresList, defaultValue}) {
 
 
+  const handleChange = (event, value) => {
+    setGenresList(value.map(item=>item.mal_id))
+  };
 
-function ChipsArray({ chipData, handleDelete}) {
-
+  console.log(genres[1])
   return (
-    <Paper
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        flexWrap: 'wrap',
-        listStyle: 'none',
-        p: 0.5,
-        m: 0,
-      }}
-      component="ul"
-    >
-      {chipData && chipData?.map((data) => {
-        let icon;
-
-        if (data.label === 'React') {
-          icon = <TagFacesIcon />;
-        }
-
-        return (
-          <ListItem key={data.mal_id}>
-            <Chip
-              label={data.name}
-              onDelete={handleDelete(data)}
-            />
-          </ListItem>
-        );
-      })}
-    </Paper>
+    <Autocomplete
+      multiple
+      id="tags-outlined"
+      options={genres}
+      getOptionLabel={(option) => option.name}
+      defaultValue={defaultValue}
+      filterSelectedOptions
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label="Genres"
+        />
+      )}
+      onChange={handleChange}
+      sx={{my : 6}}
+    />
   );
 }
 
+
 function Genre() {
   const dispatch = useDispatch();
-  const { genresAnimes } = useSelector((state) => state.top);
+  const { genresAnimes, lastPage, loading } = useSelector((state) => state.top);
   const { genres } = useSelector((state) => state.genre);
   const [genresList, setGenresList] = React.useState([1,2]);
-
   const [chipData, setChipData] = React.useState(genres);
+  const [page,setPage] = React.useState(1);
+
+  const { genreId } = useParams();
+
+  const defaultValue = useMemo(()=>{
+    const index = genres?.findIndex(item => item.mal_id == genreId);
+    return index !== -1 ? [genres[index]] : [];
+  },[genreId, genres])
+
+  
   
 
-  const handleDelete = (chipToDelete) => () => {
-    setChipData((chips) => chips.filter((chip) => chip.mal_id !== chipToDelete.mal_id));
-  };
+  function handleAdd(id){
+    if(!genresList.includes(id)){
+      setGenresList([...genresList,id])
+    }
+  }
+
+  
 
   useEffect(() => {
     setChipData(genres);
@@ -68,10 +71,12 @@ function Genre() {
 
   useEffect(() => {
     const s = genresList.toString();
-    dispatch(fetchGenres({genresList:s}));
-  }, [genresList]);
+    dispatch(fetchGenres({genresList:s, page: page}));
+  }, [genresList,page]);
 
-  console.log(genresAnimes)
+  function handleChange(newPage){
+    setPage(newPage);
+  }
   
 
   return (
@@ -95,8 +100,9 @@ function Genre() {
       >
         Genres
       </Typography>
-      <ChipsArray genres={genres} chipData={chipData} handleDelete={handleDelete}/>
-      {/* <TopTable /> */}
+      <ComboBox genres={genres} setGenresList={setGenresList} defaultValue={defaultValue}/>
+      {loading ? <LoadingAnimesDisplay />: 
+      <AnimesDisplay animes={genresAnimes} lastPage={lastPage} page={page} handleChange={handleChange}/>}
     </Container>
   );
 }
