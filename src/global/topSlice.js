@@ -28,7 +28,7 @@ export const fetchAnimes = createAsyncThunk(
 export const fetchGenres = createAsyncThunk(
     'top/fetchGenres',
     async ({genresList,page}) => {
-        const response = await axios.get(`${baseURL}/anime?genres=${genresList}&page=${page}`);
+        const response = await axios.get(`${baseURL}/anime?genres=${genresList}&page=${page}&limit=16`);
         return response.data;
     }
 )
