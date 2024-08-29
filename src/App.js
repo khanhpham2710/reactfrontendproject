@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThemeProvider as MUIThemeProvider, CssBaseline } from '@mui/material';
 import {darkTheme, lightTheme} from './global/modeContext/theme';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import DefaultLayout from './layouts/DefaultLayout';
 import { publicRoutes } from './routes/routes';
 import { ModeContext } from './global/modeContext/modeContext'
