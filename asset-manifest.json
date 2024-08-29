@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/reactfrontendproject/static/css/main.dc0730f4.css",
-    "main.js": "/reactfrontendproject/static/js/main.cab6defd.js",
+    "main.js": "/reactfrontendproject/static/js/main.c7093590.js",
     "static/js/453.4e2a33a2.chunk.js": "/reactfrontendproject/static/js/453.4e2a33a2.chunk.js",
     "static/media/replaceImg.jpg": "/reactfrontendproject/static/media/replaceImg.cfc4f5b7f7ed59c6910b.jpg",
     "static/media/mobile.png": "/reactfrontendproject/static/media/mobile.b4d1ba75d5827db86078.png",
@@ -26,11 +26,11 @@
     "static/media/slick.woff": "/reactfrontendproject/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/reactfrontendproject/index.html",
     "main.dc0730f4.css.map": "/reactfrontendproject/static/css/main.dc0730f4.css.map",
-    "main.cab6defd.js.map": "/reactfrontendproject/static/js/main.cab6defd.js.map",
+    "main.c7093590.js.map": "/reactfrontendproject/static/js/main.c7093590.js.map",
     "453.4e2a33a2.chunk.js.map": "/reactfrontendproject/static/js/453.4e2a33a2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.dc0730f4.css",
-    "static/js/main.cab6defd.js"
+    "static/js/main.c7093590.js"
   ]
 }
