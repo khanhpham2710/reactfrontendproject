@@ -36,8 +36,8 @@ const SignInForm = ({ handleClickSnackbar }) => {
 
                 navigate("/home");
             } catch (error) {
-                handleClickSnackbar("An error occurred during sign-up.", error.message);
-                console.error(error);
+                handleClickSnackbar(error.message, "error");
+                console.log(error.message);
             }
         } else {
             handleClickSnackbar("Please enter both name and password.", "error");
