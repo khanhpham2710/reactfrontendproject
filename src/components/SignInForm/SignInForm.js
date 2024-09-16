@@ -36,7 +36,7 @@ const SignInForm = ({ handleClickSnackbar }) => {
 
                 navigate("/home");
             } catch (error) {
-                handleClickSnackbar("An error occurred during sign-up.", "error");
+                handleClickSnackbar("An error occurred during sign-up.", error.message);
                 console.error(error);
             }
         } else {
@@ -111,7 +111,7 @@ const SignInForm = ({ handleClickSnackbar }) => {
                     color: "blue !important", fontStyle: "italic !important",
                     cursor: 'pointer', my: 1, textDecorationLine: "underline !important"
                 }} >Continue as guest</Typography>
-                <button type="submit" className='button'>Sign Up</button>
+                <button type="submit" className='button' >Sign Up</button>
                 <button onClick={onGoogleSignIn} className='button'>Sign Up With Google</button>
             </form>
         </div>
