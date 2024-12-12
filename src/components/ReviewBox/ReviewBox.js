@@ -41,7 +41,7 @@ const Textarea = styled(BaseTextareaAutosize)(
 export default function ReviewBox({id}) {
   const [review, setReview] = React.useState('');
   const dispatch = useDispatch()
-  const { currentUser } = useAuth()
+  const { currentUser, userLoggedIn } = useAuth()
 
   function handleSubmit() {
     dispatch(addReviews({id,review, photoURL: currentUser.photoURL, user: {
