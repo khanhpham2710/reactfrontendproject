@@ -1,4 +1,4 @@
-import { Typography, Grid, Box, Container } from "@mui/material";
+import { Typography, Grid, Box } from "@mui/material";
 import assets from "../../assets/assets";
 import { useEffect, useRef } from "react";
 import "./AnimeInfo.css"

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAiringAnime, fetchUpcomingAnime, fetchPopularAnime, fetchTopRatedAnime, fetchFavoriteAnime } from '../../global/animeHomeSlice';
@@ -19,7 +20,7 @@ function Homepage() {
       dispatch(fetchUpcomingAnime());
       // dispatch(fetchTopRatedAnime());
       // dispatch(fetchFavoriteAnime());
-  }, []);
+  }, [dispatch]);
 
   const isLoading = loading.popularAnime || loading.airingAnime || loading.upcomingAnime || loading.topRatedAnime || loading.favoriteAnime;
 

@@ -12,7 +12,7 @@ function AnimesDisplay(prop) {
       gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
     }}>
       {animes?.map((anime, index) => (
-        <Grid item>
+        <Grid item key={index}>
           <AnimeCard item={anime} font={{
             xs: "25px",
             sm: "17px",

@@ -16,7 +16,8 @@ function SearchBox() {
 
   const handleSubmit = useCallback((event) => {
     event.preventDefault();
-    navigate(`/search/${search}`);
+    navigate(`/search?q=${search}`);
+    setSearch("")
   }, [search, navigate]);
 
   return (

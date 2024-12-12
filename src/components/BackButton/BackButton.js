@@ -5,7 +5,7 @@ import { Box, Typography } from "@mui/material";
 function BackButton({ label }) {
     let navigate = useNavigate();
     return (
-        <Box component="section" sx={{ px: 4, display: "flex", height: "100%", display: "flex", alignItems: "center" }}>
+        <Box component="section" sx={{ px: 4, display: "flex", height: "100%", alignItems: "center" }}>
             <ArrowBackIosNewOutlinedIcon
                 sx={{
                     fontSize: "40px",
