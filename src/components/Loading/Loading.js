@@ -15,7 +15,7 @@ export default function Loading() {
 
   return (
     <Box sx={style}>
-      <img src={assets.loading} style={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)"}}/>
+      <img src={assets.loading} style={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)"}} alt='loading'/>
     </Box>
   );
 }

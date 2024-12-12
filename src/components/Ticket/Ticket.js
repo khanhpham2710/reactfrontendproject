@@ -12,7 +12,7 @@ import ShareIcon from '@mui/icons-material/Share';
 
 
 function Ticket({ ticket, onClick, button_name, button_icon }) {
-    const { movieId, date, time, row, num, seatNo, userId } = ticket;
+    const { movieId, date, time, row, num, seatNo } = ticket;
     const movie = movies[movieId - 1];
 
     const generateId = useCallback((movieId, date, time, row, num, userId) => {

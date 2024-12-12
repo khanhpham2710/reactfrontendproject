@@ -49,7 +49,7 @@ const SignInForm = ({ handleClickSnackbar }) => {
         if (!isSigningIn) {
             setIsSigningIn(true);
             try {
-                const result = await doSignInWithGoogle();
+                await doSignInWithGoogle();
 
                 await doSendEmailVerification();
                 handleClickSnackbar("Verification email sent. Please check your inbox.", "info");

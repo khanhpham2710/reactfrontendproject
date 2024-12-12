@@ -1,10 +1,8 @@
 import './CharacterCard.css';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Typography, Box } from '@mui/material';
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-
-
 
 function CharacterCard({ character, role, animeId }) {
   const theme = useTheme();
@@ -22,7 +20,7 @@ function CharacterCard({ character, role, animeId }) {
 
   useEffect(() => {
     imgRef.current.style.backgroundImage = `url(${images?.jpg.image_url})`;
-  }, [character]);
+  }, [character, images]);
 
   function handleClick() {
     const link = "/character/" + animeId + "/" + mal_id;

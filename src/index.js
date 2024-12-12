@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './global/store';
 import { Provider } from 'react-redux';
-import { CssBaseline, SnackbarContent } from '@mui/material';
+import { CssBaseline } from '@mui/material';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ModeContextProvider } from './global/modeContext/modeContext'

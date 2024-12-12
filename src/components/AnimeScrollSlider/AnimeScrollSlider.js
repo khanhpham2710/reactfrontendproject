@@ -1,13 +1,10 @@
 import "./AnimeScrollSlider.css";
-import { useState, useEffect, useRef } from 'react';
 import { Link } from "react-router-dom";
 import { Container, Typography } from "@mui/material";
-import AnimeCard from "../AnimeCard/AnimeCard";
 import AnimeMultipleCarousel from "../AnimeMultipleCarousel/AnimeMultipleCarousel";
 
 function AnimeScrollSlider(props) {
   const { list, label } = props;
-  const listRef = useRef();
 
   const linkPath = "/top/" + label.toLowerCase();
 

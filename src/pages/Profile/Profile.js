@@ -20,9 +20,7 @@ function Profile() {
 
   React.useEffect(() => {
     dispatch(loadFavorite)
-  }, [])
-
-
+  }, [dispatch])
 
   const handleClickSnackbar = (message, severity) => {
     setSnackbarMessage(message);

@@ -59,8 +59,6 @@ function Review({ review }) {
 export default function ReviewSection({ reviews, id }) {
     const dispatch = useDispatch()
     const { userReviews } = useSelector(state => state.user0)
-    console.log(userReviews)
-
 
     React.useEffect(() => {
         dispatch(loadReviews());
