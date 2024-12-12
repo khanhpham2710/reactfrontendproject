@@ -16,6 +16,7 @@ import BookTicket from "../pages/BookTicketV2.js/BookTicket";
 
 
 const publicRoutes = [
+    { path: "/", component: LandingPage, layout: null },
     { path: "/reactfrontendproject", component: LandingPage, layout: null },
     { path: "/home", component: Homepage},
     { path: "/login", component: LoginPage, layout: null },
@@ -27,6 +28,7 @@ const publicRoutes = [
     { path: "/watch", component: Watch, layout: null },
     { path: "/genre/:genreId", component: Genre, layout: null },
     { path: "/search", component: SearchPage,layout: NoSlider},
+    { path: "/genres", component: Genre, layout: NoSlider },
     { path: "/anime/:animeId", component: AnimePage, layout: null },
     { path: "/character/:animeId/:characterId", component: Gallery, layout: NoSlider },
     { path: "/book/:movieId", component: BookTicket, layout: null },

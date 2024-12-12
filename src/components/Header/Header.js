@@ -13,6 +13,7 @@ import { Grid } from '@mui/material';
 import SideMenu from '../SideMenu/SideMenu';
 import styles from "./Header.module.css";
 import SearchBoxOpen from '../SearchBoxOpen/SearchBoxOpen'
+import GenresButton from "../GenresButton/GenresButton"
 
 export const pages = [
   { name: "Home", path: "/home" },
@@ -25,8 +26,10 @@ export const settings = [
   { name: 'Account', path: "/account" },
   { name: 'Logout' },
 ];
+
+
 function Header({ play }) {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const headerRef = useRef();
   const [showSearch, setShowSearch] = React.useState(false);
 
@@ -46,16 +49,16 @@ function Header({ play }) {
   }, []);
 
   return (
-    <AppBar 
-      ref={headerRef} 
-      position="fixed" 
+    <AppBar
+      ref={headerRef}
+      position="fixed"
       sx={{
-        display: play ? "none" : "flex", 
-        height: "10vh", 
-        justifyContent: "center", 
-        transition: "opacity 0.7s", 
+        display: play ? "none" : "flex",
+        height: "10vh",
+        justifyContent: "center",
+        transition: "opacity 0.7s",
         "&:hover": {
-          opacity: "1 !important", 
+          opacity: "1 !important",
           zIndex: 1,
         }
       }}
@@ -78,8 +81,8 @@ function Header({ play }) {
                 component={Link}
                 to={page.path}
                 sx={{
-                  color: 'white', 
-                  display: 'block', 
+                  color: 'white',
+                  display: 'block',
                   p: "10px 15px",
                   transition: "color 0.5s ease-in-out, background-color 0.5s ease-in-out, display 0.5s ease-in-out",
                   "&:hover": {
@@ -93,11 +96,12 @@ function Header({ play }) {
                 </Typography>
               </Button>
             ))}
+            <GenresButton />
           </Box>
           <Box sx={{ flexGrow: 0, display: { xs: "none", sm: "none", md: "block" } }}>
-            <Grid container columnSpacing={6} sx={{height: "60px"}}>
+            <Grid container columnSpacing={6} sx={{ height: "60px" }}>
               <Box sx={{ flexGrow: 0, display: "flex", gap: "20px" }}>
-                <SearchBoxOpen setShowSearch={setShowSearch}/>
+                <SearchBoxOpen setShowSearch={setShowSearch} />
               </Box>
             </Grid>
           </Box>

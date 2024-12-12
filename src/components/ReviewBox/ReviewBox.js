@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { addReviews } from '../../global/userSlice0';
 import { useAuth } from '../../global/authContext/authContext';
 
+
 const Textarea = styled(BaseTextareaAutosize)(
   ({ theme }) => `
   box-sizing: border-box;
@@ -48,10 +49,8 @@ export default function ReviewBox({id}) {
     }}))
   }
 
-
-
   return (
-    <Box px={4} py={2}>
+    userLoggedIn && <Box px={4} py={2}>
       <Stack spacing={2}>
         <Textarea
           minRows={3}

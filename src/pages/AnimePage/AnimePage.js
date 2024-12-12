@@ -45,6 +45,7 @@ function AnimePage() {
 
   useEffect(() => {
     const img_url = trailer?.images?.maximum_image_url || assets.replace;
+  
     if (backGroundRef.current) {
       backGroundRef.current.src = img_url;
       backGroundRef.current.onload = () => {
@@ -54,7 +55,7 @@ function AnimePage() {
         }
       };
     }
-  }, [trailer]);
+  }, [trailer])
 
   if (status_loading === 'loading') {
     return <Loading />;
@@ -67,7 +68,7 @@ function AnimePage() {
   return (
     <Box>
       <Header play={play} />
-      <Box sx={{ width: "100vw", position: 'fixed', zIndex: -5 }}>
+      <Box sx={{ width: "100vw", position: 'fixed', zIndex: -5}}>
         <img
           ref={backGroundRef}
           style={{ width: "100vw", aspectRatio: "16 / 9", zIndex: -6, position: "relative" }}

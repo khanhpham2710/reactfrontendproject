@@ -51,6 +51,7 @@ function Gallery() {
   const dispatch = useDispatch();
   const { pictures, loading, error } = useSelector((state) => state.character);
 
+
   const [selectedIndex, setSelectedIndex] = useState(0);
 
 
@@ -113,7 +114,20 @@ function Gallery() {
       </Box>
       {pictures && pictures[selectedIndex] && (<Typography variant="body2" textAlign="right">{selectedIndex+1} / {pictures.length}</Typography>)}
       <Container>
-        <Slider {...settings}>
+        <Box sx={{display: "flex", width: "100%", height: "auto", mb: 6, justifyContent: "center"}}>
+        {pictures.length<=5 && pictures?.map((picture, index) => (
+            picture && (
+              <div
+                key={index}
+                className={`gallery-item ${selectedIndex === index ? "selected" : ""}`}
+                onClick={() => handleImageClick(index)}
+              >
+                <img src={picture.jpg.image_url} alt={`Slide ${index}`} />
+              </div>
+            )
+          ))} 
+        </Box>
+        {pictures.length>5 && <Slider {...settings}>
           {pictures?.map((picture, index) => (
             picture && (
               <div
@@ -125,7 +139,7 @@ function Gallery() {
               </div>
             )
           ))}
-        </Slider>
+        </Slider>}
       </Container>
     </Container>
   );
