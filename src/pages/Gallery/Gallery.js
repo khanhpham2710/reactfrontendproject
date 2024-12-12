@@ -47,7 +47,7 @@ function SamplePrevArrow(props) {
 
 
 function Gallery() {
-  const { animeId, characterId } = useParams();
+  const { characterId } = useParams();
   const dispatch = useDispatch();
   const { pictures, loading, error } = useSelector((state) => state.character);
 

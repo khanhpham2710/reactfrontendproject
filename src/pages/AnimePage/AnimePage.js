@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+// eslint-disable-next-line no-unused-vars
 import { fetchAnimeDetails, fetchAnimeCharacters, fetchAnimeReviews, fetchAnimeRecommendation, fetchAnimeRelations } from '../../global/animeSlice';
 import Loading from '../../components/Loading/Loading';
 import { Box, Typography, Divider, Container } from '@mui/material';
@@ -71,6 +72,7 @@ function AnimePage() {
         <img
           ref={backGroundRef}
           style={{ width: "100vw", aspectRatio: "16 / 9", zIndex: -6, position: "relative" }}
+          alt={details.title}
         />
         {trailer?.images?.maximum_image_url && <PlayButton id={trailer.youtube_id} setPlay={setPlay} />}
       </Box>

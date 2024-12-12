@@ -47,7 +47,7 @@ function AnimeCard({ item, font }) {
         </Typography>
         
         <Box width="100%" sx={{display: "flex", justifyContent: "flex=start", gap:"5px"}} className="genres">
-          <Typography variant='body1' element="p" sx={{fontSize: fontSize}}>{item.genres[0].name}</Typography>
+          <Typography variant='body1' element="p" sx={{fontSize: fontSize}}>{item.genres[0]?.name}</Typography>
           <Typography variant='body1' element="p" sx={{fontSize: fontSize}}>{item.genres[1]?.name}</Typography>
         </Box>
       </div>

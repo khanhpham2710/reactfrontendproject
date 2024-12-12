@@ -43,7 +43,7 @@ const BookTicket = () => {
         if (!userLoggedIn){
             navigate("/login")
         }
-    },[])
+    },[navigate, userLoggedIn])
 
     const handleStart = () => {
         dispatch(createSeats({ movieId: movieId, date: date, time: time }));

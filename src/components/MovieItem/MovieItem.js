@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function MovieItem({ id, onHover }) {
   const [hovered, setHovered] = useState(false);
@@ -16,7 +16,7 @@ function MovieItem({ id, onHover }) {
         position: "relative",
         cursor: "pointer",
         transition: "transform 0.3s ease",
-        transform: hovered ? "scale(1.05)" : "scale(1)"
+        transform: hovered ? "scale(1.05)" : "scale(1)",
       }}
       onMouseEnter={() => {
         setHovered(true);
@@ -35,6 +35,7 @@ function MovieItem({ id, onHover }) {
           frameBorder="0"
           allow="autoplay; encrypted-media"
           allowFullScreen
+          title="video"
         />
       ) : (
         <img
@@ -44,7 +45,7 @@ function MovieItem({ id, onHover }) {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            transition: "opacity 0.3s ease"
+            transition: "opacity 0.3s ease",
           }}
         />
       )}

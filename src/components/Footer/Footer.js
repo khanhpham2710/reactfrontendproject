@@ -61,7 +61,7 @@ function Footer() {
             <ListItem><Link href="#">User Guide</Link></ListItem>
           </List>
         </Grid>
-        <Grid item mt={3} xs={12} sm={4} md={6} lg={2} sx={{ borderRight: { md: "2px solid #ccc", md: "none", lg: "2px solid #ccc" } }}>
+        <Grid item mt={3} xs={12} sm={4} md={6} lg={2} sx={{ borderRight: { md: "none", lg: "2px solid #ccc" } }}>
           <Typography variant="h5" sx={{ fontWeight: 600 }} textAlign="left" ml={2}>Legal</Typography>
           <List>
             <ListItem><Link href="#">Terms of Use</Link></ListItem>

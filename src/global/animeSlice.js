@@ -11,7 +11,6 @@ const createFetchThunk = (endpoint) => {
     `anime/fetch${endpoint.charAt(0).toUpperCase() + endpoint.slice(1)}`,
     async (animeId) => {
       const response = await axios.get(`${baseURL}/${animeId}/${endpoint}`);
-      console.log(`${baseURL}/${animeId}/${endpoint}`)
       return response.data.data;
     }
   );
@@ -22,7 +21,7 @@ export const fetchAnimeDetails = createAsyncThunk(
   'anime/fetchDetails',
   async (animeId) => {
     const response = await axios.get(`${baseURL}/${animeId}/full`);
-    console.log('Anime Details Response:', response.data.data); 
+    // console.log('Anime Details Response:', response.data.data); 
     return response.data.data;
   }
 );

@@ -1,4 +1,4 @@
-import { Box, Tooltip, IconButton, Avatar, Menu, Typography, MenuItem, Divider } from '@mui/material';
+import { Box, IconButton, Avatar, Menu, MenuItem, Divider } from '@mui/material';
 import * as React from 'react';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Logout from '@mui/icons-material/Logout';
@@ -8,7 +8,6 @@ import {  useNavigate } from 'react-router-dom';
 import LoginIcon from '@mui/icons-material/Login';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import { useAuth } from '../../global/authContext/authContext';
-import { useMonthCalendarDefaultizedProps } from '@mui/x-date-pickers/MonthCalendar/MonthCalendar';
 
 
 export default function User() {
@@ -19,7 +18,7 @@ export default function User() {
 
   const { currentUser, userLoggedIn } = useAuth()
 
-  console.log(currentUser)
+  // console.log(currentUser)
 
   function handleLogout() {
     doSignOut()

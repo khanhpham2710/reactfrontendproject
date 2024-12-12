@@ -11,10 +11,10 @@ export const searchAnime = createAsyncThunk(
     }
 );
 
-export const letterSearchAnime = createAsyncThunk(
-    'search/letterSearchAnime',
-    async ({ letter }) => {
-        const response = await axios.get(`${baseURL}/anime?letter=${letter}&order_by=popularity&sort=asc&sfw=true`);
+export const searchFieldAnime = createAsyncThunk(
+    'search/searchFieldAnime',
+    async (query) => {
+        const response = await axios.get(`${baseURL}/anime?q=${query}&order_by=popularity&sort=asc&sfw=true&page=1`);
         return response.data;
     }
 );
@@ -24,7 +24,7 @@ const searchSlice = createSlice({
     name: 'search',
     initialState: {
         searchResults: [],
-        letterSearchResults: [],
+        searchFieldResults: [],
         loading: false,
         error: null,
         total: 0,
@@ -38,22 +38,19 @@ const searchSlice = createSlice({
             })
             .addCase(searchAnime.fulfilled, (state, action) => {
                 state.searchResults = action.payload.data;
-                state.total = action.payload.pagination.items.total;
-                state.lastPage = action.payload.pagination.last_visible_page;
+                state.total = action.payload.pagination?.items.total;
+                state.lastPage = action.payload.pagination?.last_visible_page;
                 state.loading = false;
             })
             .addCase(searchAnime.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
             })
-            .addCase(letterSearchAnime.pending, (state) => {
-                state.loading = true;
-            })
-            .addCase(letterSearchAnime.fulfilled, (state, action) => {
-                state.letterSearchResults = action.payload.data;
+            .addCase(searchFieldAnime.fulfilled, (state, action) => {
+                state.searchFieldResults = action.payload.data;
                 state.loading = false;
             })
-            .addCase(letterSearchAnime.rejected, (state, action) => {
+            .addCase(searchFieldAnime.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
             })
