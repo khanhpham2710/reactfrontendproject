@@ -1,9 +1,9 @@
 import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGenres } from "../../global/genreSlice";
-import { memo, useEffect, useRef } from "react";
+import { memo, useEffect } from "react";
 import { Typography } from "@mui/material";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function GenresButton() {
     const dispatch = useDispatch()
@@ -14,6 +14,7 @@ function GenresButton() {
         if (!genres){
             dispatch(fetchGenres())
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     
 

@@ -1,5 +1,5 @@
 import { Typography, Container } from '@mui/material';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, } from 'react';
 import AnimesDisplay from '../AnimesDisplay/AnimesDisplay';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGenres } from '../../global/topSlice';
@@ -49,7 +49,7 @@ function Genre() {
   const { genreId } = useParams();
 
   const defaultValue = useMemo(()=>{
-    const index = genres?.findIndex(item => item.mal_id == genreId);
+    const index = genres?.findIndex(item => item.mal_id === genreId);
     return index !== -1 ? [genres[index]] : [];
   },[genreId, genres])
 
